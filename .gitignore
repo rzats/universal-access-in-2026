@@ -1,0 +1,18 @@
+.env
+.venv/
+.DS_Store
+__pycache__/
+*.pyc
+# raw model completions and regenerable artefacts
+data/raw/
+data/images/
+data/ocr/
+runs/
+*.log
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.blg
+paper/*.bbl
+paper/*.synctex.gz
+template/download/
