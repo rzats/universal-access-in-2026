@@ -36,6 +36,12 @@ def main():
         if w:
             freq[w.lower()] = freq.get(w.lower(), 0) + int(c or 1)
     lexicon = {w for w, c in freq.items() if c >= 2}
+    # real names the generator draws from also count as "real words" when a near-word is normalised to them
+    import textgen
+    known = set(lexicon)
+    for lst in (textgen.BRAND_WORDS, textgen.SURNAMES, textgen.DRUGS, textgen.STREETS, textgen.CITIES):
+        for w in lst:
+            known.update(toks(w))
     ocr = {r["id"]: set(toks(r["psm3"])) | set(toks(r["psm11"])) for r in load_jsonl(os.path.join(ROOT, "runs", "ocr.jsonl"))}
     resp = {}
     for m in MAIN + ["fable"]:
@@ -58,7 +64,7 @@ def main():
         matched = set()
         for c in cl:
             o = c["tok"]
-            lab = label(o, gt, lexicon)
+            lab = label(o, gt, known)
             n_lab[lab["label"]] += 1
             if lab["label"] == "correct":
                 matched.add(lab["gt"])

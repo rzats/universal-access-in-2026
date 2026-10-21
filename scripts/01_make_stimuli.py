@@ -50,8 +50,8 @@ with open(os.path.join(a.out, "stimuli.jsonl"), "w", encoding="utf-8") as out:
             spec["attempts"] = attempt + 1
             spec["tokens"] = toks
             img.save(os.path.join(a.out, "images", sid + ".jpg"), quality=jpg)
-            for ln in spec["lines"]:
-                del ln["cats"]
+            for ln in spec["lines"]:  # per-character slot category, one letter each
+                ln["cats"] = "".join({"word": "w", "name": "n", "nonce": "x", "lure": "l", "num": "d"}[c] for c in ln["cats"])
             out.write(json.dumps(spec, ensure_ascii=False) + "\n")
             n += 1
             if a.only and n >= a.only:

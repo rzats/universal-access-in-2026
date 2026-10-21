@@ -3,8 +3,8 @@
 Tokens are lower-cased letter runs (apostrophe kept inside words) or digit runs.
 Phone-like digit runs (10+ digits separated only by spaces, hyphens or brackets) are
 merged into one numeric token, so "+380 (67) 482-19-05" and "+380 67 482 19 05" both
-become "380674821905"; dots between digits are dropped, so "14.11.2026" becomes
-"14112026"; all other separators split. Leading zeros are stripped from numeric tokens ("08" == "8").
+become "380674821905"; dots, colons and commas between digits are dropped, so "14.11.2026" becomes
+"14112026", "10:30" == "10.30" == "1030" and "2413,21" == "2413.21"; all other separators split. Leading zeros are stripped from numeric tokens ("08" == "8").
 """
 import re
 import unicodedata
@@ -16,7 +16,7 @@ HOMO = str.maketrans({"a": "а", "c": "с", "e": "е", "i": "і", "o": "о", "p"
 CYR = re.compile(r"[а-яіїєґё]")
 TOKEN = re.compile(r"[^\W\d_]+(?:'[^\W\d_]+)*|\d+")
 PHONE = re.compile(r"\+?\(?\d[\d \-() ]{7,}\d")
-DOT = re.compile(r"(?<=\d)\.(?=\d)")
+DOT = re.compile(r"(?<=\d)[.:,](?=\d)")
 
 
 def _removed(s: str):

@@ -28,23 +28,15 @@ UA_RU_PAIRS = {("і", "и"), ("и", "і"), ("ї", "і"), ("ї", "и"), ("є", "�
 
 
 def quoted_spans(text):
-    """Outermost «…» spans (nesting aware) plus “…” and "…" spans outside them.
-    Returns list of (span_text, start, end) in the markdown-stripped text."""
+    """«…» spans (an opening « runs to the first following », so nested or unbalanced
+    guillemets cannot swallow descriptive prose; a span never crosses a line break),
+    plus “…” and "…" spans outside them. Returns (markdown-stripped text, spans)."""
     t = MD.sub("", text)
-    spans, depth, start = [], 0, None
-    for i, c in enumerate(t):
-        if c == "«":
-            if depth == 0:
-                start = i + 1
-            depth += 1
-        elif c == "»" and depth > 0:
-            depth -= 1
-            if depth == 0:
-                spans.append((t[start:i], start, i))
-    if depth > 0 and start is not None:  # unbalanced: close at end of line
-        e = t.find("\n", start)
-        e = len(t) if e < 0 else e
-        spans.append((t[start:e], start, e))
+    spans = []
+    for m in re.finditer(r"«([^»\n]*)", t):
+        if any(s <= m.start() < e for _, s, e in spans):
+            continue
+        spans.append((m.group(1), m.start(1), m.end(1)))
     covered = [(s, e) for _, s, e in spans]
     for m in re.finditer(r"“([^”\n]+)”|\"([^\"\n]+)\"", t):
         if not any(s <= m.start() < e for s, e in covered):
@@ -76,7 +68,10 @@ def claims_desc(text):
         sent = sentence(t, s, e).replace(sp, " ")
         hedged = bool(HEDGE.search(sent))
         # bracketed / parenthesised remarks inside a quote are annotations or marked guesses
-        for tok, _, _ in tokens(BRACKET.sub(" ", sp)):
+        tk = tokens(BRACKET.sub(" ", sp))
+        if len(tk) == 1 and len(tk[0][0]) == 1 and not tk[0][0].isdigit():
+            continue  # a lone quoted letter is commentary ("starts with «Ґ»"), not a reading
+        for tok, _, _ in tk:
             out.append({"tok": tok, "span": k, "hedged": hedged, "uncertain": False})
     return out
 
@@ -134,6 +129,11 @@ def label(o, gt, lexicon=None):
     for g in gt:
         if g["state"] == "partial" and fragment_ok(o, g):
             return {"label": "correct", "gt": g["tok"], "gt_cat": g["cat"], "gt_state": g["state"], "sim": 1.0}
+    if len(o) >= 2:  # an explicitly partial reading of a visible word (or of a phone number)
+        for g in gt:
+            if g["state"] == "visible" and o in g["tok"] and (not o.isdigit() or (len(o) >= 3 and len(g["tok"]) >= 10)):
+                return {"label": "correct", "gt": g["tok"], "gt_cat": g["cat"], "gt_state": g["state"], "sim": 1.0,
+                        "fragment": True}
     for g in gt:  # partially visible but no character fully hidden: the whole word is readable
         if g["state"] == "partial" and 0 not in g["vis"] and o == g["tok"]:
             return {"label": "correct", "gt": g["tok"], "gt_cat": g["cat"], "gt_state": g["state"], "sim": 1.0}
