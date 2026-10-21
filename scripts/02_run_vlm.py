@@ -13,6 +13,9 @@ sweep before the budget is exceeded.
 import argparse, concurrent.futures as cf, glob, hashlib, json, os, shutil, subprocess, sys, threading, time
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+sys.path.insert(0, os.path.join(ROOT, "src"))
+from paths import DATA, RUNS, RESULTS  # noqa: E402
+
 SYSTEM = ("Ти — сервіс опису зображень для незрячих і слабозорих користувачів. "
           "Відповідай українською мовою.")
 PROMPTS = {
@@ -34,7 +37,7 @@ def opaque(sid):
 
 def spent():
     tot = 0.0
-    for p in glob.glob(os.path.join(ROOT, "runs", "vlm", "*.jsonl")):
+    for p in glob.glob(os.path.join(RUNS, "vlm", "*.jsonl")):
         for ln in open(p, encoding="utf-8"):
             tot += json.loads(ln).get("cost", 0.0)
     return tot
@@ -64,18 +67,20 @@ def main():
     ap.add_argument("--budget", type=float, default=85.0, help="stop when total spend reaches this (USD)")
     a = ap.parse_args()
 
-    stim = [json.loads(l) for l in open(os.path.join(ROOT, "data", "stimuli.jsonl"), encoding="utf-8")]
+    stim = [json.loads(l) for l in open(os.path.join(DATA, "stimuli.jsonl"), encoding="utf-8")]
     if a.subset:
         keep = set(open(a.subset).read().split())
         stim = [s for s in stim if s["id"] in keep]
-    imgdir = os.path.join(ROOT, "runs", "img")
+    imgdir = os.path.join(RUNS, "img")
     os.makedirs(imgdir, exist_ok=True)
-    os.makedirs(os.path.join(ROOT, "runs", "vlm"), exist_ok=True)
+    os.makedirs(os.path.join(RUNS, "vlm"), exist_ok=True)
     for s in stim:
         dst = os.path.join(imgdir, opaque(s["id"]))
+        src = os.path.join(DATA, "images", s["id"] + ".jpg")
+        assert os.path.getsize(src) <= 250_000, f"{src}: the CLI silently drops attachments above ~256 KB"
         if not os.path.exists(dst):
-            shutil.copy(os.path.join(ROOT, "data", "images", s["id"] + ".jpg"), dst)
-    out_path = os.path.join(ROOT, "runs", "vlm", f"{a.model}.{a.prompt}.jsonl")
+            shutil.copy(os.path.join(DATA, "images", s["id"] + ".jpg"), dst)
+    out_path = os.path.join(RUNS, "vlm", f"{a.model}.{a.prompt}.jsonl")
     done = set()
     if os.path.exists(out_path):
         done = {json.loads(l)["id"] for l in open(out_path, encoding="utf-8")}

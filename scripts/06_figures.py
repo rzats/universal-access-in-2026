@@ -9,9 +9,12 @@ from PIL import Image
 from sklearn.metrics import roc_curve
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+sys.path.insert(0, os.path.join(ROOT, "src"))
+from paths import DATA, RUNS, RESULTS  # noqa: E402
+
 OUT = os.path.join(ROOT, "paper", "figures")
 os.makedirs(OUT, exist_ok=True)
-S = json.load(open(os.path.join(ROOT, "results", "summary.json"), encoding="utf-8"))
+S = json.load(open(os.path.join(RESULTS, "summary.json"), encoding="utf-8"))
 COL = {"haiku": "#2a78d6", "sonnet": "#eb6834", "opus": "#1baf7a", "fable": "#eda100"}
 NAME = {"haiku": "Haiku 5.5", "sonnet": "Sonnet 5.5", "opus": "Opus 5.5", "fable": "Fable 5.1"}
 INK, INK2, GRID = "#0b0b0b", "#52514e", "#e4e3df"
@@ -51,8 +54,8 @@ fig.savefig(os.path.join(OUT, "fig_cells.pdf"))
 plt.close(fig)
 
 # ---- Fig 3: token hallucination rate by ground-truth category
-cats = ["word", "name", "nonce", "lure", "num"]
-labels = ["common\nword", "real\nname", "invented\nname", "near-word\nname", "digits"]
+cats = ["word", "name", "num"]
+labels = ["common word", "name or rare word", "digits"]
 fig, ax = plt.subplots(figsize=(4.6, 2.4))
 bars(ax, cats, lambda m, c: S["factors"]["gt_cat"][m].get(c), "Hallucinated words (%)")
 ax.set_xticklabels(labels)
@@ -62,7 +65,7 @@ fig.savefig(os.path.join(OUT, "fig_categories.pdf"))
 plt.close(fig)
 
 # ---- Fig 4: ROC curves of detectors, one panel per main model
-C = [json.loads(l) for l in open(os.path.join(ROOT, "runs", "claims.jsonl"), encoding="utf-8")]
+C = [json.loads(l) for l in open(os.path.join(RUNS, "claims.jsonl"), encoding="utf-8")]
 mm = [m for m in ["haiku", "sonnet", "opus"] if m in S["detection"]]
 fig, axs = plt.subplots(1, len(mm), figsize=(7.0, 3.6), sharey=True)
 axs = np.atleast_1d(axs)
@@ -85,19 +88,24 @@ fig.tight_layout()
 fig.savefig(os.path.join(OUT, "fig_roc.pdf"))
 plt.close(fig)
 
-# ---- Fig 1: example stimuli
-ex = ["sig-cl-no-lu-0", "pac-bl-oc-no-1", "doc-se-cr-wo-2", "pac-cl-cr-nо-0", "doc-bl-oc-lu-3", "sig-se-no-no-0"]
-ex = [e.replace("о", "o") for e in ex]
-fig, axs = plt.subplots(2, 3, figsize=(7.0, 3.3))
+# ---- Fig 1: example stimuli (one row per genre: clean / degraded / framed)
+ST = [json.loads(l) for l in open(os.path.join(DATA, "stimuli.jsonl"), encoding="utf-8")]
+def pick(g, q, fr):
+    for x in ST:
+        if x["genre"] == g and x["quality"] == q and x["framing"] == fr:
+            return x
+ex = [pick("signage", "clean", "none"), pick("signage", "blur", "none"), pick("signage", "severe", "none"),
+      pick("packaging", "clean", "none"), pick("packaging", "blur", "crop"), pick("packaging", "clean", "occlusion"),
+      pick("document", "clean", "none"), pick("document", "blur", "occlusion"), pick("document", "clean", "crop")]
+fig, axs = plt.subplots(3, 3, figsize=(7.0, 6.6))
 for ax, e in zip(axs.flat, ex):
-    im = Image.open(os.path.join(ROOT, "data", "images", e + ".jpg"))
-    ax.imshow(im)
     ax.set_axis_off()
-    g, q, fr = e.split("-")[:3]
-    ax.set_title({"sig": "signage", "pac": "packaging", "doc": "document"}[g] + ", " +
-                 {"cl": "clean", "bl": "blur", "se": "severe"}[q] + ", " +
-                 {"no": "full frame", "cr": "cropped", "oc": "occluded"}[fr], fontsize=7, color=INK)
+    if e is None:
+        continue
+    ax.imshow(Image.open(os.path.join(DATA, "images", e["id"] + ".jpg")))
+    ax.set_title(f"{e['genre']}, {e['quality']}, " + {"none": "full frame", "crop": "cropped", "occlusion": "occluded"}[e["framing"]],
+                 fontsize=7, color=INK)
 fig.tight_layout()
-fig.savefig(os.path.join(OUT, "fig_examples.pdf"), dpi=200)
+fig.savefig(os.path.join(OUT, "fig_examples.pdf"), dpi=170)
 plt.close(fig)
 print("figures written to", OUT)

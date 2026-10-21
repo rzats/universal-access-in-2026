@@ -3,7 +3,7 @@
 Reads runs/claims.jsonl and runs/responses.jsonl (from 04_score.py); writes the
 response-free aggregate results/summary.json and LaTeX-ready tables in results/.
 """
-import collections, json, math, os, random
+import collections, json, math, os, random, sys
 
 import numpy as np
 from scipy.stats import binomtest
@@ -11,6 +11,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score, average_precision_score
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+sys.path.insert(0, os.path.join(ROOT, "src"))
+from paths import DATA, RUNS, RESULTS  # noqa: E402
+
 MAIN = ["haiku", "sonnet", "opus"]
 MODELS = MAIN + ["fable"]
 HALL = {"misread", "fabricated"}
@@ -52,8 +55,10 @@ def auc(y, s):
 
 
 def main():
-    C = [json.loads(l) for l in open(os.path.join(ROOT, "runs", "claims.jsonl"), encoding="utf-8")]
-    R = [json.loads(l) for l in open(os.path.join(ROOT, "runs", "responses.jsonl"), encoding="utf-8")]
+    C = [json.loads(l) for l in open(os.path.join(RUNS, "claims.jsonl"), encoding="utf-8")]
+    n_unscored = sum(c["label"] == "unscored" for c in C)
+    C = [c for c in C if c["label"] != "unscored"]
+    R = [json.loads(l) for l in open(os.path.join(RUNS, "responses.jsonl"), encoding="utf-8")]
     S = {}
     for c in C:
         c["hall"] = c["label"] in HALL
@@ -61,6 +66,7 @@ def main():
     stim_ids = sorted({r["id"] for r in R})
     fable_ids = sorted({r["id"] for r in R if r["model"] == "fable"})
     S["n_images"] = len(stim_ids)
+    S["n_unscored_claims"] = n_unscored
     S["n_fable_images"] = len(fable_ids)
     S["n_claims"] = {f"{m}.{p}": sum(1 for c in C if c["model"] == m and c["prompt"] == p) for m in MODELS for p in ["desc", "trans"]}
     S["n_responses"] = {f"{m}.{p}": sum(1 for r in R if r["model"] == m and r["prompt"] == p) for m in MODELS for p in ["desc", "trans"]}
@@ -242,12 +248,12 @@ def main():
     S["detection"] = det
 
     import glob
-    S["spend_usd"] = round(sum(json.loads(l).get("cost", 0) for p in glob.glob(os.path.join(ROOT, "runs", "vlm", "*.jsonl"))
+    S["spend_usd"] = round(sum(json.loads(l).get("cost", 0) for p in glob.glob(os.path.join(RUNS, "vlm", "*.jsonl"))
                                for l in open(p, encoding="utf-8")), 2)
     S["spend_by_run"] = {os.path.basename(p)[:-6]: round(sum(json.loads(l).get("cost", 0) for l in open(p, encoding="utf-8")), 2)
-                         for p in sorted(glob.glob(os.path.join(ROOT, "runs", "vlm", "*.jsonl")))}
+                         for p in sorted(glob.glob(os.path.join(RUNS, "vlm", "*.jsonl")))}
     os.makedirs(os.path.join(ROOT, "results"), exist_ok=True)
-    with open(os.path.join(ROOT, "results", "summary.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(RESULTS, "summary.json"), "w", encoding="utf-8") as f:
         json.dump(S, f, ensure_ascii=False, indent=1)
     for k, v in rates.items():
         print(k, v["claims"], "hall", v["hall_token"]["p"], "img_any", v["img_any_hall"]["p"], "compl", v["completion_token"]["p"], "cov", v["coverage"])

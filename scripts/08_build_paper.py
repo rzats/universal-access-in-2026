@@ -9,10 +9,13 @@ Output:   paper/universal-access-in-2026.tex and .pdf
 import json, os, re, subprocess, sys
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+sys.path.insert(0, os.path.join(ROOT, "src"))
+from paths import DATA, RUNS, RESULTS  # noqa: E402
+
 P = os.path.join(ROOT, "paper")
 ORDER = ["body_title", "body_front", "body_method", "body_results", "body_discussion", "body_back"]
-S = json.load(open(os.path.join(ROOT, "results", "summary.json"), encoding="utf-8"))
-A = json.load(open(os.path.join(ROOT, "results", "audit.json"), encoding="utf-8")) if os.path.exists(os.path.join(ROOT, "results", "audit.json")) else None
+S = json.load(open(os.path.join(RESULTS, "summary.json"), encoding="utf-8"))
+A = json.load(open(os.path.join(RESULTS, "audit.json"), encoding="utf-8")) if os.path.exists(os.path.join(RESULTS, "audit.json")) else None
 
 
 def pc(x, nd=1):
@@ -25,7 +28,7 @@ def ci(d, nd=1):
 
 def macros():
     m = {}
-    stim = [json.loads(l) for l in open(os.path.join(ROOT, "data", "stimuli.jsonl"), encoding="utf-8")]
+    stim = [json.loads(l) for l in open(os.path.join(DATA, "stimuli.jsonl"), encoding="utf-8")]
     toks = [t for s in stim for t in s["tokens"]]
     m["NImages"] = str(len(stim))
     m["NImgPerCell"] = str(len(stim) // 81)
@@ -73,7 +76,7 @@ def macros():
         if c:
             m[f"NComplTrans{T}"] = str(c["completion"])
         L = S["lexicalisation"].get(f"{mod}.desc")
-        if L:
+        if L and L.get("lure", {}).get("lexicalised", {}).get("p") is not None:
             m[f"LureLex{T}"] = pc(L["lure"]["lexicalised"]["p"])
             m[f"LureMis{T}"] = pc(L["lure"]["misread"]["p"])
             m[f"NonceUa{T}"] = pc(L["nonce"]["ua_letter"]["p"])
@@ -127,7 +130,8 @@ def macros():
     m["RangeHall"] = rng_([S["rates"][f"{k}.desc"]["hall_token"]["p"] for k in allm])
     m["RangeImg"] = rng_([S["rates"][f"{k}.desc"]["img_any_hall"]["p"] for k in allm], 0)
     m["RangeCleanFull"] = rng_([S["rates"][f"{k}.desc"]["img_any_hall_clean_full"]["p"] for k in main3], 0)
-    m["RangeNameHall"] = rng_([S["factors"]["gt_cat"][k][c]["p"] for k in main3 for c in ("nonce", "lure")], 0)
+    m["RangeNameHall"] = rng_([S["factors"]["gt_cat"][k]["name"]["p"] for k in main3])
+    m["RangeNumHall"] = rng_([S["factors"]["gt_cat"][k]["num"]["p"] for k in main3])
     m["RangeWordHall"] = rng_([S["factors"]["gt_cat"][k]["word"]["p"] for k in main3])
     m["RangeAucComb"] = rng_([S["detection"][k]["combined"]["auroc"] for k in main3], pct=False)
     m["RangeRecTen"] = rng_([S["detection"][k]["combined"]["operating_points"]["0.1"]["recall"] for k in main3], 0)
@@ -138,7 +142,40 @@ def macros():
     m["RangeRuleRec"] = rng_([S["detection"][k]["rule_reread_or_unconfirmed"]["recall"] for k in main3], 0)
     m["RangeRuleFf"] = rng_([S["detection"][k]["rule_reread_or_unconfirmed"]["false_flag"] for k in main3], 0)
     m["RangeRereadRec"] = rng_([S["detection"][k]["rule_reread_only"]["recall"] for k in main3], 0)
-    m["SpendTotal"] = f"{S.get('spend_usd', 0):.0f}"
+    # stimulus-set composition
+    m["NSign"] = str(sum(s_["genre"] == "signage" for s_ in stim))
+    m["NPack"] = str(sum(s_["genre"] == "packaging" for s_ in stim))
+    m["NDoc"] = str(sum(s_["genre"] == "document" for s_ in stim))
+    man = os.path.join(ROOT, "data", "raw_docs", "manifest.jsonl")
+    if os.path.exists(man):
+        nd = sum(1 for _ in open(man, encoding="utf-8"))
+        m["NDocsCollected"] = str(nd)
+        m["NDocsRejected"] = str(nd - int(m["NDoc"]))
+    # near-word probe
+    PR = os.path.join(ROOT, "results", "probe.json")
+    if os.path.exists(PR):
+        P = json.load(open(PR))
+        first = next(iter(P.values()))
+        m["NProbePairs"] = str(first["n_pairs"])
+        for mod, r in P.items():
+            T = mod.capitalize()
+            m[f"PrOrig{T}"] = pc(r["orig_exact"]["p"], 0)
+            m[f"PrNear{T}"] = pc(r["near_exact"]["p"], 0)
+            m[f"PrNorm{T}"] = pc(r["near_normalised"]["p"], 0)
+            m[f"PrNormCI{T}"] = f"{pc(r['near_normalised']['lo'], 0)}--{pc(r['near_normalised']['hi'], 0)}"
+            m[f"PrCond{T}"] = pc(r["near_exact_given_orig_read"]["p"], 0)
+            m[f"PrCondN{T}"] = str(r["near_exact_given_orig_read"]["n"])
+            m[f"PrP{T}"] = f"={r['p_mcnemar']:.3f}" if r["p_mcnemar"] >= 0.001 else "<0.001"
+        m["RangePrNorm"] = rng_([r["near_normalised"]["p"] for r in P.values()], 0)
+        m["RangePrNear"] = rng_([r["near_exact"]["p"] for r in P.values()], 0)
+        m["RangePrOrig"] = rng_([r["orig_exact"]["p"] for r in P.values()], 0)
+    # spend across all sweeps (synthetic pilot, real benchmark, probe, discarded oversize runs)
+    import glob
+    tot = 0.0
+    for f in glob.glob(os.path.join(ROOT, "runs", "**", "*.jsonl"), recursive=True):
+        if "/vlm" in f or "vlm_oversize" in f:
+            tot += sum(json.loads(l).get("cost", 0) for l in open(f, encoding="utf-8"))
+    m["SpendTotal"] = f"{tot:.0f}"
     return m
 
 

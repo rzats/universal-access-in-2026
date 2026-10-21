@@ -3,15 +3,18 @@ the automatic labeller. Prints context; the judgments are recorded in results/au
 import json, os, random, sys
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 sys.path.insert(0, os.path.join(ROOT, "src"))
+from paths import DATA, RUNS, RESULTS  # noqa: E402
+
+sys.path.insert(0, os.path.join(ROOT, "src"))
 from scoring import quoted_spans
 rng = random.Random(int(sys.argv[1]) if len(sys.argv) > 1 else 11)
-C = [json.loads(l) for l in open(os.path.join(ROOT, "runs", "claims.jsonl"), encoding="utf-8")]
+C = [json.loads(l) for l in open(os.path.join(RUNS, "claims.jsonl"), encoding="utf-8")]
 MODELS = ("haiku", "sonnet", "opus", "fable")
 C = [c for c in C if c["prompt"] == "desc"]
-stim = {json.loads(l)["id"]: json.loads(l) for l in open(os.path.join(ROOT, "data", "stimuli.jsonl"), encoding="utf-8")}
+stim = {json.loads(l)["id"]: json.loads(l) for l in open(os.path.join(DATA, "stimuli.jsonl"), encoding="utf-8")}
 resp = {}
 for m in MODELS:
-    for l in open(os.path.join(ROOT, "runs", "vlm", f"{m}.desc.jsonl"), encoding="utf-8"):
+    for l in open(os.path.join(RUNS, "vlm", f"{m}.desc.jsonl"), encoding="utf-8"):
         d = json.loads(l); resp[(m, d["id"])] = d["result"]
 sample = []
 for lab, n in [("misread", 50), ("fabricated", 50), ("completion", 30), ("correct", 50)]:

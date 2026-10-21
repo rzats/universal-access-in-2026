@@ -18,6 +18,9 @@ import collections, json, math, os, re, sys
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 sys.path.insert(0, os.path.join(ROOT, "src"))
+from paths import DATA, RUNS, RESULTS  # noqa: E402
+
+sys.path.insert(0, os.path.join(ROOT, "src"))
 from scoring import claims_desc, claims_trans, label
 from textnorm import toks, sim
 
@@ -29,7 +32,7 @@ def load_jsonl(p):
 
 
 def main():
-    stim = {s["id"]: s for s in load_jsonl(os.path.join(ROOT, "data", "stimuli.jsonl"))}
+    stim = {s["id"]: s for s in load_jsonl(os.path.join(DATA, "stimuli.jsonl"))}
     freq = {}
     for ln in open(os.path.join(ROOT, "data", "assets", "uk_full.txt"), encoding="utf-8"):
         w, _, c = ln.strip().partition(" ")
@@ -42,11 +45,11 @@ def main():
     for lst in (textgen.BRAND_WORDS, textgen.SURNAMES, textgen.DRUGS, textgen.STREETS, textgen.CITIES):
         for w in lst:
             known.update(toks(w))
-    ocr = {r["id"]: set(toks(r["psm3"])) | set(toks(r["psm11"])) for r in load_jsonl(os.path.join(ROOT, "runs", "ocr.jsonl"))}
+    ocr = {r["id"]: set(toks(r["psm3"])) | set(toks(r["psm11"])) for r in load_jsonl(os.path.join(RUNS, "ocr.jsonl"))}
     resp = {}
     for m in MAIN + ["fable"]:
         for p in ["desc", "trans"]:
-            for r in load_jsonl(os.path.join(ROOT, "runs", "vlm", f"{m}.{p}.jsonl")):
+            for r in load_jsonl(os.path.join(RUNS, "vlm", f"{m}.{p}.jsonl")):
                 resp[(m, p, r["id"])] = r["result"]
     readtoks = {k: set(toks(re.sub(r"\[[^\]]*\]", " ", v))) for k, v in resp.items()}
     unc = {}
@@ -54,8 +57,8 @@ def main():
         if p == "trans":
             unc[(m, i)] = {c["tok"] for c in claims_trans(v) if c["uncertain"]}
 
-    out_c = open(os.path.join(ROOT, "runs", "claims.jsonl"), "w", encoding="utf-8")
-    out_r = open(os.path.join(ROOT, "runs", "responses.jsonl"), "w", encoding="utf-8")
+    out_c = open(os.path.join(RUNS, "claims.jsonl"), "w", encoding="utf-8")
+    out_r = open(os.path.join(RUNS, "responses.jsonl"), "w", encoding="utf-8")
     for (m, p, i), text in sorted(resp.items()):
         s = stim[i]
         gt = s["tokens"]
@@ -65,6 +68,9 @@ def main():
         for c in cl:
             o = c["tok"]
             lab = label(o, gt, known)
+            if lab["label"] in ("misread", "fabricated") and any(g.get("lowconf") and g["tok"] == lab["gt"] for g in gt) \
+                    and lab["sim"] >= 0.5:
+                lab["label"] = "unscored"  # the matched reference word is itself an uncertain OCR reading
             n_lab[lab["label"]] += 1
             if lab["label"] == "correct":
                 matched.add(lab["gt"])
@@ -83,7 +89,7 @@ def main():
                    "ocr_sim": max([sim(o, t) for t in ocr_t] or [0.0]) if ocr_t is not None else None,
                    "lex": o in lexicon, "lexfreq": math.log10(freq.get(o, 0) + 1)}
             out_c.write(json.dumps(rec, ensure_ascii=False) + "\n")
-        vis = [g for g in gt if g["state"] == "visible"]
+        vis = [g for g in gt if g["state"] == "visible" and not g.get("extra")]
         out_r.write(json.dumps({"id": i, "model": m, "prompt": p, "genre": s["genre"], "quality": s["quality"],
                                 "framing": s["framing"], "cond": s["cond"], "rep": s["rep"], "n_claims": len(cl),
                                 **{f"n_{k}": n_lab[k] for k in ["correct", "completion", "misread", "fabricated"]},

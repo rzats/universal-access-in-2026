@@ -18,3 +18,8 @@ template/download/
 data/assets/
 paper/*.aux
 paper/*.out
+data/off/
+data/raw_docs/
+data/raw_signs/
+data/real/images/
+data/probe/images/
