@@ -16,3 +16,5 @@ paper/*.bbl
 paper/*.synctex.gz
 template/download/
 data/assets/
+paper/*.aux
+paper/*.out
