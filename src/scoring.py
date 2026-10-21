@@ -60,6 +60,9 @@ def sentence(t, s, e):
     return t[a:max(b, e)]
 
 
+BRACKET = re.compile(r"\[[^\]]*\]|\((?=[^)]*[^\W\d_])[^)]*\)")
+
+
 def claims_desc(text):
     """Claimed tokens from a description: one record per token of each distinct span."""
     t, spans = quoted_spans(text)
@@ -72,7 +75,8 @@ def claims_desc(text):
         ctx = t[max(0, s - 1):e + 1]
         sent = sentence(t, s, e).replace(sp, " ")
         hedged = bool(HEDGE.search(sent))
-        for tok, _, _ in tokens(sp):
+        # bracketed / parenthesised remarks inside a quote are annotations or marked guesses
+        for tok, _, _ in tokens(BRACKET.sub(" ", sp)):
             out.append({"tok": tok, "span": k, "hedged": hedged, "uncertain": False})
     return out
 
@@ -129,6 +133,9 @@ def label(o, gt, lexicon=None):
             return {"label": "correct", "gt": g["tok"], "gt_cat": g["cat"], "gt_state": g["state"], "sim": 1.0}
     for g in gt:
         if g["state"] == "partial" and fragment_ok(o, g):
+            return {"label": "correct", "gt": g["tok"], "gt_cat": g["cat"], "gt_state": g["state"], "sim": 1.0}
+    for g in gt:  # partially visible but no character fully hidden: the whole word is readable
+        if g["state"] == "partial" and 0 not in g["vis"] and o == g["tok"]:
             return {"label": "correct", "gt": g["tok"], "gt_cat": g["cat"], "gt_state": g["state"], "sim": 1.0}
     for g in gt:
         if g["state"] != "visible" and o == g["tok"]:

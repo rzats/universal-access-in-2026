@@ -198,7 +198,7 @@ def render(spec, rng: random.Random):
             arr = np.array(scene, float)
             arr = arr * (1 - alpha[..., None]) + 255 * alpha[..., None]
             scene = Image.fromarray(np.clip(arr, 0, 255).astype(np.uint8))
-            occ = alpha > 0.55
+            occ = alpha > 0.85  # text under weaker glare stays legible
         framing_info = {"occluder": kind}
     spec["framing_info"] = framing_info
     fx0, fy0, fx1, fy1 = int(fx0), int(fy0), int(fx1), int(fy1)
