@@ -1,0 +1,31 @@
+\section{Discussion}\label{sec:discussion}
+
+\subsection{What the error profile means for blind users}
+
+The headline token-level rates of a few per cent understate the accessibility problem. A blind user does not receive tokens but descriptions, and roughly a third or more of the descriptions in our benchmark contained at least one word that is not printed on the object. Most of these words were delivered without any cue of uncertainty. The errors also concentrate where they hurt most. Proper names that cannot be guessed (brands, surnames, drug and company names) are hallucinated an order of magnitude more often than common words, and these names are exactly what a user needs to tell one medicine, bill or shop from another. Near-word names are silently corrected to the real word they resemble. A user told that the box says \foreignlanguage{ukrainian}{«Метформін»} has no way to learn that it says something else, and the rare case in which an unusual printed string matters is the case the model is least likely to report faithfully.
+
+Two further patterns are specific to the Ukrainian setting. First, letters that distinguish Ukrainian from Russian orthography (\foreignlanguage{ukrainian}{ї, є, ґ}) are dropped or replaced in invented names. This loss is invisible in a screen-reader rendering of the output, but it changes the spelling of names that users may have to repeat, type or search for. Second, models describe text that is cut off by the frame edge or covered by a finger by completing it. The completions are usually right and usually hedged, but they are not readings. Because aiming errors are frequent in photographs taken by blind people~\cite{gurari2018vizwiz}, a description that fills in the unseen part removes the cue that would prompt the user to re-take the photograph.
+
+\subsection{Design recommendations}
+
+The results suggest concrete measures for assistive applications that build on VLMs:
+\begin{enumerate}
+\item \emph{Re-read before reading out.} A second, constrained transcription call costs little compared with the harm of a wrong dose or date. Comparing the two readings word by word catches over half of the hallucinated words on its own. Adding an on-device OCR pass, which shares no language prior with the VLM, and a second model where available raises this to roughly three quarters or more at a 5--7\% false-flag rate.
+\item \emph{Mark, do not hide.} Flagged words should be voiced with an explicit marker (e.g., ``probably \ldots'') or spelled out letter by letter, rather than removed. This lets the user decide whether to re-take the photograph or seek sighted verification, in line with the verification strategies blind users already employ~\cite{alharbi2024misfitting,xie2025beyond}.
+\item \emph{Separate reading from inference.} Prompts and interfaces should distinguish ``the label says'' from ``the hidden part is probably''. Our transcription prompt shows that completions can be almost eliminated by instruction. The description prompt should therefore ask the model to state explicitly where the frame cuts the text, which also tells the user how to move the camera.
+\item \emph{Treat names and numbers as critical.} Digits and names should always pass the cross-check and, when flagged, be offered for character-level reading. These are the fields where a language prior cannot help and where most of the harm arises.
+\end{enumerate}
+
+\subsection{Limitations}
+
+\emph{Synthetic stimuli.} The images are rendered, not photographed. This gives exact ground truth and exact visibility, which real photographs cannot provide, but the degradations only approximate real camera blur, lighting, reflections, curved packaging and clutter. The absolute rates should therefore be read as indicative, while the contrasts between conditions are the more robust finding. A validation on a smaller set of real, manually transcribed photographs of Ukrainian signage, packaging and documents is the natural next step. The invented names also over-represent the letters \foreignlanguage{ukrainian}{ї} and \foreignlanguage{ukrainian}{є} relative to natural Ukrainian text, which inflates the absolute Ukrainian-letter error rate, though not the existence of the effect.
+
+\emph{Models and harness.} All four models come from one vendor and were queried through its command-line client with default settings. Other model families, decoding settings and on-device models may behave differently. The cross-model detector, in particular, may be weaker when the other models share training data and therefore errors. Fable~5.1 was evaluated on a third of the images for cost reasons.
+
+\emph{Labelling.} Claimed text is identified by quotation marks, which the prompt requested. Text a model reads out without quoting it is not scored, and quoted text that a model presents as an example or an alternative reading is scored as a claim. Matching against the image's token set is conservative. The manual audit, performed by one author, indicates that the labels are largely correct but not error-free.
+
+\emph{No user study.} We measure what is said, not how blind users perceive or act on it. How flagged words should be voiced, and whether flags improve decisions without eroding trust in correct readings, requires a study with blind participants.
+
+\section{Conclusion}\label{sec:conclusion}
+
+Vision-language models read Ukrainian signs, labels and documents well enough that per-word error rates are low. They nevertheless assert text that is not printed in a large share of their descriptions, most often by normalising unusual names to familiar words, dropping Ukrainian-specific letters, altering digits or completing text the camera did not capture. Most of these assertions carry no hedge. The errors are, however, detectable at run time: a second constrained reading, an independent OCR pass and agreement between models together separate hallucinated from correct words with an AUROC of about 0.95. This makes it practical for assistive applications to tell blind users \emph{which} words to doubt. The benchmark generator, stimuli, ground truth and analysis code are released to support evaluation of further models and real-photograph validation.

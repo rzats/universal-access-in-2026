@@ -94,12 +94,158 @@
 %%\unnumbered% uncomment this for unnumbered level heads
 
 %% reported numbers, generated from results/summary.json by scripts/08_build_paper.py
+\newcommand{\ApHaiku}{0.65}
+\newcommand{\ApOpus}{0.36}
+\newcommand{\ApSonnet}{0.45}
+\newcommand{\AucCombCIHaiku}{0.963 [0.952, 0.973]}
+\newcommand{\AucCombCIOpus}{0.947 [0.920, 0.967]}
+\newcommand{\AucCombCISonnet}{0.953 [0.941, 0.965]}
+\newcommand{\AucDigitsHaiku}{0.98}
+\newcommand{\AucDigitsOpus}{0.96}
+\newcommand{\AucDigitsSonnet}{0.97}
+\newcommand{\AucHedgeHaiku}{0.66}
+\newcommand{\AucHedgeOpus}{0.62}
+\newcommand{\AucHedgeSonnet}{0.62}
+\newcommand{\AucLexHaiku}{0.67}
+\newcommand{\AucLexOpus}{0.59}
+\newcommand{\AucLexSonnet}{0.68}
+\newcommand{\AucOcrHaiku}{0.77}
+\newcommand{\AucOcrOpus}{0.73}
+\newcommand{\AucOcrSonnet}{0.74}
+\newcommand{\AucRereadHaiku}{0.77}
+\newcommand{\AucRereadOpus}{0.79}
+\newcommand{\AucRereadSonnet}{0.76}
+\newcommand{\AucUnsupHaiku}{0.95}
+\newcommand{\AucUnsupOpus}{0.93}
+\newcommand{\AucUnsupSonnet}{0.93}
+\newcommand{\AucXmodelHaiku}{0.88}
+\newcommand{\AucXmodelOpus}{0.90}
+\newcommand{\AucXmodelSonnet}{0.86}
+\newcommand{\BaseHaiku}{3.8}
+\newcommand{\BaseOpus}{3.2}
+\newcommand{\BaseSonnet}{2.9}
+\newcommand{\CatLureHaiku}{28.5}
+\newcommand{\CatLureOpus}{28.7}
+\newcommand{\CatLureSonnet}{19.0}
+\newcommand{\CatNonceHaiku}{38.2}
+\newcommand{\CatNonceOpus}{22.5}
+\newcommand{\CatNonceSonnet}{26.0}
+\newcommand{\CatNumHaiku}{4.2}
+\newcommand{\CatNumOpus}{3.2}
+\newcommand{\CatNumSonnet}{2.8}
+\newcommand{\CatWordHaiku}{2.0}
+\newcommand{\CatWordOpus}{1.4}
+\newcommand{\CatWordSonnet}{1.6}
+\newcommand{\ComplHedgedHaiku}{71}
+\newcommand{\ComplHedgedOpus}{90}
+\newcommand{\ComplHedgedSonnet}{91}
+\newcommand{\CovHaikuDesc}{92.7}
+\newcommand{\CovSonnetDesc}{95.6}
+\newcommand{\FrameFullHaiku}{3.0}
+\newcommand{\FrameFullOpus}{3.4}
+\newcommand{\FrameFullSonnet}{2.6}
+\newcommand{\FrameOccHaiku}{4.8}
+\newcommand{\FrameOccOpus}{3.3}
+\newcommand{\FrameOccSonnet}{3.6}
+\newcommand{\GenrePackagingHaiku}{3.2}
+\newcommand{\GenrePackagingOpus}{2.1}
+\newcommand{\GenrePackagingSonnet}{2.5}
+\newcommand{\GenreSignageHaiku}{6.5}
+\newcommand{\GenreSignageOpus}{6.3}
+\newcommand{\GenreSignageSonnet}{4.4}
+\newcommand{\HallPHaikuDesc}{3.8}
+\newcommand{\HallPOpusDesc}{2.8}
+\newcommand{\HallPSonnetDesc}{2.8}
+\newcommand{\HedgeCorrHaiku}{11}
+\newcommand{\HedgeCorrOpus}{13}
+\newcommand{\HedgeCorrSonnet}{12}
+\newcommand{\HedgeHallHaiku}{43}
+\newcommand{\HedgeHallOpus}{39}
+\newcommand{\HedgeHallSonnet}{39}
+\newcommand{\IllegibleHaiku}{60}
+\newcommand{\IllegibleSonnet}{62}
+\newcommand{\ImgAucHaiku}{0.89}
+\newcommand{\ImgAucOpus}{0.78}
+\newcommand{\ImgAucSonnet}{0.84}
+\newcommand{\ImgCleanFullHaiku}{19}
+\newcommand{\ImgCleanFullOpus}{11}
+\newcommand{\ImgCleanFullSonnet}{11}
+\newcommand{\ImgDigitHaiku}{11}
+\newcommand{\ImgDigitOpus}{10}
+\newcommand{\ImgDigitSonnet}{10}
+\newcommand{\ImgPHaikuDesc}{41}
+\newcommand{\ImgPOpusDesc}{34}
+\newcommand{\ImgPSonnetDesc}{35}
+\newcommand{\ImgUnhHaikuDesc}{30}
+\newcommand{\ImgUnhOpusDesc}{24}
+\newcommand{\LureLexHaiku}{12.8}
+\newcommand{\LureLexOpus}{18.4}
+\newcommand{\LureLexSonnet}{9.7}
+\newcommand{\McDescHaiku}{55}
+\newcommand{\McDescOpus}{16}
+\newcommand{\McDescSonnet}{32}
+\newcommand{\McPHaiku}{0.266}
+\newcommand{\McPOpus}{0.012}
+\newcommand{\McPSonnet}{0.699}
+\newcommand{\McTransHaiku}{43}
+\newcommand{\McTransOpus}{4}
+\newcommand{\McTransSonnet}{28}
 \newcommand{\NAudit}{??}
+\newcommand{\NComplHaiku}{205}
+\newcommand{\NComplOpus}{119}
+\newcommand{\NComplSonnet}{286}
+\newcommand{\NComplTransHaiku}{29}
+\newcommand{\NComplTransOpus}{1}
+\newcommand{\NComplTransSonnet}{8}
 \newcommand{\NFableImages}{0}
 \newcommand{\NGTNotVisible}{1\,719}
 \newcommand{\NGTTokens}{11\,424}
 \newcommand{\NImages}{567}
 \newcommand{\NImgPerCell}{7}
+\newcommand{\NonceUaHaiku}{16.3}
+\newcommand{\NonceUaOpus}{11.4}
+\newcommand{\NonceUaSonnet}{13.0}
+\newcommand{\QualBlurHaiku}{1.6}
+\newcommand{\QualBlurOpus}{1.8}
+\newcommand{\QualBlurSonnet}{1.3}
+\newcommand{\QualCleanHaiku}{2.1}
+\newcommand{\QualCleanOpus}{1.1}
+\newcommand{\QualCleanSonnet}{1.7}
+\newcommand{\QualSevereHaiku}{8.1}
+\newcommand{\QualSevereOpus}{6.3}
+\newcommand{\QualSevereSonnet}{5.6}
+\newcommand{\RangeAucComb}{0.95--0.96}
+\newcommand{\RangeCleanFull}{11--19}
+\newcommand{\RangeHall}{2.8--3.8}
+\newcommand{\RangeHedgeHall}{39--43}
+\newcommand{\RangeImg}{34--41}
+\newcommand{\RangeNameHall}{19--38}
+\newcommand{\RangeRecTen}{84--90}
+\newcommand{\RangeWordHall}{1.4--2.0}
+\newcommand{\RecFiveHaiku}{83}
+\newcommand{\RecFiveOpus}{72}
+\newcommand{\RecFiveSonnet}{75}
+\newcommand{\RecTenHaiku}{90}
+\newcommand{\RecTenOpus}{88}
+\newcommand{\RecTenSonnet}{84}
+\newcommand{\RuleFfHaiku}{5.0}
+\newcommand{\RuleFfOpus}{5.9}
+\newcommand{\RuleFfSonnet}{6.6}
+\newcommand{\RuleRecHaiku}{80}
+\newcommand{\RuleRecOpus}{67}
+\newcommand{\RuleRecSonnet}{76}
+\newcommand{\SubDigitHaiku}{20}
+\newcommand{\SubDigitOpus}{20}
+\newcommand{\SubDigitSonnet}{18}
+\newcommand{\SubFabHaiku}{25}
+\newcommand{\SubFabOpus}{31}
+\newcommand{\SubFabSonnet}{21}
+\newcommand{\SubLexHaiku}{8}
+\newcommand{\SubLexOpus}{17}
+\newcommand{\SubLexSonnet}{8}
+\newcommand{\SubUaHaiku}{13}
+\newcommand{\SubUaOpus}{13}
+\newcommand{\SubUaSonnet}{16}
 
 \begin{document}
 \title[Detecting text-reading hallucinations for blind users]{Detecting Text-Reading Hallucinations in Vision-Language Descriptions of Cyrillic Signage, Packaging and Documents for Blind Users}
@@ -112,9 +258,9 @@
 
 \affil[2]{\orgname{Lviv Polytechnic National University}, \orgaddress{\street{12 Stepan Bandera Str.}, \city{Lviv}, \postcode{79013}, \country{Ukraine}}}
 
-\abstract{ABSTRACT-PLACEHOLDER}
+\abstract{Blind people increasingly rely on vision-language models (VLMs) to read signs, product labels and documents aloud, but a model that cannot read a word tends to produce a plausible one instead. We measure how often this happens for Ukrainian (Cyrillic) text and whether it can be detected at run time. We built a benchmark of \NImages{} synthetic, photograph-like images of signage, packaging and documents. Every character is annotated, together with its visibility in the frame. The design crosses image quality, framing (cropping by the frame edge, finger or glare occlusion) and the type of the distinctive name (a real word, an invented word, or a word one letter away from a real one). Four Claude models described each image for a blind user and, separately, transcribed it. Only \RangeHall\% of the quoted words were hallucinated, yet \RangeImg\% of the descriptions contained at least one hallucinated word, including \RangeCleanFull\% of descriptions of clean, fully framed images. Invented and near-word names were hallucinated at \RangeNameHall\%, against \RangeWordHall\% for common words. Near-words were normalised to the real word, letters specific to Ukrainian were replaced by Russian-like spellings, and text hidden by the frame was completed. Only \RangeHedgeHall\% of hallucinated words were hedged. Combining the model's own re-reading, an independent Tesseract OCR pass and agreement between models detected hallucinated words with an AUROC of \RangeAucComb{}, catching \RangeRecTen\% of them at a 10\% false-flag rate. We derive design recommendations for assistive reading applications.}
 
-\keywords{KW-PLACEHOLDER}
+\keywords{blind and visually impaired users, vision-language models, hallucination detection, scene text reading, Cyrillic script, assistive technology}
 
 \maketitle
 
@@ -222,6 +368,131 @@ Each signal is evaluated alone by the area under the ROC curve (AUROC)~\cite{han
 \subsection{Statistics}\label{sec:stats}
 
 Proportions are reported with Wilson 95\% score intervals~\cite{wilson1927probable}. Because tokens are clustered within images, we additionally report percentile intervals from a cluster bootstrap over images~\cite{efron1979bootstrap} (1000 resamples for rates and 300 for AUROC). Paired comparisons of the description and transcription prompts on the same images use the exact McNemar test on image-level outcomes. All analysis code and the response-free aggregate results are released (see Declarations). Raw model responses are withheld from the repository but can be regenerated with the released scripts.
+
+
+\section{Results}\label{sec:results}
+
+\subsection{How often models assert text that is not there (RQ1)}\label{sec:rq1}
+
+Table~\ref{tab:rates} summarises all \NImages{} images (\NFableImages{} for Fable). Measured per quoted word, hallucination is rare: \HallPHaikuDesc\% of the words Haiku quotes in its descriptions are misread or fabricated, \HallPSonnetDesc\% for Sonnet, \HallPOpusDesc\% for Opus and \HallPFableDesc\% for Fable. Measured per response, which is what a blind user experiences, it is common. A description contains at least one hallucinated word in \ImgPHaikuDesc\% (Haiku), \ImgPSonnetDesc\% (Sonnet), \ImgPOpusDesc\% (Opus) and \ImgPFableDesc\% (Fable) of the images. In \ImgUnhHaikuDesc--\ImgUnhOpusDesc\% of the images, at least one hallucinated word is stated without any hedging in its sentence, so the listener has no cue to doubt it. Hallucination is not confined to degraded photographs: even for clean, fully framed images, \ImgCleanFullHaiku\% (Haiku), \ImgCleanFullSonnet\% (Sonnet) and \ImgCleanFullOpus\% (Opus) of the descriptions contain a hallucinated word. Errors in digits matter most for safety, because they affect dates, doses, prices, phone and account numbers. At least one wrong digit group appears in \ImgDigitHaiku\%, \ImgDigitSonnet\% and \ImgDigitOpus\% of the descriptions, respectively. Reading coverage is high: the models quote \CovHaikuDesc--\CovSonnetDesc\% of the visible ground-truth words. Under-reading is therefore not the main failure.
+
+\begin{table}[t]
+\caption{Text-reading outcomes per model and prompt. Token rates are percentages of all quoted (description) or transcribed (transcription) tokens; brackets give Wilson 95\% intervals. ``Responses'' is the percentage of images whose response contains at least one hallucinated (misread or fabricated) token. Coverage is the percentage of visible ground-truth tokens that the response reads correctly.}\label{tab:rates}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep\fill}llrlrrrlr}
+\toprule
+Model & Prompt & Tokens & Hallucinated \% & Misread & Fabric. & Completion & Responses \% & Cover. \\
+\midrule
+Haiku 5.5 & description & 10{,}823 & 3.78 [3.44{,} 4.15] & 2.84 & 0.94 & 1.89 & 41.1 [37.1{,} 45.2] & 92.7 \\
+Haiku 5.5 & transcription & 10{,}576 & 4.38 [4.00{,} 4.78] & 2.42 & 1.96 & 0.27 & 39.0 [35.0{,} 43.0] & 94.7 \\
+Sonnet 5.5 & description & 11{,}458 & 2.83 [2.54{,} 3.15] & 2.23 & 0.59 & 2.50 & 34.7 [30.9{,} 38.8] & 95.6 \\
+Sonnet 5.5 & transcription & 7{,}001 & 3.87 [3.44{,} 4.35] & 2.31 & 1.56 & 0.11 & 33.1 [28.5{,} 38.0] & 96.5 \\
+Opus 5.5 & description & 3{,}332 & 2.82 [2.31{,} 3.44] & 1.95 & 0.87 & 3.57 & 34.0 [27.0{,} 41.7] & 95.6 \\
+Opus 5.5 & transcription & 2{,}302 & 2.61 [2.03{,} 3.34] & 1.43 & 1.17 & 0.04 & 27.7 [20.7{,} 35.9] & 97.2 \\
+\botrule
+\end{tabular*}
+\end{table}
+
+\paragraph{Image quality and framing.} Figure~\ref{fig:cells} breaks down the response-level rate by quality and framing. Severe degradation is the dominant driver: per quoted word, Haiku's hallucination rate rises from \QualCleanHaiku\% on clean images to \QualSevereHaiku\% on severely degraded ones, Sonnet's from \QualCleanSonnet\% to \QualSevereSonnet\% and Opus's from \QualCleanOpus\% to \QualSevereOpus\%. Moderate blur does not raise the rate (\QualBlurHaiku\%, \QualBlurSonnet\%, \QualBlurOpus\%), which suggests that current models read moderately blurred print reliably. Occlusion by a finger or glare raises the rate further (Haiku \FrameOccHaiku\%, Sonnet \FrameOccSonnet\%, Opus \FrameOccOpus\%, against \FrameFullHaiku\%, \FrameFullSonnet\% and \FrameFullOpus\% for full frames). A crop by the frame edge adds few misreadings but produces completions (Section~\ref{sec:completion}). Signage is the hardest genre (Haiku \GenreSignageHaiku\%, Sonnet \GenreSignageSonnet\%, Opus \GenreSignageOpus\% against \GenrePackagingHaiku\%, \GenrePackagingSonnet\% and \GenrePackagingOpus\% for packaging). Its names are set in the largest and most often decorative type, and a larger share of its text is names.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_cells.pdf}
+\caption{Share of description responses containing at least one hallucinated word, by image quality (x-axis) and framing (panels). Error bars are Wilson 95\% intervals; each bar is based on 63 images (18 for Fable).}\label{fig:cells}
+\end{figure}
+
+\paragraph{What kind of text is misread.} The category of the printed word matters far more than image quality (Figure~\ref{fig:categories}). Common words are hallucinated at \CatWordHaiku\% (Haiku), \CatWordSonnet\% (Sonnet) and \CatWordOpus\% (Opus), and real names at similar rates. Invented names, which no language prior can predict, are misread or replaced at \CatNonceHaiku\%, \CatNonceSonnet\% and \CatNonceOpus\%. Near-word names, one letter away from a real word, are misread at \CatLureHaiku\%, \CatLureSonnet\% and \CatLureOpus\%. Digits sit in between (\CatNumHaiku\%, \CatNumSonnet\%, \CatNumOpus\%). For the near-word names, the misreading is very often the real word: \LureLexHaiku\% (Haiku), \LureLexSonnet\% (Sonnet) and \LureLexOpus\% (Opus) of the claims matched to a near-word name are the lexicalised original. Examples are \foreignlanguage{ukrainian}{«Метфермін»} read as \foreignlanguage{ukrainian}{«Метформін»}, \foreignlanguage{ukrainian}{«Добробїт»} as \foreignlanguage{ukrainian}{«Добробут»} and \foreignlanguage{ukrainian}{«Воложка»} as \foreignlanguage{ukrainian}{«Волошка»}. This is prior-driven normalisation: the model reports the word it expects rather than the word that is printed.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.72\textwidth]{figures/fig_categories.pdf}
+\caption{Share of quoted words that are hallucinated, by the category of the ground-truth word they correspond to (description prompt). Invented and near-word names are hallucinated an order of magnitude more often than common words. Error bars are Wilson 95\% intervals.}\label{fig:categories}
+\end{figure}
+
+\paragraph{Ukrainian orthography.} A second systematic pattern is the loss of letters specific to Ukrainian. Among claims matched to invented names, \NonceUaHaiku\% (Haiku), \NonceUaSonnet\% (Sonnet) and \NonceUaOpus\% (Opus) differ from the printed form only in replacing \foreignlanguage{ukrainian}{ї, є} or \foreignlanguage{ukrainian}{ґ} by \foreignlanguage{ukrainian}{і, е} or \foreignlanguage{ukrainian}{г}, i.e., by spellings shared with Russian (e.g., \foreignlanguage{ukrainian}{«Пїжєназол»} read as \foreignlanguage{ukrainian}{«Піженазол»}, \foreignlanguage{ukrainian}{«Ґражда»} as \foreignlanguage{ukrainian}{«Гражда»}). Across all hallucinated words in descriptions, Ukrainian-letter substitutions account for \SubUaHaiku\% (Haiku), \SubUaSonnet\% (Sonnet) and \SubUaOpus\% (Opus). Digit errors account for \SubDigitHaiku\%, \SubDigitSonnet\% and \SubDigitOpus\%, lexicalisations for \SubLexHaiku\%, \SubLexSonnet\% and \SubLexOpus\%, and outright fabrications for \SubFabHaiku\%, \SubFabSonnet\% and \SubFabOpus\%. The remainder are other substitutions, such as grammatical ``corrections'' of the printed text, paraphrases inside quotation marks and wrong words in blurred small print.
+
+\subsection{Completing text the camera did not capture}\label{sec:completion}
+
+Crops and occlusions hide part of the text, and the description prompt often fills it in. Haiku produced \NComplHaiku{} completions of partly or wholly hidden words, Sonnet \NComplSonnet{} and Opus \NComplOpus{}. The constrained transcription prompt, which explicitly forbids completion and offers a placeholder, nearly eliminates them (\NComplTransHaiku, \NComplTransSonnet{} and \NComplTransOpus). Most completions in descriptions are correct guesses, because the hidden word is usually predictable (\foreignlanguage{ukrainian}{«Шановні»}, \foreignlanguage{ukrainian}{«температурі»}). They are also usually hedged: \ComplHedgedHaiku\%, \ComplHedgedSonnet\% and \ComplHedgedOpus\% of them appear in a sentence that flags uncertainty. The more capable models also frequently reason aloud about hidden content. For example, one model inferred a covered total from the visible line items of a receipt (``the three visible prices sum to 244.47, so the total is most likely 244.47''), which is helpful when right and dangerous when the hidden digit differs. In \IllegibleHaiku--\IllegibleSonnet\% of the descriptions the model said that some text was illegible, covered or cut off, so the models do report missing evidence. They still fill it in with plausible text in the same response.
+
+\subsection{Hedging and the transcription prompt}\label{sec:hedging}
+
+Hedging carries information, but not enough. Of the hallucinated words in descriptions, \HedgeHallHaiku\% (Haiku), \HedgeHallSonnet\% (Sonnet) and \HedgeHallOpus\% (Opus) are in a hedged sentence, compared with \HedgeCorrHaiku\%, \HedgeCorrSonnet\% and \HedgeCorrOpus\% of the correctly read words. The majority of hallucinations are therefore delivered with the same confidence as correct text, consistent with reports that verbal hedging is only loosely tied to model uncertainty~\cite{yona2024can}.
+
+The transcription prompt suppresses completions but does not, in general, reduce misreadings. Per transcribed token, the hallucination rate is similar to or slightly higher than in descriptions (Table~\ref{tab:rates}), because transcriptions include more of the hard small print. Paired by image, the image-level outcome differs between the prompts for Haiku in \McDescHaiku{} versus \McTransHaiku{} images (description-only versus transcription-only hallucination; exact McNemar $p=\McPHaiku$), for Sonnet in \McDescSonnet{} versus \McTransSonnet{} ($p=\McPSonnet$) and for Opus in \McDescOpus{} versus \McTransOpus{} ($p=\McPOpus$). The ``(?)'' marks requested by the transcription prompt were used sparingly and are a weak detector on their own (Table~\ref{tab:detect}).
+
+\subsection{Detecting hallucinated words (RQ2)}\label{sec:rq2}
+
+Table~\ref{tab:detect} and Figure~\ref{fig:roc} report how well each run-time signal separates hallucinated from correct quoted words in descriptions. Agreement with the other models is the strongest single signal (AUROC \AucXmodelHaiku, \AucXmodelSonnet{} and \AucXmodelOpus{} for Haiku, Sonnet and Opus descriptions). The model's own re-reading under the transcription prompt (\AucRereadHaiku, \AucRereadSonnet, \AucRereadOpus) and the Tesseract cross-check (\AucOcrHaiku, \AucOcrSonnet, \AucOcrOpus) follow. Tesseract alone reads Ukrainian poorly on degraded images, but it does not share the VLM's language prior, so its disagreement is informative precisely where the VLM normalises. Lexicon membership (\AucLexHaiku, \AucLexSonnet, \AucLexOpus) and hedging cues (\AucHedgeHaiku, \AucHedgeSonnet, \AucHedgeOpus) are weak. The lexicon fails because hallucinations are often real words, the lexicalisation effect seen above.
+
+The signals are complementary. The cross-validated combination reaches AUROC \AucCombCIHaiku{} for Haiku, \AucCombCISonnet{} for Sonnet and \AucCombCIOpus{} for Opus, with average precision of \ApHaiku, \ApSonnet{} and \ApOpus{} against base rates of \BaseHaiku\%, \BaseSonnet\% and \BaseOpus\%. At a false-flag rate of 10\% on correct words, it catches \RecTenHaiku\%, \RecTenSonnet\% and \RecTenOpus\% of hallucinated words. At 5\% it catches \RecFiveHaiku\%, \RecFiveSonnet\% and \RecFiveOpus\%. A training-free rule also works well. Flagging a quoted word when the model's own re-reading lacks it, or when neither OCR nor a majority of the other models confirms it, catches \RuleRecHaiku\%, \RuleRecSonnet\% and \RuleRecOpus\% of hallucinated words while flagging \RuleFfHaiku\%, \RuleFfSonnet\% and \RuleFfOpus\% of correct ones. Detection works equally well for digit tokens (combined AUROC \AucDigitsHaiku, \AucDigitsSonnet, \AucDigitsOpus), where errors matter most. Including completions as positives changes little (\AucUnsupHaiku, \AucUnsupSonnet, \AucUnsupOpus). At the image level, the maximum word score ranks images with at least one hallucination above clean ones with AUROC \ImgAucHaiku, \ImgAucSonnet{} and \ImgAucOpus.
+
+\begin{table}[t]
+\caption{Detection of hallucinated words in descriptions. AUROC with cluster-bootstrap 95\% intervals (resampling images). The combined model is a class-balanced logistic regression over all signals plus token length and digit status, scored by five-fold cross-validation grouped by image. The rule row gives recall / false-flag rate.}\label{tab:detect}
+\footnotesize
+\begin{tabular*}{\textwidth}{@{\extracolsep\fill}lccc}
+\toprule
+Signal & Haiku 5.5 & Sonnet 5.5 & Opus 5.5 \\
+\midrule
+Re-reading (own transcription) & 0.769 [0.75, 0.80] & 0.760 [0.72, 0.80] & 0.785 [0.73, 0.85] \\
+Re-reading uncertainty mark (?) & 0.555 [0.54, 0.57] & 0.575 [0.55, 0.60] & 0.558 [0.52, 0.62] \\
+Cross-model agreement & 0.875 [0.85, 0.90] & 0.860 [0.83, 0.89] & 0.898 [0.85, 0.94] \\
+Tesseract OCR similarity & 0.773 [0.75, 0.80] & 0.743 [0.71, 0.78] & 0.727 [0.66, 0.78] \\
+Lexicon membership & 0.671 [0.65, 0.70] & 0.682 [0.65, 0.71] & 0.591 [0.53, 0.67] \\
+Hedging cue in sentence & 0.656 [0.63, 0.68] & 0.620 [0.58, 0.65] & 0.621 [0.55, 0.69] \\
+\midrule
+Combined (logistic, grouped 5-fold CV) & \textbf{0.963} [0.95, 0.97] & \textbf{0.953} [0.94, 0.96] & \textbf{0.947} [0.92, 0.97] \\
+\quad average precision (base rate) & 0.650 (3.8\%) & 0.454 (2.9\%) & 0.360 (3.2\%) \\
+\quad recall at 5\% false flags & 83.1\% & 74.9\% & 72.3\% \\
+\quad recall at 10\% false flags & 90.5\% & 83.7\% & 87.9\% \\
+\quad recall at 20\% false flags & 95.1\% & 94.9\% & 95.2\% \\
+Rule: not re-read, or unconfirmed by OCR and other models & 80.4\% / 5.0\% & 75.8\% / 6.6\% & 67.5\% / 5.9\% \\
+Tokens (hallucinated) & 10{,}823 (409) & 7{,}436 (215) & 2{,}600 (83) \\
+\botrule
+\end{tabular*}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig_roc.pdf}
+\caption{ROC curves of the individual run-time signals for words quoted in descriptions, per model. The legend gives each signal's AUROC.}\label{fig:roc}
+\end{figure}
+
+\paragraph{Labeller audit.} In the manual audit, \AuditHallPrec\% of the \AuditNHall{} tokens labelled as hallucinated were genuine misreadings or fabrications (Wilson interval \AuditHallPrecCI). The remainder were mostly short fragments quoted around an ellipsis or formatting variants. \AuditCorrPrec\% of the \AuditNCorr{} tokens labelled correct and \AuditComplPrec\% of the \AuditNCompl{} labelled completions were confirmed.
+
+
+\section{Discussion}\label{sec:discussion}
+
+\subsection{What the error profile means for blind users}
+
+The headline token-level rates of a few per cent understate the accessibility problem. A blind user does not receive tokens but descriptions, and roughly a third or more of the descriptions in our benchmark contained at least one word that is not printed on the object. Most of these words were delivered without any cue of uncertainty. The errors also concentrate where they hurt most. Proper names that cannot be guessed (brands, surnames, drug and company names) are hallucinated an order of magnitude more often than common words, and these names are exactly what a user needs to tell one medicine, bill or shop from another. Near-word names are silently corrected to the real word they resemble. A user told that the box says \foreignlanguage{ukrainian}{«Метформін»} has no way to learn that it says something else, and the rare case in which an unusual printed string matters is the case the model is least likely to report faithfully.
+
+Two further patterns are specific to the Ukrainian setting. First, letters that distinguish Ukrainian from Russian orthography (\foreignlanguage{ukrainian}{ї, є, ґ}) are dropped or replaced in invented names. This loss is invisible in a screen-reader rendering of the output, but it changes the spelling of names that users may have to repeat, type or search for. Second, models describe text that is cut off by the frame edge or covered by a finger by completing it. The completions are usually right and usually hedged, but they are not readings. Because aiming errors are frequent in photographs taken by blind people~\cite{gurari2018vizwiz}, a description that fills in the unseen part removes the cue that would prompt the user to re-take the photograph.
+
+\subsection{Design recommendations}
+
+The results suggest concrete measures for assistive applications that build on VLMs:
+\begin{enumerate}
+\item \emph{Re-read before reading out.} A second, constrained transcription call costs little compared with the harm of a wrong dose or date. Comparing the two readings word by word catches over half of the hallucinated words on its own. Adding an on-device OCR pass, which shares no language prior with the VLM, and a second model where available raises this to roughly three quarters or more at a 5--7\% false-flag rate.
+\item \emph{Mark, do not hide.} Flagged words should be voiced with an explicit marker (e.g., ``probably \ldots'') or spelled out letter by letter, rather than removed. This lets the user decide whether to re-take the photograph or seek sighted verification, in line with the verification strategies blind users already employ~\cite{alharbi2024misfitting,xie2025beyond}.
+\item \emph{Separate reading from inference.} Prompts and interfaces should distinguish ``the label says'' from ``the hidden part is probably''. Our transcription prompt shows that completions can be almost eliminated by instruction. The description prompt should therefore ask the model to state explicitly where the frame cuts the text, which also tells the user how to move the camera.
+\item \emph{Treat names and numbers as critical.} Digits and names should always pass the cross-check and, when flagged, be offered for character-level reading. These are the fields where a language prior cannot help and where most of the harm arises.
+\end{enumerate}
+
+\subsection{Limitations}
+
+\emph{Synthetic stimuli.} The images are rendered, not photographed. This gives exact ground truth and exact visibility, which real photographs cannot provide, but the degradations only approximate real camera blur, lighting, reflections, curved packaging and clutter. The absolute rates should therefore be read as indicative, while the contrasts between conditions are the more robust finding. A validation on a smaller set of real, manually transcribed photographs of Ukrainian signage, packaging and documents is the natural next step. The invented names also over-represent the letters \foreignlanguage{ukrainian}{ї} and \foreignlanguage{ukrainian}{є} relative to natural Ukrainian text, which inflates the absolute Ukrainian-letter error rate, though not the existence of the effect.
+
+\emph{Models and harness.} All four models come from one vendor and were queried through its command-line client with default settings. Other model families, decoding settings and on-device models may behave differently. The cross-model detector, in particular, may be weaker when the other models share training data and therefore errors. Fable~5.1 was evaluated on a third of the images for cost reasons.
+
+\emph{Labelling.} Claimed text is identified by quotation marks, which the prompt requested. Text a model reads out without quoting it is not scored, and quoted text that a model presents as an example or an alternative reading is scored as a claim. Matching against the image's token set is conservative. The manual audit, performed by one author, indicates that the labels are largely correct but not error-free.
+
+\emph{No user study.} We measure what is said, not how blind users perceive or act on it. How flagged words should be voiced, and whether flags improve decisions without eroding trust in correct readings, requires a study with blind participants.
+
+\section{Conclusion}\label{sec:conclusion}
+
+Vision-language models read Ukrainian signs, labels and documents well enough that per-word error rates are low. They nevertheless assert text that is not printed in a large share of their descriptions, most often by normalising unusual names to familiar words, dropping Ukrainian-specific letters, altering digits or completing text the camera did not capture. Most of these assertions carry no hedge. The errors are, however, detectable at run time: a second constrained reading, an independent OCR pass and agreement between models together separate hallucinated from correct words with an AUROC of about 0.95. This makes it practical for assistive applications to tell blind users \emph{which} words to doubt. The benchmark generator, stimuli, ground truth and analysis code are released to support evaluation of further models and real-photograph validation.
 
 
 \backmatter

@@ -116,6 +116,20 @@ def macros():
         m["AuditNHall"] = str(A["hall_precision"]["n"])
         m["AuditNCorr"] = str(A["correct_precision"]["n"])
         m["AuditNCompl"] = str(A["completion_precision"]["n"])
+    def rng_(vals, nd=1, pct=True):
+        lo, hi = min(vals), max(vals)
+        f = (lambda v: pc(v, nd)) if pct else (lambda v: f"{v:.2f}")
+        return f"{f(lo)}--{f(hi)}" if f(lo) != f(hi) else f(lo)
+    allm = [k for k in ["haiku", "sonnet", "opus", "fable"] if f"{k}.desc" in S["rates"]]
+    main3 = [k for k in ["haiku", "sonnet", "opus"] if k in S["detection"]]
+    m["RangeHall"] = rng_([S["rates"][f"{k}.desc"]["hall_token"]["p"] for k in allm])
+    m["RangeImg"] = rng_([S["rates"][f"{k}.desc"]["img_any_hall"]["p"] for k in allm], 0)
+    m["RangeCleanFull"] = rng_([S["rates"][f"{k}.desc"]["img_any_hall_clean_full"]["p"] for k in main3], 0)
+    m["RangeNameHall"] = rng_([S["factors"]["gt_cat"][k][c]["p"] for k in main3 for c in ("nonce", "lure")], 0)
+    m["RangeWordHall"] = rng_([S["factors"]["gt_cat"][k]["word"]["p"] for k in main3])
+    m["RangeAucComb"] = rng_([S["detection"][k]["combined"]["auroc"] for k in main3], pct=False)
+    m["RangeRecTen"] = rng_([S["detection"][k]["combined"]["operating_points"]["0.1"]["recall"] for k in main3], 0)
+    m["RangeHedgeHall"] = rng_([S["rates"][f"{k}.desc"]["hedged_share_of_hall"]["p"] for k in main3], 0)
     m["SpendTotal"] = f"{S.get('spend_usd', 0):.0f}"
     return m
 
@@ -172,7 +186,7 @@ def main():
     body = "\n\n".join(open(os.path.join(P, b + ".tex"), encoding="utf-8").read()
                        for b in ORDER if os.path.exists(os.path.join(P, b + ".tex")))
     mac = macros()
-    used = set(re.findall(r"\\([A-Z][A-Za-z]+)\{\}", body))
+    used = set(re.findall(r"\\([A-Z][A-Za-z]+)(?![A-Za-z])", body)) - {"LaTeX", "TeX", "Large", "Huge", "LARGE"}
     missing = sorted(u for u in used if u not in mac and u not in ("LaTeX", "TeX"))
     if missing:
         print("WARNING undefined number macros:", missing)

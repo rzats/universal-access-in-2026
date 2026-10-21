@@ -2277,5 +2277,14 @@
    "combined_digits_auroc": 0.9595,
    "combined_nondigits_auroc": 0.9456
   }
+ },
+ "spend_usd": 28.33,
+ "spend_by_run": {
+  "haiku.desc": 0.39,
+  "haiku.trans": 0.36,
+  "opus.desc": 7.1,
+  "opus.trans": 6.68,
+  "sonnet.desc": 8.68,
+  "sonnet.trans": 5.11
  }
 }
