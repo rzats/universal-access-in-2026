@@ -79,6 +79,7 @@ def main():
             unh = [c for c in cc if c["hall"] and not c["hedged"]]
             img_any = [r["n_misread"] + r["n_fabricated"] > 0 for r in rr]
             img_unh = collections.Counter(c["id"] for c in unh)
+            img_dig = collections.Counter(c["id"] for c in cc if c["hall"] and c["is_num"])
             rates[f"{m}.{p}"] = {
                 "claims": len(cc), "labels": dict(lab),
                 "hall_token": prop(sum(hall), len(cc)),
@@ -88,6 +89,9 @@ def main():
                 "completion_token": prop(lab["completion"], len(cc)),
                 "img_any_hall": prop(sum(img_any), len(rr)),
                 "img_any_unhedged_hall": prop(sum(1 for r in rr if img_unh[r["id"]] > 0), len(rr)),
+                "img_any_digit_hall": prop(sum(1 for r in rr if img_dig[r["id"]] > 0), len(rr)),
+                "img_any_hall_clean_full": prop(sum(r["n_misread"] + r["n_fabricated"] > 0 for r in rr if r["quality"] == "clean" and r["framing"] == "none"),
+                                                sum(1 for r in rr if r["quality"] == "clean" and r["framing"] == "none")),
                 "coverage": round(sum(r["n_gt_visible_read"] for r in rr) / max(1, sum(r["n_gt_visible"] for r in rr)), 4),
                 "says_illegible": prop(sum(r["says_illegible"] for r in rr), len(rr)),
                 "hedged_share_of_hall": prop(sum(1 for c in cc if c["hall"] and c["hedged"]), sum(hall)),
@@ -231,9 +235,17 @@ def main():
         # unsupported (incl. completions) as the target
         yu = np.array([c["unsup"] for c in cc], int)
         d["combined_unsupported_auroc"] = round(auc(yu, pred), 4)
+        dig = np.array([c["is_num"] for c in cc])
+        d["combined_digits_auroc"] = round(auc(y[dig], pred[dig]), 4) if auc(y[dig], pred[dig]) else None
+        d["combined_nondigits_auroc"] = round(auc(y[~dig], pred[~dig]), 4)
         det[m] = d
     S["detection"] = det
 
+    import glob
+    S["spend_usd"] = round(sum(json.loads(l).get("cost", 0) for p in glob.glob(os.path.join(ROOT, "runs", "vlm", "*.jsonl"))
+                               for l in open(p, encoding="utf-8")), 2)
+    S["spend_by_run"] = {os.path.basename(p)[:-6]: round(sum(json.loads(l).get("cost", 0) for l in open(p, encoding="utf-8")), 2)
+                         for p in sorted(glob.glob(os.path.join(ROOT, "runs", "vlm", "*.jsonl")))}
     os.makedirs(os.path.join(ROOT, "results"), exist_ok=True)
     with open(os.path.join(ROOT, "results", "summary.json"), "w", encoding="utf-8") as f:
         json.dump(S, f, ensure_ascii=False, indent=1)
