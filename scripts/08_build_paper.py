@@ -88,7 +88,7 @@ def macros():
             d = S["desc_vs_trans"][mod]
             m[f"McDesc{T}"] = str(d["desc_only"])
             m[f"McTrans{T}"] = str(d["trans_only"])
-            m[f"McP{T}"] = f"{d['p_mcnemar']:.3f}" if d["p_mcnemar"] >= 0.001 else "<0.001"
+            m[f"McP{T}"] = f"={d['p_mcnemar']:.3f}" if d["p_mcnemar"] >= 0.001 else "<0.001"
         if mod in S["detection"]:
             d = S["detection"][mod]
             for k, nm in [("reread", "Reread"), ("xmodel", "Xmodel"), ("ocr_sim", "Ocr"), ("lex", "Lex"), ("hedged", "Hedge"),
@@ -111,6 +111,8 @@ def macros():
     if A:
         m["AuditHallPrec"] = pc(A["hall_precision"]["p"], 0)
         m["AuditHallPrecCI"] = ci(A["hall_precision"], 0)
+        m["AuditHallLo"] = pc(A["hall_precision"]["lo"], 0)
+        m["AuditHallHi"] = pc(A["hall_precision"]["hi"], 0)
         m["AuditCorrPrec"] = pc(A["correct_precision"]["p"], 0)
         m["AuditComplPrec"] = pc(A["completion_precision"]["p"], 0)
         m["AuditNHall"] = str(A["hall_precision"]["n"])

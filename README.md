@@ -42,15 +42,15 @@ scripts/08_build_paper.py    assembles paper/universal-access-in-2026.tex from t
 src/textgen.py, src/render.py, src/textnorm.py, src/scoring.py
 ```
 
-Every number in the manuscript is a macro computed from `results/summary.json` or typed
-from it and checked by `scripts/09_check_numbers.py`.
+Every reported number is a LaTeX macro computed from `results/summary.json` (and
+`results/audit.json`) by `scripts/08_build_paper.py`; tables are generated the same way.
 
 ## Reproducing
 
 ```bash
 bash scripts/00_fetch_assets.sh
 python3 scripts/01_make_stimuli.py --reps 7
-scripts/run_sweeps.sh            # needs an authenticated `claude` CLI; ~$70 at list prices
+scripts/run_sweeps.sh            # needs an authenticated `claude` CLI; about $83 at list prices (as run)
 python3 scripts/03_ocr.py
 python3 scripts/04_score.py && python3 scripts/05_analyse.py && python3 scripts/06_figures.py
 python3 scripts/08_build_paper.py

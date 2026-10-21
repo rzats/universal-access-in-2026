@@ -64,7 +64,7 @@ plt.close(fig)
 # ---- Fig 4: ROC curves of detectors, one panel per main model
 C = [json.loads(l) for l in open(os.path.join(ROOT, "runs", "claims.jsonl"), encoding="utf-8")]
 mm = [m for m in ["haiku", "sonnet", "opus"] if m in S["detection"]]
-fig, axs = plt.subplots(1, len(mm), figsize=(7.0, 2.5), sharey=True)
+fig, axs = plt.subplots(1, len(mm), figsize=(7.0, 3.6), sharey=True)
 axs = np.atleast_1d(axs)
 DET = [("reread", "Re-reading", "#2a78d6"), ("xmodel", "Other models", "#eb6834"),
        ("ocr_sim", "Tesseract OCR", "#1baf7a"), ("lex", "Lexicon", "#eda100"), ("hedged", "Hedging cue", "#6250d6")]
@@ -79,7 +79,7 @@ for ax, m in zip(axs, mm):
     ax.plot([0, 1], [0, 1], color=GRID, lw=0.8, ls="--")
     ax.set_title(NAME[m], fontsize=8, color=INK)
     ax.set_xlabel("False-flag rate on correct words")
-    ax.legend(frameon=False, fontsize=6, loc="lower right", title="AUROC", title_fontsize=6)
+    ax.legend(frameon=False, fontsize=6, loc="upper center", bbox_to_anchor=(0.5, -0.22), ncol=1, title="AUROC", title_fontsize=6)
 axs[0].set_ylabel("Hallucinated words caught")
 fig.tight_layout()
 fig.savefig(os.path.join(OUT, "fig_roc.pdf"))
