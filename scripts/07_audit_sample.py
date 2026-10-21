@@ -6,14 +6,15 @@ sys.path.insert(0, os.path.join(ROOT, "src"))
 from scoring import quoted_spans
 rng = random.Random(int(sys.argv[1]) if len(sys.argv) > 1 else 11)
 C = [json.loads(l) for l in open(os.path.join(ROOT, "runs", "claims.jsonl"), encoding="utf-8")]
-C = [c for c in C if c["prompt"] == "desc" and c["model"] in ("haiku", "sonnet")]
+MODELS = ("haiku", "sonnet", "opus", "fable")
+C = [c for c in C if c["prompt"] == "desc"]
 stim = {json.loads(l)["id"]: json.loads(l) for l in open(os.path.join(ROOT, "data", "stimuli.jsonl"), encoding="utf-8")}
 resp = {}
-for m in ("haiku", "sonnet"):
+for m in MODELS:
     for l in open(os.path.join(ROOT, "runs", "vlm", f"{m}.desc.jsonl"), encoding="utf-8"):
         d = json.loads(l); resp[(m, d["id"])] = d["result"]
 sample = []
-for lab, n in [("misread", 30), ("fabricated", 30), ("completion", 20), ("correct", 40)]:
+for lab, n in [("misread", 50), ("fabricated", 50), ("completion", 30), ("correct", 50)]:
     xs = [c for c in C if c["label"] == lab]
     sample += rng.sample(xs, min(n, len(xs)))
 for k, c in enumerate(sample):
@@ -22,4 +23,4 @@ for k, c in enumerate(sample):
     g = [x for x in stim[c["id"]]["tokens"] if x["tok"] == c["gt"]]
     line = stim[c["id"]]["lines"][g[0]["line"]]["raw"] if g else ""
     vis = "".join(str(v) for v in g[0]["vis"]) if g else ""
-    print(f"{k:3d} {c['label']:10s} tok={c['tok']!r} gt={c['gt']!r}[{c['gt_state']} {vis}] span=«{s[:70]}» line=«{line}»")
+    print(f"{k:3d} {c['model'][:2]} {c['label']:10s} tok={c['tok']!r} gt={c['gt']!r}[{c['gt_state']} {vis}] span=«{s[:70]}» line=«{line}»")

@@ -130,6 +130,12 @@ def macros():
     m["RangeAucComb"] = rng_([S["detection"][k]["combined"]["auroc"] for k in main3], pct=False)
     m["RangeRecTen"] = rng_([S["detection"][k]["combined"]["operating_points"]["0.1"]["recall"] for k in main3], 0)
     m["RangeHedgeHall"] = rng_([S["rates"][f"{k}.desc"]["hedged_share_of_hall"]["p"] for k in main3], 0)
+    m["RangeImgUnh"] = rng_([S["rates"][f"{k}.desc"]["img_any_unhedged_hall"]["p"] for k in allm], 0)
+    m["RangeCov"] = rng_([S["rates"][f"{k}.desc"]["coverage"] for k in allm])
+    m["RangeIllegible"] = rng_([S["rates"][f"{k}.desc"]["says_illegible"]["p"] for k in allm], 0)
+    m["RangeRuleRec"] = rng_([S["detection"][k]["rule_reread_or_unconfirmed"]["recall"] for k in main3], 0)
+    m["RangeRuleFf"] = rng_([S["detection"][k]["rule_reread_or_unconfirmed"]["false_flag"] for k in main3], 0)
+    m["RangeRereadRec"] = rng_([S["detection"][k]["rule_reread_only"]["recall"] for k in main3], 0)
     m["SpendTotal"] = f"{S.get('spend_usd', 0):.0f}"
     return m
 
