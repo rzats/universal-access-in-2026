@@ -1,5 +1,6 @@
 {
  "n_images": 567,
+ "n_unscored_claims": 0,
  "n_fable_images": 567,
  "n_claims": {
   "haiku.desc": 10823,

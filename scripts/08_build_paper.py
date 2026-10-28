@@ -14,8 +14,13 @@ from paths import DATA, RUNS, RESULTS  # noqa: E402
 
 P = os.path.join(ROOT, "paper")
 ORDER = ["body_title", "body_front", "body_method", "body_results", "body_discussion", "body_back"]
-S = json.load(open(os.path.join(RESULTS, "summary.json"), encoding="utf-8"))
-A = json.load(open(os.path.join(RESULTS, "audit.json"), encoding="utf-8")) if os.path.exists(os.path.join(RESULTS, "audit.json")) else None
+APPENDIX = "body_appendix"
+SYN = json.load(open(os.path.join(ROOT, "results", "summary.json"), encoding="utf-8"))
+REAL = json.load(open(os.path.join(ROOT, "results", "real", "summary.json"), encoding="utf-8"))
+REV = json.load(open(os.path.join(ROOT, "results", "revision.json"), encoding="utf-8"))
+AUD = json.load(open(os.path.join(ROOT, "results", "audit_raters.json"), encoding="utf-8")) \
+    if os.path.exists(os.path.join(ROOT, "results", "audit_raters.json")) else None
+S, A = SYN, None  # macros() reads the current study through these globals
 
 
 def pc(x, nd=1):
@@ -182,7 +187,7 @@ def macros():
 NAMES = {"haiku": "Haiku 5.5", "sonnet": "Sonnet 5.5", "opus": "Opus 5.5", "fable": "Fable 5.1"}
 
 
-def table_rates():
+def table_rates(S):
     rows = []
     for mod in NAMES:
         for pr, pn in [("desc", "description"), ("trans", "transcription")]:
@@ -197,7 +202,7 @@ def table_rates():
     return "\n".join(rows).replace(",", "{,}")
 
 
-def table_detect():
+def table_detect(S):
     rows = []
     keys = [("reread", "Re-reading (own transcription)"), ("reread_unc", "Re-reading uncertainty mark (?)"),
             ("xmodel", "Cross-model agreement"), ("ocr_sim", "Tesseract OCR similarity"), ("lex", "Lexicon membership"),
@@ -226,18 +231,149 @@ def table_detect():
     return "\n".join(rows)
 
 
+def table_pairs():
+    rows = []
+    for ds, nm in [("synthetic", "Study 1 (synthetic)"), ("real", "Study 2 (real)")]:
+        rows.append(f"\\multicolumn{{6}}{{l}}{{\\emph{{{nm}}}}} \\\\")
+        for r in REV[ds]["model_pairs"]:
+            rows.append(f"{NAMES[r['a']]} vs {NAMES[r['b']]} & {r['n_images']} & {pc(r['img_a'], 1)} / {pc(r['img_b'], 1)} & "
+                        f"{r['a_only']}/{r['b_only']} & {p3(r['p_holm'])} & "
+                        f"{pc(r['tok_diff'], 2)} [{pc(r['tok_diff_ci'][0], 2)}, {pc(r['tok_diff_ci'][1], 2)}] \\\\")
+    return "\n".join(rows)
+
+
+def table_cost():
+    rows = []
+    for ds, nm in [("synthetic", "Study 1"), ("real", "Study 2")]:
+        for k, v in REV[ds]["cost"].items():
+            mod, pr = k.split(".")
+            rows.append(f"{nm} & {NAMES[mod]} & {'description' if pr == 'desc' else 'transcription'} & {v['n']} & "
+                        f"{v['in_tokens']:,} & {v['out_tokens']:,} & {v['usd_per_image']:.4f} & {v['sec_median']:.1f} ({v['sec_p90']:.1f}) \\\\".replace(",", "{,}"))
+    return "\n".join(rows)
+
+
+def table_stab():
+    rows = []
+    for mod, v in REV["stability"].items():
+        r = v["token_rate_by_run"]
+        rows.append(f"{NAMES[mod]} & {v['n_images']} & {pc(v['img_any_by_run']['r1'], 0)} / {pc(v['img_any_by_run']['r2'], 0)} / {pc(v['img_any_by_run']['r3'], 0)} & "
+                    f"{pc(v['flip_rate']['p'], 0)} [{pc(v['flip_rate']['lo'], 0)}, {pc(v['flip_rate']['hi'], 0)}] & "
+                    f"{pc(r['r1'], 2)} / {pc(r['r2'], 2)} / {pc(r['r3'], 2)} & {pc(v['token_rate_spread'], 2)} & "
+                    f"{v['disagreement_auroc']:.2f} \\\\")
+    return "\n".join(rows)
+
+
+def table_breakdown():
+    rows = []
+    for ds, S_, nm in [("synthetic", SYN, "1"), ("real", REAL, "2")]:
+        F = S_["factors"]
+        for fac, levels in [("genre", ["signage", "packaging", "document"]), ("quality", ["clean", "blur", "severe"]),
+                            ("framing", ["none", "crop", "occlusion"]), ("gt_cat", ["word", "name", "nonce", "lure", "num"])]:
+            for lv in levels:
+                cells = []
+                for mod in ["haiku", "sonnet", "opus", "fable"]:
+                    d = F[fac].get(mod, {}).get(lv)
+                    cells.append(f"{pc(d['p'], 1)} ({d['n']:,})".replace(",", "{,}") if d and d["n"] else "--")
+                if all(c == "--" for c in cells):
+                    continue
+                lab = {"none": "full frame", "word": "common word", "name": "name / rare word", "nonce": "invented name",
+                       "lure": "near-word name", "num": "digits"}.get(lv, lv)
+                rows.append(f"{nm} & {fac.replace('gt_cat', 'category')} & {lab} & " + " & ".join(cells) + " \\\\")
+        rows.append("\\midrule")
+    return "\n".join(rows[:-1])
+
+
+TABLES = {"rates": lambda: table_rates(SYN), "realrates": lambda: table_rates(REAL), "detect": lambda: table_detect(SYN),
+          "realdetect": lambda: table_detect(REAL), "pairs": table_pairs, "cost": table_cost, "stab": table_stab,
+          "breakdown": table_breakdown}
+
+
+def p3(p):
+    return "<0.001" if p < 0.001 else f"{p:.3f}"
+
+
+def rev_macros():
+    """Numbers from results/revision.json and results/audit_raters.json."""
+    m = {}
+    st = REV.get("stability", {})
+    if st:
+        m["StabFlipRange"] = rng2([v["flip_rate"]["p"] for v in st.values()], 0)
+        m["StabSpreadMax"] = pc(max(v["token_rate_spread"] for v in st.values()), 2)
+        m["StabDisAucRange"] = rng2([v["disagreement_auroc"] for v in st.values() if v["disagreement_auroc"]], 2, False)
+        m["StabN"] = str(next(iter(st.values()))["n_images"])
+        for mod, v in st.items():
+            T = mod.capitalize()
+            m[f"StabFlip{T}"] = pc(v["flip_rate"]["p"], 0)
+            m[f"StabDisAuc{T}"] = f"{v['disagreement_auroc']:.2f}" if v["disagreement_auroc"] else "--"
+    sets = REV["sets"]
+    for ch, nm in [("ї", "Yi"), ("є", "Ye"), ("ґ", "Ghe")]:
+        m[f"Over{nm}"] = f"{sets['synthetic']['letters_invented_over_natural'][ch]:.0f}"
+        m[f"Real{nm}Share"] = f"{100 * sets['real']['letters_all'][ch]:.2f}"
+        m[f"Nat{nm}Share"] = f"{100 * sets['letters_natural'][ch]:.2f}"
+        m[f"Syn{nm}Share"] = f"{100 * sets['synthetic']['letters_all'][ch]:.2f}"
+    for ds, pre in [("synthetic", "Syn"), ("real", "Real")]:
+        x = sets[ds]
+        m[f"{pre}TokLen"] = f"{x['letter_token_len_mean']:.1f}"
+        m[f"{pre}TokPerImg"] = f"{x['tokens_per_image']:.0f}"
+        m[f"{pre}NameShare"] = pc(x["category_share"].get("name", 0), 0)
+        m[f"{pre}NumShare"] = pc(x["category_share"].get("num", 0), 0)
+        m[f"{pre}WordShare"] = pc(x["category_share"].get("word", 0), 0)
+    # model pairs: count of Holm-significant image-level differences
+    for ds, pre in [("synthetic", "Syn"), ("real", "Real")]:
+        mp = REV[ds]["model_pairs"]
+        m[f"{pre}NPairsSig"] = str(sum(r["p_holm"] < 0.05 for r in mp))
+        m[f"{pre}NPairs"] = str(len(mp))
+        m[f"{pre}NTokSig"] = str(sum(r["tok_diff_ci"][0] > 0 or r["tok_diff_ci"][1] < 0 for r in mp))
+    if AUD:
+        for ds, pre in [("synthetic", "Syn"), ("real", "Real")]:
+            a = AUD.get(ds)
+            if not a:
+                continue
+            m[f"{pre}AudN"] = str(sum(v["n"] for k, v in a["resolved"].items() if k != "hallucination"))
+            m[f"{pre}AudKappa"] = f"{a['kappa']:.2f}" if a.get("kappa") is not None else "--"
+            m[f"{pre}AudAgree"] = pc(a["raw_agreement"], 0)
+            m[f"{pre}AudNBoth"] = str(a["n_both"])
+            for k, nm in [("hallucination", "Hall"), ("correct", "Corr"), ("completion", "Compl"), ("misread", "Mis"), ("fabricated", "Fab")]:
+                r = a["resolved"][k]
+                m[f"{pre}Aud{nm}"] = pc(r["p"], 0) if r["p"] is not None else "--"
+                m[f"{pre}Aud{nm}CI"] = f"{pc(r['lo'], 0)}--{pc(r['hi'], 0)}" if r["p"] is not None else "--"
+                for rater, rn in [("claude", "Cl"), ("gemma", "Gm")]:
+                    rr = a[rater][k]
+                    m[f"{pre}Aud{nm}{rn}"] = pc(rr["p"], 0) if rr["p"] is not None else "--"
+        gm = AUD.get("gemma_meta") or {}
+        m["OllamaVersion"] = str(gm.get("ollama_version", "--"))
+    return m
+
+
+def rng2(vals, nd=1, pct=True):
+    lo, hi = min(vals), max(vals)
+    f = (lambda v: pc(v, nd)) if pct else (lambda v: f"{v:.{nd}f}")
+    return f"{f(lo)}--{f(hi)}" if f(lo) != f(hi) else f(lo)
+
+
 def main():
     tpl = open(os.path.join(P, "template_main.tex"), encoding="utf-8").read()
     body = "\n\n".join(open(os.path.join(P, b + ".tex"), encoding="utf-8").read()
                        for b in ORDER if os.path.exists(os.path.join(P, b + ".tex")))
+    app = open(os.path.join(P, APPENDIX + ".tex"), encoding="utf-8").read()
+    body = body.replace("\\bibliography{refs}", app + "\n\\bibliography{refs}")
+    global S, DATA
+    S, DATA = SYN, os.path.join(ROOT, "data")
     mac = macros()
+    S, DATA = REAL, os.path.join(ROOT, "data", "real")
+    real = macros()
+    shared = [k for k in real if k.startswith(("NSign", "NPack", "NDoc", "NProbe", "Pr", "RangePr", "SpendTotal"))]
+    mac.update({k: real[k] for k in shared})
+    mac.update({"Real" + k: v for k, v in real.items() if k not in shared})
+    mac.update(rev_macros())
     used = set(re.findall(r"\\([A-Z][A-Za-z]+)(?![A-Za-z])", body)) - {"LaTeX", "TeX", "Large", "Huge", "LARGE"}
     missing = sorted(u for u in used if u not in mac and u not in ("LaTeX", "TeX"))
     if missing:
         print("WARNING undefined number macros:", missing)
     defs = "%% reported numbers, generated from results/summary.json by scripts/08_build_paper.py\n" + "".join(
         f"\\newcommand{{\\{k}}}{{{v}}}\n" for k, v in sorted(mac.items()) if k in used)
-    body = body.replace("%TABLE:rates%", table_rates()).replace("%TABLE:detect%", table_detect())
+    for tag, fn in TABLES.items():
+        body = body.replace(f"%TABLE:{tag}%", fn())
     out = tpl.replace("%BODY%", body).replace("\\begin{document}", defs + "\n\\begin{document}", 1)
     out = out.replace("\\bibliography{sn-bibliography}", "\\bibliography{refs}")
     if "---" in re.sub(r"%.*", "", out):

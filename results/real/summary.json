@@ -1,0 +1,2493 @@
+{
+ "n_images": 138,
+ "n_unscored_claims": 0,
+ "n_fable_images": 129,
+ "n_claims": {
+  "haiku.desc": 4993,
+  "haiku.trans": 8327,
+  "sonnet.desc": 6195,
+  "sonnet.trans": 8419,
+  "opus.desc": 6158,
+  "opus.trans": 8301,
+  "fable.desc": 5268,
+  "fable.trans": 0
+ },
+ "n_responses": {
+  "haiku.desc": 138,
+  "haiku.trans": 138,
+  "sonnet.desc": 138,
+  "sonnet.trans": 138,
+  "opus.desc": 129,
+  "opus.trans": 138,
+  "fable.desc": 129,
+  "fable.trans": 0
+ },
+ "rates": {
+  "haiku.desc": {
+   "claims": 4993,
+   "labels": {
+    "correct": 4503,
+    "completion": 31,
+    "misread": 249,
+    "fabricated": 210
+   },
+   "hall_token": {
+    "k": 459,
+    "n": 4993,
+    "p": 0.0919,
+    "lo": 0.0842,
+    "hi": 0.1003
+   },
+   "hall_token_cluster_ci": [
+    0.0746,
+    0.1102
+   ],
+   "misread_token": {
+    "k": 249,
+    "n": 4993,
+    "p": 0.0499,
+    "lo": 0.0442,
+    "hi": 0.0563
+   },
+   "fabricated_token": {
+    "k": 210,
+    "n": 4993,
+    "p": 0.0421,
+    "lo": 0.0368,
+    "hi": 0.048
+   },
+   "completion_token": {
+    "k": 31,
+    "n": 4993,
+    "p": 0.0062,
+    "lo": 0.0044,
+    "hi": 0.0088
+   },
+   "img_any_hall": {
+    "k": 66,
+    "n": 138,
+    "p": 0.4783,
+    "lo": 0.3966,
+    "hi": 0.5611
+   },
+   "img_any_unhedged_hall": {
+    "k": 54,
+    "n": 138,
+    "p": 0.3913,
+    "lo": 0.3139,
+    "hi": 0.4746
+   },
+   "img_any_digit_hall": {
+    "k": 25,
+    "n": 138,
+    "p": 0.1812,
+    "lo": 0.1258,
+    "hi": 0.2538
+   },
+   "img_any_hall_clean_full": {
+    "k": 14,
+    "n": 32,
+    "p": 0.4375,
+    "lo": 0.2817,
+    "hi": 0.6067
+   },
+   "coverage": 0.4847,
+   "says_illegible": {
+    "k": 66,
+    "n": 138,
+    "p": 0.4783,
+    "lo": 0.3966,
+    "hi": 0.5611
+   },
+   "hedged_share_of_hall": {
+    "k": 72,
+    "n": 459,
+    "p": 0.1569,
+    "lo": 0.1265,
+    "hi": 0.193
+   },
+   "hedged_share_of_correct": {
+    "k": 170,
+    "n": 4503,
+    "p": 0.0378,
+    "lo": 0.0326,
+    "hi": 0.0437
+   }
+  },
+  "haiku.trans": {
+   "claims": 8327,
+   "labels": {
+    "correct": 6971,
+    "completion": 31,
+    "misread": 560,
+    "fabricated": 765
+   },
+   "hall_token": {
+    "k": 1325,
+    "n": 8327,
+    "p": 0.1591,
+    "lo": 0.1514,
+    "hi": 0.1671
+   },
+   "hall_token_cluster_ci": [
+    0.1254,
+    0.2014
+   ],
+   "misread_token": {
+    "k": 560,
+    "n": 8327,
+    "p": 0.0673,
+    "lo": 0.0621,
+    "hi": 0.0728
+   },
+   "fabricated_token": {
+    "k": 765,
+    "n": 8327,
+    "p": 0.0919,
+    "lo": 0.0859,
+    "hi": 0.0983
+   },
+   "completion_token": {
+    "k": 31,
+    "n": 8327,
+    "p": 0.0037,
+    "lo": 0.0026,
+    "hi": 0.0053
+   },
+   "img_any_hall": {
+    "k": 92,
+    "n": 138,
+    "p": 0.6667,
+    "lo": 0.5844,
+    "hi": 0.7399
+   },
+   "img_any_unhedged_hall": {
+    "k": 92,
+    "n": 138,
+    "p": 0.6667,
+    "lo": 0.5844,
+    "hi": 0.7399
+   },
+   "img_any_digit_hall": {
+    "k": 32,
+    "n": 138,
+    "p": 0.2319,
+    "lo": 0.1693,
+    "hi": 0.309
+   },
+   "img_any_hall_clean_full": {
+    "k": 18,
+    "n": 32,
+    "p": 0.5625,
+    "lo": 0.3933,
+    "hi": 0.7183
+   },
+   "coverage": 0.6915,
+   "says_illegible": {
+    "k": 96,
+    "n": 138,
+    "p": 0.6957,
+    "lo": 0.6144,
+    "hi": 0.7663
+   },
+   "hedged_share_of_hall": {
+    "k": 0,
+    "n": 1325,
+    "p": 0.0,
+    "lo": 0,
+    "hi": 0.0029
+   },
+   "hedged_share_of_correct": {
+    "k": 0,
+    "n": 6971,
+    "p": 0.0,
+    "lo": 0,
+    "hi": 0.0006
+   }
+  },
+  "sonnet.desc": {
+   "claims": 6195,
+   "labels": {
+    "correct": 5713,
+    "misread": 233,
+    "fabricated": 226,
+    "completion": 23
+   },
+   "hall_token": {
+    "k": 459,
+    "n": 6195,
+    "p": 0.0741,
+    "lo": 0.0678,
+    "hi": 0.0809
+   },
+   "hall_token_cluster_ci": [
+    0.0615,
+    0.0885
+   ],
+   "misread_token": {
+    "k": 233,
+    "n": 6195,
+    "p": 0.0376,
+    "lo": 0.0332,
+    "hi": 0.0426
+   },
+   "fabricated_token": {
+    "k": 226,
+    "n": 6195,
+    "p": 0.0365,
+    "lo": 0.0321,
+    "hi": 0.0414
+   },
+   "completion_token": {
+    "k": 23,
+    "n": 6195,
+    "p": 0.0037,
+    "lo": 0.0025,
+    "hi": 0.0056
+   },
+   "img_any_hall": {
+    "k": 72,
+    "n": 138,
+    "p": 0.5217,
+    "lo": 0.4389,
+    "hi": 0.6034
+   },
+   "img_any_unhedged_hall": {
+    "k": 58,
+    "n": 138,
+    "p": 0.4203,
+    "lo": 0.3412,
+    "hi": 0.5037
+   },
+   "img_any_digit_hall": {
+    "k": 27,
+    "n": 138,
+    "p": 0.1957,
+    "lo": 0.1381,
+    "hi": 0.2697
+   },
+   "img_any_hall_clean_full": {
+    "k": 14,
+    "n": 32,
+    "p": 0.4375,
+    "lo": 0.2817,
+    "hi": 0.6067
+   },
+   "coverage": 0.5814,
+   "says_illegible": {
+    "k": 75,
+    "n": 138,
+    "p": 0.5435,
+    "lo": 0.4603,
+    "hi": 0.6243
+   },
+   "hedged_share_of_hall": {
+    "k": 83,
+    "n": 459,
+    "p": 0.1808,
+    "lo": 0.1483,
+    "hi": 0.2186
+   },
+   "hedged_share_of_correct": {
+    "k": 247,
+    "n": 5713,
+    "p": 0.0432,
+    "lo": 0.0383,
+    "hi": 0.0488
+   }
+  },
+  "sonnet.trans": {
+   "claims": 8419,
+   "labels": {
+    "correct": 7505,
+    "misread": 368,
+    "fabricated": 532,
+    "completion": 14
+   },
+   "hall_token": {
+    "k": 900,
+    "n": 8419,
+    "p": 0.1069,
+    "lo": 0.1005,
+    "hi": 0.1137
+   },
+   "hall_token_cluster_ci": [
+    0.0878,
+    0.1294
+   ],
+   "misread_token": {
+    "k": 368,
+    "n": 8419,
+    "p": 0.0437,
+    "lo": 0.0395,
+    "hi": 0.0483
+   },
+   "fabricated_token": {
+    "k": 532,
+    "n": 8419,
+    "p": 0.0632,
+    "lo": 0.0582,
+    "hi": 0.0686
+   },
+   "completion_token": {
+    "k": 14,
+    "n": 8419,
+    "p": 0.0017,
+    "lo": 0.001,
+    "hi": 0.0028
+   },
+   "img_any_hall": {
+    "k": 96,
+    "n": 138,
+    "p": 0.6957,
+    "lo": 0.6144,
+    "hi": 0.7663
+   },
+   "img_any_unhedged_hall": {
+    "k": 96,
+    "n": 138,
+    "p": 0.6957,
+    "lo": 0.6144,
+    "hi": 0.7663
+   },
+   "img_any_digit_hall": {
+    "k": 33,
+    "n": 138,
+    "p": 0.2391,
+    "lo": 0.1756,
+    "hi": 0.3167
+   },
+   "img_any_hall_clean_full": {
+    "k": 20,
+    "n": 32,
+    "p": 0.625,
+    "lo": 0.4525,
+    "hi": 0.7707
+   },
+   "coverage": 0.7394,
+   "says_illegible": {
+    "k": 95,
+    "n": 138,
+    "p": 0.6884,
+    "lo": 0.6069,
+    "hi": 0.7597
+   },
+   "hedged_share_of_hall": {
+    "k": 0,
+    "n": 900,
+    "p": 0.0,
+    "lo": 0.0,
+    "hi": 0.0043
+   },
+   "hedged_share_of_correct": {
+    "k": 0,
+    "n": 7505,
+    "p": 0.0,
+    "lo": 0,
+    "hi": 0.0005
+   }
+  },
+  "opus.desc": {
+   "claims": 6158,
+   "labels": {
+    "correct": 5657,
+    "misread": 215,
+    "fabricated": 243,
+    "completion": 43
+   },
+   "hall_token": {
+    "k": 458,
+    "n": 6158,
+    "p": 0.0744,
+    "lo": 0.0681,
+    "hi": 0.0812
+   },
+   "hall_token_cluster_ci": [
+    0.0618,
+    0.0865
+   ],
+   "misread_token": {
+    "k": 215,
+    "n": 6158,
+    "p": 0.0349,
+    "lo": 0.0306,
+    "hi": 0.0398
+   },
+   "fabricated_token": {
+    "k": 243,
+    "n": 6158,
+    "p": 0.0395,
+    "lo": 0.0349,
+    "hi": 0.0446
+   },
+   "completion_token": {
+    "k": 43,
+    "n": 6158,
+    "p": 0.007,
+    "lo": 0.0052,
+    "hi": 0.0094
+   },
+   "img_any_hall": {
+    "k": 74,
+    "n": 129,
+    "p": 0.5736,
+    "lo": 0.4874,
+    "hi": 0.6556
+   },
+   "img_any_unhedged_hall": {
+    "k": 65,
+    "n": 129,
+    "p": 0.5039,
+    "lo": 0.4187,
+    "hi": 0.5888
+   },
+   "img_any_digit_hall": {
+    "k": 24,
+    "n": 129,
+    "p": 0.186,
+    "lo": 0.1283,
+    "hi": 0.2619
+   },
+   "img_any_hall_clean_full": {
+    "k": 16,
+    "n": 29,
+    "p": 0.5517,
+    "lo": 0.3755,
+    "hi": 0.7159
+   },
+   "coverage": 0.565,
+   "says_illegible": {
+    "k": 73,
+    "n": 129,
+    "p": 0.5659,
+    "lo": 0.4797,
+    "hi": 0.6483
+   },
+   "hedged_share_of_hall": {
+    "k": 54,
+    "n": 458,
+    "p": 0.1179,
+    "lo": 0.0915,
+    "hi": 0.1507
+   },
+   "hedged_share_of_correct": {
+    "k": 330,
+    "n": 5657,
+    "p": 0.0583,
+    "lo": 0.0525,
+    "hi": 0.0647
+   }
+  },
+  "opus.trans": {
+   "claims": 8301,
+   "labels": {
+    "correct": 7684,
+    "misread": 289,
+    "fabricated": 319,
+    "completion": 9
+   },
+   "hall_token": {
+    "k": 608,
+    "n": 8301,
+    "p": 0.0732,
+    "lo": 0.0678,
+    "hi": 0.079
+   },
+   "hall_token_cluster_ci": [
+    0.0614,
+    0.0855
+   ],
+   "misread_token": {
+    "k": 289,
+    "n": 8301,
+    "p": 0.0348,
+    "lo": 0.0311,
+    "hi": 0.039
+   },
+   "fabricated_token": {
+    "k": 319,
+    "n": 8301,
+    "p": 0.0384,
+    "lo": 0.0345,
+    "hi": 0.0428
+   },
+   "completion_token": {
+    "k": 9,
+    "n": 8301,
+    "p": 0.0011,
+    "lo": 0.0006,
+    "hi": 0.0021
+   },
+   "img_any_hall": {
+    "k": 75,
+    "n": 138,
+    "p": 0.5435,
+    "lo": 0.4603,
+    "hi": 0.6243
+   },
+   "img_any_unhedged_hall": {
+    "k": 75,
+    "n": 138,
+    "p": 0.5435,
+    "lo": 0.4603,
+    "hi": 0.6243
+   },
+   "img_any_digit_hall": {
+    "k": 30,
+    "n": 138,
+    "p": 0.2174,
+    "lo": 0.1567,
+    "hi": 0.2934
+   },
+   "img_any_hall_clean_full": {
+    "k": 16,
+    "n": 32,
+    "p": 0.5,
+    "lo": 0.3363,
+    "hi": 0.6637
+   },
+   "coverage": 0.7554,
+   "says_illegible": {
+    "k": 99,
+    "n": 138,
+    "p": 0.7174,
+    "lo": 0.6372,
+    "hi": 0.7858
+   },
+   "hedged_share_of_hall": {
+    "k": 0,
+    "n": 608,
+    "p": 0.0,
+    "lo": 0,
+    "hi": 0.0063
+   },
+   "hedged_share_of_correct": {
+    "k": 0,
+    "n": 7684,
+    "p": 0.0,
+    "lo": 0,
+    "hi": 0.0005
+   }
+  },
+  "fable.desc": {
+   "claims": 5268,
+   "labels": {
+    "correct": 4780,
+    "completion": 62,
+    "misread": 210,
+    "fabricated": 216
+   },
+   "hall_token": {
+    "k": 426,
+    "n": 5268,
+    "p": 0.0809,
+    "lo": 0.0738,
+    "hi": 0.0885
+   },
+   "hall_token_cluster_ci": [
+    0.0665,
+    0.0977
+   ],
+   "misread_token": {
+    "k": 210,
+    "n": 5268,
+    "p": 0.0399,
+    "lo": 0.0349,
+    "hi": 0.0455
+   },
+   "fabricated_token": {
+    "k": 216,
+    "n": 5268,
+    "p": 0.041,
+    "lo": 0.036,
+    "hi": 0.0467
+   },
+   "completion_token": {
+    "k": 62,
+    "n": 5268,
+    "p": 0.0118,
+    "lo": 0.0092,
+    "hi": 0.0151
+   },
+   "img_any_hall": {
+    "k": 73,
+    "n": 129,
+    "p": 0.5659,
+    "lo": 0.4797,
+    "hi": 0.6483
+   },
+   "img_any_unhedged_hall": {
+    "k": 54,
+    "n": 129,
+    "p": 0.4186,
+    "lo": 0.337,
+    "hi": 0.5049
+   },
+   "img_any_digit_hall": {
+    "k": 25,
+    "n": 129,
+    "p": 0.1938,
+    "lo": 0.1349,
+    "hi": 0.2705
+   },
+   "img_any_hall_clean_full": {
+    "k": 15,
+    "n": 31,
+    "p": 0.4839,
+    "lo": 0.3197,
+    "hi": 0.6516
+   },
+   "coverage": 0.5513,
+   "says_illegible": {
+    "k": 69,
+    "n": 129,
+    "p": 0.5349,
+    "lo": 0.449,
+    "hi": 0.6187
+   },
+   "hedged_share_of_hall": {
+    "k": 130,
+    "n": 426,
+    "p": 0.3052,
+    "lo": 0.2633,
+    "hi": 0.3505
+   },
+   "hedged_share_of_correct": {
+    "k": 445,
+    "n": 4780,
+    "p": 0.0931,
+    "lo": 0.0852,
+    "hi": 0.1017
+   }
+  }
+ },
+ "factors": {
+  "quality": {
+   "haiku": {
+    "blur": {
+     "k": 218,
+     "n": 2532,
+     "p": 0.0861,
+     "lo": 0.0758,
+     "hi": 0.0977
+    },
+    "clean": {
+     "k": 163,
+     "n": 2137,
+     "p": 0.0763,
+     "lo": 0.0658,
+     "hi": 0.0883
+    },
+    "severe": {
+     "k": 78,
+     "n": 324,
+     "p": 0.2407,
+     "lo": 0.1974,
+     "hi": 0.2902
+    }
+   },
+   "sonnet": {
+    "blur": {
+     "k": 222,
+     "n": 2855,
+     "p": 0.0778,
+     "lo": 0.0685,
+     "hi": 0.0882
+    },
+    "clean": {
+     "k": 194,
+     "n": 2921,
+     "p": 0.0664,
+     "lo": 0.0579,
+     "hi": 0.076
+    },
+    "severe": {
+     "k": 43,
+     "n": 419,
+     "p": 0.1026,
+     "lo": 0.0771,
+     "hi": 0.1354
+    }
+   },
+   "opus": {
+    "blur": {
+     "k": 203,
+     "n": 2902,
+     "p": 0.07,
+     "lo": 0.0612,
+     "hi": 0.0798
+    },
+    "clean": {
+     "k": 223,
+     "n": 2923,
+     "p": 0.0763,
+     "lo": 0.0672,
+     "hi": 0.0865
+    },
+    "severe": {
+     "k": 32,
+     "n": 333,
+     "p": 0.0961,
+     "lo": 0.0689,
+     "hi": 0.1325
+    }
+   },
+   "fable": {
+    "blur": {
+     "k": 182,
+     "n": 2419,
+     "p": 0.0752,
+     "lo": 0.0654,
+     "hi": 0.0864
+    },
+    "clean": {
+     "k": 179,
+     "n": 2172,
+     "p": 0.0824,
+     "lo": 0.0716,
+     "hi": 0.0947
+    },
+    "severe": {
+     "k": 65,
+     "n": 677,
+     "p": 0.096,
+     "lo": 0.076,
+     "hi": 0.1205
+    }
+   }
+  },
+  "framing": {
+   "haiku": {
+    "crop": {
+     "k": 144,
+     "n": 1527,
+     "p": 0.0943,
+     "lo": 0.0806,
+     "hi": 0.11
+    },
+    "none": {
+     "k": 195,
+     "n": 2269,
+     "p": 0.0859,
+     "lo": 0.0751,
+     "hi": 0.0982
+    },
+    "occlusion": {
+     "k": 120,
+     "n": 1197,
+     "p": 0.1003,
+     "lo": 0.0845,
+     "hi": 0.1186
+    }
+   },
+   "sonnet": {
+    "crop": {
+     "k": 122,
+     "n": 1759,
+     "p": 0.0694,
+     "lo": 0.0584,
+     "hi": 0.0822
+    },
+    "none": {
+     "k": 194,
+     "n": 2733,
+     "p": 0.071,
+     "lo": 0.0619,
+     "hi": 0.0812
+    },
+    "occlusion": {
+     "k": 143,
+     "n": 1703,
+     "p": 0.084,
+     "lo": 0.0717,
+     "hi": 0.0981
+    }
+   },
+   "opus": {
+    "crop": {
+     "k": 132,
+     "n": 1836,
+     "p": 0.0719,
+     "lo": 0.061,
+     "hi": 0.0846
+    },
+    "none": {
+     "k": 193,
+     "n": 2667,
+     "p": 0.0724,
+     "lo": 0.0631,
+     "hi": 0.0828
+    },
+    "occlusion": {
+     "k": 133,
+     "n": 1655,
+     "p": 0.0804,
+     "lo": 0.0682,
+     "hi": 0.0945
+    }
+   },
+   "fable": {
+    "crop": {
+     "k": 133,
+     "n": 1626,
+     "p": 0.0818,
+     "lo": 0.0694,
+     "hi": 0.0961
+    },
+    "none": {
+     "k": 200,
+     "n": 2616,
+     "p": 0.0765,
+     "lo": 0.0669,
+     "hi": 0.0873
+    },
+    "occlusion": {
+     "k": 93,
+     "n": 1026,
+     "p": 0.0906,
+     "lo": 0.0746,
+     "hi": 0.1098
+    }
+   }
+  },
+  "genre": {
+   "haiku": {
+    "document": {
+     "k": 387,
+     "n": 4037,
+     "p": 0.0959,
+     "lo": 0.0872,
+     "hi": 0.1053
+    },
+    "signage": {
+     "k": 72,
+     "n": 956,
+     "p": 0.0753,
+     "lo": 0.0602,
+     "hi": 0.0938
+    }
+   },
+   "sonnet": {
+    "document": {
+     "k": 390,
+     "n": 5166,
+     "p": 0.0755,
+     "lo": 0.0686,
+     "hi": 0.083
+    },
+    "signage": {
+     "k": 69,
+     "n": 1029,
+     "p": 0.0671,
+     "lo": 0.0533,
+     "hi": 0.084
+    }
+   },
+   "opus": {
+    "document": {
+     "k": 389,
+     "n": 5113,
+     "p": 0.0761,
+     "lo": 0.0691,
+     "hi": 0.0837
+    },
+    "signage": {
+     "k": 69,
+     "n": 1045,
+     "p": 0.066,
+     "lo": 0.0525,
+     "hi": 0.0827
+    }
+   },
+   "fable": {
+    "document": {
+     "k": 351,
+     "n": 4209,
+     "p": 0.0834,
+     "lo": 0.0754,
+     "hi": 0.0921
+    },
+    "signage": {
+     "k": 75,
+     "n": 1059,
+     "p": 0.0708,
+     "lo": 0.0569,
+     "hi": 0.0879
+    }
+   }
+  },
+  "gt_cat": {
+   "haiku": {
+    "name": {
+     "k": 133,
+     "n": 1118,
+     "p": 0.119,
+     "lo": 0.1013,
+     "hi": 0.1393
+    },
+    "num": {
+     "k": 54,
+     "n": 352,
+     "p": 0.1534,
+     "lo": 0.1195,
+     "hi": 0.1948
+    },
+    "word": {
+     "k": 272,
+     "n": 3523,
+     "p": 0.0772,
+     "lo": 0.0688,
+     "hi": 0.0865
+    }
+   },
+   "sonnet": {
+    "name": {
+     "k": 131,
+     "n": 1442,
+     "p": 0.0908,
+     "lo": 0.0771,
+     "hi": 0.1068
+    },
+    "num": {
+     "k": 46,
+     "n": 476,
+     "p": 0.0966,
+     "lo": 0.0732,
+     "hi": 0.1265
+    },
+    "word": {
+     "k": 282,
+     "n": 4277,
+     "p": 0.0659,
+     "lo": 0.0589,
+     "hi": 0.0738
+    }
+   },
+   "opus": {
+    "name": {
+     "k": 125,
+     "n": 1427,
+     "p": 0.0876,
+     "lo": 0.074,
+     "hi": 0.1034
+    },
+    "num": {
+     "k": 43,
+     "n": 453,
+     "p": 0.0949,
+     "lo": 0.0712,
+     "hi": 0.1254
+    },
+    "word": {
+     "k": 290,
+     "n": 4278,
+     "p": 0.0678,
+     "lo": 0.0606,
+     "hi": 0.0757
+    }
+   },
+   "fable": {
+    "name": {
+     "k": 115,
+     "n": 1156,
+     "p": 0.0995,
+     "lo": 0.0835,
+     "hi": 0.1181
+    },
+    "num": {
+     "k": 54,
+     "n": 422,
+     "p": 0.128,
+     "lo": 0.0994,
+     "hi": 0.1632
+    },
+    "word": {
+     "k": 257,
+     "n": 3690,
+     "p": 0.0696,
+     "lo": 0.0619,
+     "hi": 0.0783
+    }
+   }
+  },
+  "is_num": {
+   "haiku": {
+    "False": {
+     "k": 398,
+     "n": 4634,
+     "p": 0.0859,
+     "lo": 0.0782,
+     "hi": 0.0943
+    },
+    "True": {
+     "k": 61,
+     "n": 359,
+     "p": 0.1699,
+     "lo": 0.1346,
+     "hi": 0.2122
+    }
+   },
+   "sonnet": {
+    "False": {
+     "k": 400,
+     "n": 5706,
+     "p": 0.0701,
+     "lo": 0.0638,
+     "hi": 0.077
+    },
+    "True": {
+     "k": 59,
+     "n": 489,
+     "p": 0.1207,
+     "lo": 0.0947,
+     "hi": 0.1525
+    }
+   },
+   "opus": {
+    "False": {
+     "k": 401,
+     "n": 5691,
+     "p": 0.0705,
+     "lo": 0.0641,
+     "hi": 0.0774
+    },
+    "True": {
+     "k": 57,
+     "n": 467,
+     "p": 0.1221,
+     "lo": 0.0954,
+     "hi": 0.1549
+    }
+   },
+   "fable": {
+    "False": {
+     "k": 357,
+     "n": 4831,
+     "p": 0.0739,
+     "lo": 0.0669,
+     "hi": 0.0816
+    },
+    "True": {
+     "k": 69,
+     "n": 437,
+     "p": 0.1579,
+     "lo": 0.1267,
+     "hi": 0.195
+    }
+   }
+  },
+  "cond": {
+   "haiku": {
+    "real": {
+     "k": 459,
+     "n": 4993,
+     "p": 0.0919,
+     "lo": 0.0842,
+     "hi": 0.1003
+    }
+   },
+   "sonnet": {
+    "real": {
+     "k": 459,
+     "n": 6195,
+     "p": 0.0741,
+     "lo": 0.0678,
+     "hi": 0.0809
+    }
+   },
+   "opus": {
+    "real": {
+     "k": 458,
+     "n": 6158,
+     "p": 0.0744,
+     "lo": 0.0681,
+     "hi": 0.0812
+    }
+   },
+   "fable": {
+    "real": {
+     "k": 426,
+     "n": 5268,
+     "p": 0.0809,
+     "lo": 0.0738,
+     "hi": 0.0885
+    }
+   }
+  }
+ },
+ "img_cells": {
+  "haiku": {
+   "clean|none": {
+    "k": 14,
+    "n": 32,
+    "p": 0.4375,
+    "lo": 0.2817,
+    "hi": 0.6067
+   },
+   "clean|crop": {
+    "k": 7,
+    "n": 8,
+    "p": 0.875,
+    "lo": 0.5291,
+    "hi": 0.9776
+   },
+   "clean|occlusion": {
+    "k": 3,
+    "n": 7,
+    "p": 0.4286,
+    "lo": 0.1582,
+    "hi": 0.7495
+   },
+   "blur|none": {
+    "k": 14,
+    "n": 31,
+    "p": 0.4516,
+    "lo": 0.2916,
+    "hi": 0.6223
+   },
+   "blur|crop": {
+    "k": 7,
+    "n": 7,
+    "p": 1.0,
+    "lo": 0.6457,
+    "hi": 1
+   },
+   "blur|occlusion": {
+    "k": 7,
+    "n": 8,
+    "p": 0.875,
+    "lo": 0.5291,
+    "hi": 0.9776
+   },
+   "severe|none": {
+    "k": 11,
+    "n": 30,
+    "p": 0.3667,
+    "lo": 0.2187,
+    "hi": 0.5449
+   },
+   "severe|crop": {
+    "k": 2,
+    "n": 7,
+    "p": 0.2857,
+    "lo": 0.0822,
+    "hi": 0.6411
+   },
+   "severe|occlusion": {
+    "k": 1,
+    "n": 8,
+    "p": 0.125,
+    "lo": 0.0224,
+    "hi": 0.4709
+   }
+  },
+  "sonnet": {
+   "clean|none": {
+    "k": 14,
+    "n": 32,
+    "p": 0.4375,
+    "lo": 0.2817,
+    "hi": 0.6067
+   },
+   "clean|crop": {
+    "k": 6,
+    "n": 8,
+    "p": 0.75,
+    "lo": 0.4093,
+    "hi": 0.9285
+   },
+   "clean|occlusion": {
+    "k": 6,
+    "n": 7,
+    "p": 0.8571,
+    "lo": 0.4869,
+    "hi": 0.9743
+   },
+   "blur|none": {
+    "k": 13,
+    "n": 31,
+    "p": 0.4194,
+    "lo": 0.2642,
+    "hi": 0.5923
+   },
+   "blur|crop": {
+    "k": 6,
+    "n": 7,
+    "p": 0.8571,
+    "lo": 0.4869,
+    "hi": 0.9743
+   },
+   "blur|occlusion": {
+    "k": 8,
+    "n": 8,
+    "p": 1.0,
+    "lo": 0.6756,
+    "hi": 1
+   },
+   "severe|none": {
+    "k": 14,
+    "n": 30,
+    "p": 0.4667,
+    "lo": 0.3023,
+    "hi": 0.6386
+   },
+   "severe|crop": {
+    "k": 4,
+    "n": 7,
+    "p": 0.5714,
+    "lo": 0.2505,
+    "hi": 0.8418
+   },
+   "severe|occlusion": {
+    "k": 1,
+    "n": 8,
+    "p": 0.125,
+    "lo": 0.0224,
+    "hi": 0.4709
+   }
+  },
+  "opus": {
+   "clean|none": {
+    "k": 16,
+    "n": 29,
+    "p": 0.5517,
+    "lo": 0.3755,
+    "hi": 0.7159
+   },
+   "clean|crop": {
+    "k": 6,
+    "n": 8,
+    "p": 0.75,
+    "lo": 0.4093,
+    "hi": 0.9285
+   },
+   "clean|occlusion": {
+    "k": 6,
+    "n": 7,
+    "p": 0.8571,
+    "lo": 0.4869,
+    "hi": 0.9743
+   },
+   "blur|none": {
+    "k": 16,
+    "n": 29,
+    "p": 0.5517,
+    "lo": 0.3755,
+    "hi": 0.7159
+   },
+   "blur|crop": {
+    "k": 6,
+    "n": 7,
+    "p": 0.8571,
+    "lo": 0.4869,
+    "hi": 0.9743
+   },
+   "blur|occlusion": {
+    "k": 8,
+    "n": 8,
+    "p": 1.0,
+    "lo": 0.6756,
+    "hi": 1
+   },
+   "severe|none": {
+    "k": 11,
+    "n": 26,
+    "p": 0.4231,
+    "lo": 0.2554,
+    "hi": 0.6105
+   },
+   "severe|crop": {
+    "k": 4,
+    "n": 7,
+    "p": 0.5714,
+    "lo": 0.2505,
+    "hi": 0.8418
+   },
+   "severe|occlusion": {
+    "k": 1,
+    "n": 8,
+    "p": 0.125,
+    "lo": 0.0224,
+    "hi": 0.4709
+   }
+  },
+  "fable": {
+   "clean|none": {
+    "k": 15,
+    "n": 31,
+    "p": 0.4839,
+    "lo": 0.3197,
+    "hi": 0.6516
+   },
+   "clean|crop": {
+    "k": 6,
+    "n": 7,
+    "p": 0.8571,
+    "lo": 0.4869,
+    "hi": 0.9743
+   },
+   "clean|occlusion": {
+    "k": 4,
+    "n": 5,
+    "p": 0.8,
+    "lo": 0.3755,
+    "hi": 0.9638
+   },
+   "blur|none": {
+    "k": 16,
+    "n": 31,
+    "p": 0.5161,
+    "lo": 0.3484,
+    "hi": 0.6803
+   },
+   "blur|crop": {
+    "k": 5,
+    "n": 6,
+    "p": 0.8333,
+    "lo": 0.4365,
+    "hi": 0.9699
+   },
+   "blur|occlusion": {
+    "k": 7,
+    "n": 7,
+    "p": 1.0,
+    "lo": 0.6457,
+    "hi": 1
+   },
+   "severe|none": {
+    "k": 10,
+    "n": 29,
+    "p": 0.3448,
+    "lo": 0.1994,
+    "hi": 0.5266
+   },
+   "severe|crop": {
+    "k": 5,
+    "n": 6,
+    "p": 0.8333,
+    "lo": 0.4365,
+    "hi": 0.9699
+   },
+   "severe|occlusion": {
+    "k": 5,
+    "n": 7,
+    "p": 0.7143,
+    "lo": 0.3589,
+    "hi": 0.9178
+   }
+  }
+ },
+ "subtypes": {
+  "haiku": {
+   "misread:other": 183,
+   "misread:digit": 36,
+   "fabricated:none": 210,
+   "misread:lexicalised": 27,
+   "misread:russified": 3
+  },
+  "sonnet": {
+   "misread:other": 165,
+   "fabricated:none": 226,
+   "misread:lexicalised": 29,
+   "misread:digit": 30,
+   "misread:russified": 9
+  },
+  "opus": {
+   "misread:other": 165,
+   "fabricated:none": 243,
+   "misread:digit": 23,
+   "misread:lexicalised": 21,
+   "misread:russified": 6
+  },
+  "fable": {
+   "misread:other": 146,
+   "fabricated:none": 216,
+   "misread:digit": 33,
+   "misread:lexicalised": 28,
+   "misread:russified": 3
+  }
+ },
+ "lexicalisation": {
+  "haiku.desc": {
+   "word": {
+    "misread": {
+     "k": 138,
+     "n": 3372,
+     "p": 0.0409,
+     "lo": 0.0347,
+     "hi": 0.0482
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 3372,
+     "p": 0.0,
+     "lo": 0,
+     "hi": 0.0011
+    },
+    "ua_letter": {
+     "k": 3,
+     "n": 3372,
+     "p": 0.0009,
+     "lo": 0.0003,
+     "hi": 0.0026
+    }
+   },
+   "name": {
+    "misread": {
+     "k": 75,
+     "n": 1046,
+     "p": 0.0717,
+     "lo": 0.0576,
+     "hi": 0.089
+    },
+    "lexicalised": {
+     "k": 27,
+     "n": 1046,
+     "p": 0.0258,
+     "lo": 0.0178,
+     "hi": 0.0373
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 1046,
+     "p": 0.0,
+     "lo": 0,
+     "hi": 0.0037
+    }
+   },
+   "nonce": {
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   },
+   "lure": {
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   }
+  },
+  "haiku.trans": {
+   "word": {
+    "misread": {
+     "k": 366,
+     "n": 5275,
+     "p": 0.0694,
+     "lo": 0.0628,
+     "hi": 0.0766
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 5275,
+     "p": 0.0,
+     "lo": 0,
+     "hi": 0.0007
+    },
+    "ua_letter": {
+     "k": 4,
+     "n": 5275,
+     "p": 0.0008,
+     "lo": 0.0003,
+     "hi": 0.0019
+    }
+   },
+   "name": {
+    "misread": {
+     "k": 131,
+     "n": 1662,
+     "p": 0.0788,
+     "lo": 0.0668,
+     "hi": 0.0928
+    },
+    "lexicalised": {
+     "k": 56,
+     "n": 1662,
+     "p": 0.0337,
+     "lo": 0.026,
+     "hi": 0.0435
+    },
+    "ua_letter": {
+     "k": 3,
+     "n": 1662,
+     "p": 0.0018,
+     "lo": 0.0006,
+     "hi": 0.0053
+    }
+   },
+   "nonce": {
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   },
+   "lure": {
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   }
+  },
+  "sonnet.desc": {
+   "word": {
+    "misread": {
+     "k": 127,
+     "n": 4112,
+     "p": 0.0309,
+     "lo": 0.026,
+     "hi": 0.0366
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 4112,
+     "p": 0.0,
+     "lo": 0,
+     "hi": 0.0009
+    },
+    "ua_letter": {
+     "k": 4,
+     "n": 4112,
+     "p": 0.001,
+     "lo": 0.0004,
+     "hi": 0.0025
+    }
+   },
+   "name": {
+    "misread": {
+     "k": 76,
+     "n": 1375,
+     "p": 0.0553,
+     "lo": 0.0444,
+     "hi": 0.0686
+    },
+    "lexicalised": {
+     "k": 29,
+     "n": 1375,
+     "p": 0.0211,
+     "lo": 0.0147,
+     "hi": 0.0301
+    },
+    "ua_letter": {
+     "k": 5,
+     "n": 1375,
+     "p": 0.0036,
+     "lo": 0.0016,
+     "hi": 0.0085
+    }
+   },
+   "nonce": {
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   },
+   "lure": {
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   }
+  },
+  "sonnet.trans": {
+   "word": {
+    "misread": {
+     "k": 222,
+     "n": 5501,
+     "p": 0.0404,
+     "lo": 0.0355,
+     "hi": 0.0459
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 5501,
+     "p": 0.0,
+     "lo": 0,
+     "hi": 0.0007
+    },
+    "ua_letter": {
+     "k": 6,
+     "n": 5501,
+     "p": 0.0011,
+     "lo": 0.0005,
+     "hi": 0.0024
+    }
+   },
+   "name": {
+    "misread": {
+     "k": 104,
+     "n": 1760,
+     "p": 0.0591,
+     "lo": 0.049,
+     "hi": 0.0711
+    },
+    "lexicalised": {
+     "k": 35,
+     "n": 1760,
+     "p": 0.0199,
+     "lo": 0.0143,
+     "hi": 0.0275
+    },
+    "ua_letter": {
+     "k": 2,
+     "n": 1760,
+     "p": 0.0011,
+     "lo": 0.0003,
+     "hi": 0.0041
+    }
+   },
+   "nonce": {
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   },
+   "lure": {
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   }
+  },
+  "opus.desc": {
+   "word": {
+    "misread": {
+     "k": 130,
+     "n": 4091,
+     "p": 0.0318,
+     "lo": 0.0268,
+     "hi": 0.0376
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 4091,
+     "p": 0.0,
+     "lo": 0,
+     "hi": 0.0009
+    },
+    "ua_letter": {
+     "k": 4,
+     "n": 4091,
+     "p": 0.001,
+     "lo": 0.0004,
+     "hi": 0.0025
+    }
+   },
+   "name": {
+    "misread": {
+     "k": 62,
+     "n": 1348,
+     "p": 0.046,
+     "lo": 0.036,
+     "hi": 0.0585
+    },
+    "lexicalised": {
+     "k": 21,
+     "n": 1348,
+     "p": 0.0156,
+     "lo": 0.0102,
+     "hi": 0.0237
+    },
+    "ua_letter": {
+     "k": 2,
+     "n": 1348,
+     "p": 0.0015,
+     "lo": 0.0004,
+     "hi": 0.0054
+    }
+   },
+   "nonce": {
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   },
+   "lure": {
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   }
+  },
+  "opus.trans": {
+   "word": {
+    "misread": {
+     "k": 161,
+     "n": 5549,
+     "p": 0.029,
+     "lo": 0.0249,
+     "hi": 0.0338
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 5549,
+     "p": 0.0,
+     "lo": 0,
+     "hi": 0.0007
+    },
+    "ua_letter": {
+     "k": 4,
+     "n": 5549,
+     "p": 0.0007,
+     "lo": 0.0003,
+     "hi": 0.0019
+    }
+   },
+   "name": {
+    "misread": {
+     "k": 96,
+     "n": 1814,
+     "p": 0.0529,
+     "lo": 0.0435,
+     "hi": 0.0642
+    },
+    "lexicalised": {
+     "k": 33,
+     "n": 1814,
+     "p": 0.0182,
+     "lo": 0.013,
+     "hi": 0.0254
+    },
+    "ua_letter": {
+     "k": 8,
+     "n": 1814,
+     "p": 0.0044,
+     "lo": 0.0022,
+     "hi": 0.0087
+    }
+   },
+   "nonce": {
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   },
+   "lure": {
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   }
+  },
+  "fable.desc": {
+   "word": {
+    "misread": {
+     "k": 113,
+     "n": 3510,
+     "p": 0.0322,
+     "lo": 0.0268,
+     "hi": 0.0386
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 3510,
+     "p": 0.0,
+     "lo": 0,
+     "hi": 0.0011
+    },
+    "ua_letter": {
+     "k": 2,
+     "n": 3510,
+     "p": 0.0006,
+     "lo": 0.0002,
+     "hi": 0.0021
+    }
+   },
+   "name": {
+    "misread": {
+     "k": 64,
+     "n": 1079,
+     "p": 0.0593,
+     "lo": 0.0467,
+     "hi": 0.075
+    },
+    "lexicalised": {
+     "k": 28,
+     "n": 1079,
+     "p": 0.0259,
+     "lo": 0.018,
+     "hi": 0.0372
+    },
+    "ua_letter": {
+     "k": 1,
+     "n": 1079,
+     "p": 0.0009,
+     "lo": 0.0002,
+     "hi": 0.0052
+    }
+   },
+   "nonce": {
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   },
+   "lure": {
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "lexicalised": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "ua_letter": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   }
+  }
+ },
+ "completion": {
+  "haiku.desc": {
+   "completion": 31,
+   "wrong_guess": 52,
+   "hedged_completion": {
+    "k": 4,
+    "n": 31,
+    "p": 0.129,
+    "lo": 0.0513,
+    "hi": 0.2885
+   }
+  },
+  "haiku.trans": {
+   "completion": 31,
+   "wrong_guess": 124,
+   "hedged_completion": {
+    "k": 0,
+    "n": 31,
+    "p": 0.0,
+    "lo": 0,
+    "hi": 0.1103
+   }
+  },
+  "sonnet.desc": {
+   "completion": 23,
+   "wrong_guess": 48,
+   "hedged_completion": {
+    "k": 5,
+    "n": 23,
+    "p": 0.2174,
+    "lo": 0.0966,
+    "hi": 0.419
+   }
+  },
+  "sonnet.trans": {
+   "completion": 14,
+   "wrong_guess": 65,
+   "hedged_completion": {
+    "k": 0,
+    "n": 14,
+    "p": 0.0,
+    "lo": 0,
+    "hi": 0.2153
+   }
+  },
+  "opus.desc": {
+   "completion": 43,
+   "wrong_guess": 52,
+   "hedged_completion": {
+    "k": 28,
+    "n": 43,
+    "p": 0.6512,
+    "lo": 0.5017,
+    "hi": 0.7758
+   }
+  },
+  "opus.trans": {
+   "completion": 9,
+   "wrong_guess": 53,
+   "hedged_completion": {
+    "k": 0,
+    "n": 9,
+    "p": 0.0,
+    "lo": 0,
+    "hi": 0.2992
+   }
+  },
+  "fable.desc": {
+   "completion": 62,
+   "wrong_guess": 48,
+   "hedged_completion": {
+    "k": 49,
+    "n": 62,
+    "p": 0.7903,
+    "lo": 0.6736,
+    "hi": 0.8732
+   }
+  }
+ },
+ "desc_vs_trans": {
+  "haiku": {
+   "n": 138,
+   "desc_only": 8,
+   "trans_only": 34,
+   "both": 58,
+   "p_mcnemar": 6.87711149112147e-05
+  },
+  "sonnet": {
+   "n": 138,
+   "desc_only": 5,
+   "trans_only": 29,
+   "both": 67,
+   "p_mcnemar": 3.8558151572942734e-05
+  },
+  "opus": {
+   "n": 129,
+   "desc_only": 15,
+   "trans_only": 14,
+   "both": 59,
+   "p_mcnemar": 1.0
+  }
+ },
+ "detection": {
+  "haiku": {
+   "n": 4993,
+   "pos": 459,
+   "single": {
+    "reread": {
+     "auroc": 0.6432,
+     "auroc_ci": [
+      0.6066,
+      0.6846
+     ]
+    },
+    "xmodel": {
+     "auroc": 0.6793,
+     "auroc_ci": [
+      0.6365,
+      0.7273
+     ]
+    },
+    "ocr": {
+     "auroc": 0.657,
+     "auroc_ci": [
+      0.6184,
+      0.699
+     ]
+    },
+    "ocr_sim": {
+     "auroc": 0.6837,
+     "auroc_ci": [
+      0.6347,
+      0.7226
+     ]
+    },
+    "lex": {
+     "auroc": 0.5819,
+     "auroc_ci": [
+      0.5532,
+      0.6128
+     ]
+    },
+    "hedged": {
+     "auroc": 0.5592,
+     "auroc_ci": [
+      0.5305,
+      0.593
+     ]
+    },
+    "reread_unc": {
+     "auroc": 0.5131,
+     "auroc_ci": [
+      0.5056,
+      0.5225
+     ]
+    }
+   },
+   "combined": {
+    "auroc": 0.7795,
+    "auprc": 0.4695,
+    "base_rate": 0.0919,
+    "auroc_ci": [
+     0.728,
+     0.8387
+    ],
+    "coef": {
+     "no_reread": 1.11,
+     "no_xmodel": 2.81,
+     "no_ocr": 0.299,
+     "ocr_dissim": 0.54,
+     "not_lex": -0.351,
+     "lexfreq": -0.304,
+     "hedged": 0.881,
+     "reread_unc": 0.441,
+     "is_num": 0.597,
+     "len": 0.232
+    },
+    "operating_points": {
+     "0.05": {
+      "recall": 0.4553,
+      "precision": 0.4816
+     },
+     "0.1": {
+      "recall": 0.5316,
+      "precision": 0.3501
+     },
+     "0.2": {
+      "recall": 0.5948,
+      "precision": 0.2316
+     }
+    }
+   },
+   "rule_reread_or_unconfirmed": {
+    "recall": 0.4096,
+    "false_flag": 0.0401,
+    "precision": 0.5081
+   },
+   "rule_reread_only": {
+    "recall": 0.3246,
+    "false_flag": 0.0382
+   },
+   "image_level_auroc": 0.9378,
+   "combined_unsupported_auroc": 0.7873,
+   "combined_digits_auroc": 0.7432,
+   "combined_nondigits_auroc": 0.7726
+  },
+  "sonnet": {
+   "n": 6195,
+   "pos": 459,
+   "single": {
+    "reread": {
+     "auroc": 0.578,
+     "auroc_ci": [
+      0.555,
+      0.6068
+     ]
+    },
+    "xmodel": {
+     "auroc": 0.6203,
+     "auroc_ci": [
+      0.5877,
+      0.6591
+     ]
+    },
+    "ocr": {
+     "auroc": 0.6506,
+     "auroc_ci": [
+      0.6049,
+      0.6865
+     ]
+    },
+    "ocr_sim": {
+     "auroc": 0.6779,
+     "auroc_ci": [
+      0.6406,
+      0.7253
+     ]
+    },
+    "lex": {
+     "auroc": 0.5749,
+     "auroc_ci": [
+      0.541,
+      0.6076
+     ]
+    },
+    "hedged": {
+     "auroc": 0.5684,
+     "auroc_ci": [
+      0.5404,
+      0.6045
+     ]
+    },
+    "reread_unc": {
+     "auroc": 0.5089,
+     "auroc_ci": [
+      0.4995,
+      0.5209
+     ]
+    }
+   },
+   "combined": {
+    "auroc": 0.7202,
+    "auprc": 0.2689,
+    "base_rate": 0.0741,
+    "auroc_ci": [
+     0.6738,
+     0.7682
+    ],
+    "coef": {
+     "no_reread": 0.909,
+     "no_xmodel": 1.787,
+     "no_ocr": 0.296,
+     "ocr_dissim": 0.907,
+     "not_lex": -0.098,
+     "lexfreq": -0.261,
+     "hedged": 0.871,
+     "reread_unc": -0.637,
+     "is_num": -0.069,
+     "len": -0.068
+    },
+    "operating_points": {
+     "0.05": {
+      "recall": 0.2985,
+      "precision": 0.3254
+     },
+     "0.1": {
+      "recall": 0.3813,
+      "precision": 0.2346
+     },
+     "0.2": {
+      "recall": 0.4924,
+      "precision": 0.1646
+     }
+    }
+   },
+   "rule_reread_or_unconfirmed": {
+    "recall": 0.2179,
+    "false_flag": 0.0221,
+    "precision": 0.4405
+   },
+   "rule_reread_only": {
+    "recall": 0.1743,
+    "false_flag": 0.0183
+   },
+   "image_level_auroc": 0.8589,
+   "combined_unsupported_auroc": 0.7253,
+   "combined_digits_auroc": 0.6966,
+   "combined_nondigits_auroc": 0.7141
+  },
+  "opus": {
+   "n": 6158,
+   "pos": 458,
+   "single": {
+    "reread": {
+     "auroc": 0.5829,
+     "auroc_ci": [
+      0.5582,
+      0.6158
+     ]
+    },
+    "xmodel": {
+     "auroc": 0.5947,
+     "auroc_ci": [
+      0.5663,
+      0.6286
+     ]
+    },
+    "ocr": {
+     "auroc": 0.6512,
+     "auroc_ci": [
+      0.6084,
+      0.6892
+     ]
+    },
+    "ocr_sim": {
+     "auroc": 0.677,
+     "auroc_ci": [
+      0.6304,
+      0.7258
+     ]
+    },
+    "lex": {
+     "auroc": 0.5658,
+     "auroc_ci": [
+      0.5369,
+      0.5953
+     ]
+    },
+    "hedged": {
+     "auroc": 0.5275,
+     "auroc_ci": [
+      0.5044,
+      0.5534
+     ]
+    },
+    "reread_unc": {
+     "auroc": 0.5248,
+     "auroc_ci": [
+      0.5082,
+      0.5443
+     ]
+    }
+   },
+   "combined": {
+    "auroc": 0.7175,
+    "auprc": 0.2256,
+    "base_rate": 0.0744,
+    "auroc_ci": [
+     0.6726,
+     0.7702
+    ],
+    "coef": {
+     "no_reread": 1.763,
+     "no_xmodel": 0.509,
+     "no_ocr": 0.312,
+     "ocr_dissim": 0.968,
+     "not_lex": -0.287,
+     "lexfreq": -0.33,
+     "hedged": -0.342,
+     "reread_unc": 0.715,
+     "is_num": 0.193,
+     "len": 0.107
+    },
+    "operating_points": {
+     "0.05": {
+      "recall": 0.2576,
+      "precision": 0.2935
+     },
+     "0.1": {
+      "recall": 0.3777,
+      "precision": 0.2328
+     },
+     "0.2": {
+      "recall": 0.4825,
+      "precision": 0.1624
+     }
+    }
+   },
+   "rule_reread_or_unconfirmed": {
+    "recall": 0.214,
+    "false_flag": 0.0286,
+    "precision": 0.3755
+   },
+   "rule_reread_only": {
+    "recall": 0.1878,
+    "false_flag": 0.0219
+   },
+   "image_level_auroc": 0.7937,
+   "combined_unsupported_auroc": 0.733,
+   "combined_digits_auroc": 0.666,
+   "combined_nondigits_auroc": 0.7143
+  }
+ },
+ "spend_usd": 26.26,
+ "spend_by_run": {
+  "fable.desc": 12.47,
+  "haiku.desc": 0.12,
+  "haiku.trans": 0.13,
+  "opus.desc": 5.52,
+  "opus.trans": 3.49,
+  "sonnet.desc": 2.74,
+  "sonnet.trans": 1.79
+ }
+}

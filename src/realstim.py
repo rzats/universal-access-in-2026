@@ -79,7 +79,9 @@ def photograph(img, lines, quality, framing, rng: random.Random, sheet=False):
         SW, SH = W, Hh
         scene = img.copy()
 
-    allq = np.array([p for ln in lines for b in ln["boxes"] if b is not None for p in b], float)
+    # context lines (text visible in the crop but outside the selected block) do not steer framing
+    core = [ln for ln in lines if not ln.get("context")]
+    allq = np.array([p for ln in core for b in ln["boxes"] if b is not None for p in b], float)
     tq = apply_h(H, allq)
     bx0, by0 = tq.min(0)
     bx1, by1 = tq.max(0)
@@ -103,7 +105,7 @@ def photograph(img, lines, quality, framing, rng: random.Random, sheet=False):
         info = {"side": side, "frac": round(frac, 3)}
     elif framing == "occlusion":
         kind = rng.choice(["finger", "glare"])
-        boxes = [b for ln in lines for b in ln["boxes"] if b is not None]
+        boxes = [b for ln in core for b in ln["boxes"] if b is not None]
         tx, ty = apply_h(H, [np.mean(np.asarray(rng.choice(boxes), float), 0)])[0]
         yy, xx = np.mgrid[0:SH, 0:SW]
         S = max(SW, SH)
@@ -136,13 +138,20 @@ def photograph(img, lines, quality, framing, rng: random.Random, sheet=False):
             if b is None:
                 vis.append(2)
                 continue
-            pts = apply_h(H, grid(b))
-            ok = sum(1 for px, py in pts if fx0 <= px < fx1 and fy0 <= py < fy1
+            src_pts = grid(b)
+            inside_src = [0 <= x < W and 0 <= y < Hh for x, y in src_pts]  # glyph parts cut off the source image
+            pts = apply_h(H, src_pts)
+            ok = sum(1 for (px, py), ins in zip(pts, inside_src) if ins and fx0 <= px < fx1 and fy0 <= py < fy1
                      and not occ[int(min(max(py, 0), SH - 1)), int(min(max(px, 0), SW - 1))])
             vis.append(2 if ok >= 8 else (0 if ok <= 2 else 1))
         ln["vis"] = vis
 
     s = 1024 / max(out.size)
+    for ln in lines:  # line bounding box in final-image pixels (for figures; no randomness used)
+        pts = [p for b in ln["boxes"] if b is not None for p in b]
+        if pts:
+            t = (apply_h(H, pts) - np.array([fx0, fy0])) * s
+            ln["bbox"] = [round(float(v), 1) for v in (*t.min(0), *t.max(0))]
     out = out.resize((max(1, int(out.size[0] * s)), max(1, int(out.size[1] * s))), Image.LANCZOS)
     q = {}
     if quality == "clean":
@@ -219,7 +228,7 @@ def lines_from_gcv(fta, scale=1.0):
     return lines
 
 
-def lines_from_pdf(pdf, page, dpi=130, max_words=170, start_line=0):
+def lines_from_pdf(pdf, page, dpi=130, max_words=170, start_line=0, with_context=False):
     """Render one PDF page and read its text layer with word boxes (poppler).
     Character boxes split each word box in proportion to character count. If the page has
     more than max_words words, a block of consecutive lines starting at start_line is cut out.
@@ -256,6 +265,27 @@ def lines_from_pdf(pdf, page, dpi=130, max_words=170, start_line=0):
         img = Image.open(os.path.join(td, f)).convert("RGB")
     X0, Y0 = max(0, int(x0 * k)), max(0, int(y0 * k))
     img = img.crop((X0, Y0, min(img.size[0], int(x1 * k)), min(img.size[1], int(y1 * k))))
+    def mk(ws):
+        raw, boxes = [], []
+        for j, (a, b, c, d, t) in enumerate(ws):
+            if j:
+                raw.append(" "); boxes.append(None)
+            wpx = (c - a) / len(t)
+            for i, ch in enumerate(t):
+                xa, xb = (a + i * wpx) * k - X0, (a + (i + 1) * wpx) * k - X0
+                raw.append(ch)
+                boxes.append([(xa, b * k - Y0), (xb, b * k - Y0), (xb, d * k - Y0), (xa, d * k - Y0)])
+        return {"raw": "".join(raw), "boxes": boxes}
+
+    if with_context:
+        # other lines of the page that reach into the cropped region (often cut by the crop edge)
+        ctx = []
+        for ws in L:
+            if ws in sel:
+                continue
+            ws2 = [w for w in ws if w[2] * k > X0 and w[0] * k < X0 + img.size[0] and w[3] * k > Y0 and w[1] * k < Y0 + img.size[1]]
+            if ws2:
+                ctx.append(dict(mk(ws2), context=True))
     lines = []
     for ws in sel:
         raw, boxes = [], []
@@ -269,4 +299,6 @@ def lines_from_pdf(pdf, page, dpi=130, max_words=170, start_line=0):
                 raw.append(ch)
                 boxes.append([(xa, ya), (xb, ya), (xb, yb), (xa, yb)])
         lines.append({"raw": "".join(raw), "boxes": boxes})
+    if with_context:
+        return img, lines, ctx
     return img, lines

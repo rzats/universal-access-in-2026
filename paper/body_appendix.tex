@@ -1,0 +1,51 @@
+\begin{appendices}
+
+\section{Prompts, models and run settings}\label{secA1}
+
+\paragraph{Evaluated models and client.} \texttt{claude-haiku-5-5}, \texttt{claude-sonnet-5-5}, \texttt{claude-opus-5-5} and \texttt{claude-fable-5-1} (Anthropic). Every call went through the Claude Code command-line client, version 2.1.304, in non-interactive mode (\texttt{claude -p \ldots{} --output-format json --system-prompt \ldots{} --tools "" --setting-sources "" --no-session-persistence}). The image was attached by an \texttt{@}-reference to a file with an opaque hashed name. The client does not expose temperature or top-$p$, so the provider's default sampling settings apply. Each call was a fresh session without shared context. Study~1 and the Study~2 signage and document runs were made on 21--22 October 2026. The Study~2 packaging runs, the remaining Opus and Fable calls, the near-word probe, the repeated runs and the audit were made on 28--29 October 2026. Token counts, list-price cost and wall-clock time of every call were recorded from the client's JSON output (Table~\ref{tab:cost}).
+
+\paragraph{System prompt (all evaluated calls).}
+\begin{quote}\small
+\foreignlanguage{ukrainian}{Ти — сервіс опису зображень для незрячих і слабозорих користувачів. Відповідай українською мовою.}
+\end{quote}
+
+\paragraph{Description prompt.} The attachment reference \texttt{@<file>.jpg} follows on a new line.
+\begin{quote}\small
+\foreignlanguage{ukrainian}{Я незряча людина. Опиши, будь ласка, що зображено на цьому фото, і прочитай увесь текст, який на ньому видно. Увесь прочитаний текст наводь дослівно в лапках «…».}
+\end{quote}
+
+\paragraph{Transcription prompt.}
+\begin{quote}\small
+\foreignlanguage{ukrainian}{Перепиши дослівно весь текст, який видно на цьому зображенні, рядок за рядком. Нічого не виправляй і не доповнюй. Якщо частина тексту обрізана, закрита або нерозбірлива, познач це місце як [нерозбірливо]. Якщо ти не впевнений у слові, познач його знаком (?) одразу після слова. Виведи лише текст.}
+\end{quote}
+
+\paragraph{Audit rater prompt (both raters, identical).} The placeholders in braces are filled per token. The stimulus image is attached: for Claude through the same client as above with model \texttt{claude-sonnet-5-5}, for Gemma as a base64 image in an Ollama \texttt{/api/chat} request.
+\begin{quote}\small\raggedright
+You are auditing an automatic scorer of image descriptions written for blind users. A vision-language model described the attached image and quoted text it claimed to read. The automatic scorer compared one quoted word with the reference text of the image and assigned a label.\\
+Reference line the word was matched to (printed text, ground truth): «\{line\}»\\
+Quoted span from the description: «\{span\}»\\
+Quoted word being scored (normalised to lower case): «\{tok\}»\\
+Label assigned by the scorer: \{label\}\\
+Definition of this label: \{definition\}\\
+Look at the image and the reference. Is the assigned label right for this word? Ignore capitalisation, punctuation and spacing differences. Answer with JSON only: \{"verdict": "right" or "wrong", "reason": "<at most 15 words>"\}
+\end{quote}
+The label definitions inserted into the prompt are as follows. \emph{Correct}: the token matches text that is printed and visible in the image (an explicit fragment of a visible word also counts). \emph{Completion}: the token matches a printed word that is partly or wholly cut off by the frame edge or covered by a finger or glare, so the model completed text it could not see. \emph{Misread}: the token is a wrong reading of a printed word (wrong letters or digits, a different word form, a Russian-like spelling, a ``corrected'' spelling). \emph{Fabricated}: the token does not correspond to any printed text in the image; the model invented it.
+
+\paragraph{Open audit rater.} \texttt{gemma3:12b} (Ollama digest \texttt{f4031aab637d}, Q4\_K\_M quantisation) served by Ollama \OllamaVersion{} on a separate local machine, one request at a time. Decoding used temperature~0, seed~7 and at most 120 output tokens. Its latency is not comparable with the cloud models and is not reported.
+
+\section{Per-genre and per-condition breakdown}\label{secA2}
+
+\begin{table}[h]
+\caption{Token-level hallucination rate (\%) of descriptions by study, factor and level, with the number of quoted tokens in parentheses. Study~1: synthetic, Study~2: real images. Signage in Study~2 is used in full frame only. The invented and near-word categories exist only in Study~1. ``Name / rare word'' in Study~2 covers every word absent from the frequency list.}\label{tab:breakdown}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep\fill}lllrrrr}
+\toprule
+Study & Factor & Level & Haiku 5.5 & Sonnet 5.5 & Opus 5.5 & Fable 5.1 \\
+\midrule
+%TABLE:breakdown%
+\botrule
+\end{tabular*}
+\end{table}
+
+\end{appendices}

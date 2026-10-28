@@ -131,7 +131,7 @@ def main():
                    "cond": "probe_" + ("original" if tag == "o" else "nearword"), "rep": 0, "src": s["src"],
                    "attribution": s["attribution"], "framing_info": info,
                    "target": {"printed": word.lower(), "real": w.lower(), "near": lw.lower(), "line": li},
-                   "lines": [{"raw": l["raw"], "vis": l["vis"]} for l in L], "tokens": gt_tokens(L, lex)}
+                   "lines": [{"raw": l["raw"], "vis": l["vis"], **({"bbox": l["bbox"]} if "bbox" in l else {})} for l in L], "tokens": gt_tokens(L, lex)}
             out.write(json.dumps(rec, ensure_ascii=False) + "\n")
             n += 1
     print("probe stimuli:", n)

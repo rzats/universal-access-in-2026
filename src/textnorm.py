@@ -40,7 +40,9 @@ def norm_text(s: str) -> str:
 
 
 def _fix_script(tok: str) -> str:
-    if CYR.search(tok) and re.search(r"[a-z]", tok):
+    """Fold Latin look-alike letters to Cyrillic. Applied to every token on every side (reference,
+    model output, OCR), so mixed-script text layers (e.g. 'sніgеllа') match 'shigella'."""
+    if re.search(r"[a-z]", tok):
         return tok.translate(HOMO)
     return tok
 

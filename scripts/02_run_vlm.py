@@ -64,6 +64,7 @@ def main():
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--subset", default="", help="file with stimulus ids to restrict to")
+    ap.add_argument("--tag", default="", help="repeat-run tag, e.g. r2 (writes <model>.<prompt>_<tag>.jsonl)")
     ap.add_argument("--budget", type=float, default=85.0, help="stop when total spend reaches this (USD)")
     a = ap.parse_args()
 
@@ -80,7 +81,7 @@ def main():
         assert os.path.getsize(src) <= 250_000, f"{src}: the CLI silently drops attachments above ~256 KB"
         if not os.path.exists(dst):
             shutil.copy(os.path.join(DATA, "images", s["id"] + ".jpg"), dst)
-    out_path = os.path.join(RUNS, "vlm", f"{a.model}.{a.prompt}.jsonl")
+    out_path = os.path.join(RUNS, "vlm", f"{a.model}.{a.prompt}{'_' + a.tag if a.tag else ''}.jsonl")
     done = set()
     if os.path.exists(out_path):
         done = {json.loads(l)["id"] for l in open(out_path, encoding="utf-8")}

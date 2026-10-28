@@ -89,17 +89,17 @@ def sources():
             # cover pages of bulletins carry little text: take the richest of the first pages
             for page in ([2, 3, 4] if d.get("category") == "book" else [1]):
                 try:
-                    img, lines = lines_from_pdf(pdf, page, dpi=150, max_words=150)
+                    img, lines, ctx = lines_from_pdf(pdf, page, dpi=150, max_words=150, with_context=True)
                 except Exception as e:
                     continue
                 if img is None:
                     continue
                 nw = sum(len(toks(l["raw"])) for l in lines)
                 if best is None or nw > best[0]:
-                    best = (nw, img, lines, page)
+                    best = (nw, img, lines, page, ctx)
             if best is None or best[0] < 25:
                 print("skip (too little text)", d["file"]); continue
-            nw, img, lines, page = best
+            nw, img, lines, page, ctx = best
             # quality gate: the text layer must match what is drawn (Tesseract on the clean render)
             agree = tess_agreement(img, lines)
             if agree < 0.6:
@@ -108,7 +108,7 @@ def sources():
                           "attribution": {"source": d.get("publisher"), "url": d.get("source_url"), "page": page,
                                           "title": d.get("title"), "licence": d.get("licence_note"),
                                           "tesseract_agreement": round(agree, 3)},
-                          "pil": img, "lines": lines, "extra": [], "sheet": True})
+                          "pil": img, "lines": lines + ctx, "extra": [], "sheet": True})
     # signage
     p = os.path.join(ROOT, "data", "real", "sign_transcriptions.jsonl")
     if os.path.exists(p):
@@ -157,10 +157,13 @@ def main():
                     for attempt in range(10):
                         lines = [dict(l) for l in it["lines"]]  # conf travels with the line
                         img2, jpg, info = photograph(img, lines, q, fr, rng, sheet=it["sheet"])
-                        hidden = sum(v != 2 for l in lines for v in l["vis"])
+                        hidden = sum(v != 2 for l in lines if not l.get("context") for v in l["vis"])
                         if fr == "none" or hidden > 0:
                             break
                 toks_ = gt_tokens(lines, lex)
+                for t in toks_:  # text outside the selected block: accepted, not required for coverage
+                    if lines[t["line"]].get("context"):
+                        t["extra"] = True
                 vis_set = {t["tok"] for t in toks_}
                 extra = [{"tok": e, "chars": e, "line": -1, "cat": "num" if e.isdigit() else ("word" if e in lex else "name"),
                           "state": "visible", "vis": [2] * len(e), "role": "extra", "extra": True}
@@ -176,7 +179,7 @@ def main():
                 info["jpeg_saved"] = q_
                 rec = {"id": sid, "genre": g, "kind": it["kind"], "quality": q, "framing": fr, "cond": "real", "rep": 0,
                        "src": it["src"], "attribution": it["attribution"], "framing_info": info,
-                       "lines": [{"raw": l["raw"], "vis": l["vis"]} for l in lines], "tokens": toks_ + extra}
+                       "lines": [{"raw": l["raw"], "vis": l["vis"], **({"bbox": l["bbox"]} if "bbox" in l else {})} for l in lines], "tokens": toks_ + extra}
                 rec["n_lowconf"] = sum(1 for t in toks_ if t.get("lowconf"))
                 out.write(json.dumps(rec, ensure_ascii=False) + "\n")
                 n += 1
