@@ -1,0 +1,56 @@
+[
+ {
+  "id": "pac-067",
+  "model": "sonnet",
+  "tok": "⁷",
+  "label": "fabricated",
+  "gt": "1679",
+  "rater_printed": "yes",
+  "reason": "The superscript 7 in '1 · 10⁷ КУО/г' is printed and visible, so it isn't fabricated."
+ },
+ {
+  "id": "pac-067",
+  "model": "sonnet",
+  "tok": "богаєвського",
+  "label": "misread",
+  "gt": "євського",
+  "rater_printed": "no",
+  "reason": "Print shows split 'Бога євського'; the joined 'Богаєвського' is a corrected spelling, not printed."
+ },
+ {
+  "id": "pac-067",
+  "model": "sonnet",
+  "tok": "а",
+  "label": "misread",
+  "gt": "на",
+  "rater_printed": "yes",
+  "reason": "The 'a' is the start of the legible stamp 'a-UA-16-11-45-IX-PP', not a misread reference word."
+ },
+ {
+  "id": "pac-067",
+  "model": "sonnet",
+  "tok": "820226",
+  "label": "fabricated",
+  "gt": "20",
+  "rater_printed": "yes",
+  "reason": "Barcode number on the left edge reads 4 820226…; the token is printed and visible, not invented."
+ },
+ {
+  "id": "doc-022",
+  "model": "opus",
+  "tok": "місце",
+  "label": "fabricated",
+  "gt": "власне",
+  "rater_printed": "no",
+  "reason": "The form prints only the abbreviation «МП (за наявності)»; the word «місце» appears nowhere."
+ },
+ {
+  "id": "doc-022",
+  "model": "opus",
+  "tok": "печатки",
+  "label": "fabricated",
+  "gt": "подається",
+  "rater_printed": "no",
+  "reason": "The word 'печатки' is not printed; the form only has the abbreviation 'МП (за наявності)'."
+ }
+]

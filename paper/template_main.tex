@@ -61,6 +61,10 @@
 \usepackage[ukrainian,english]{babel}%
 \usepackage{url}%
 \usepackage{placeins}%
+\usepackage{needspace}%
+% float placement: allow several floats per text page and avoid sparse float-only pages
+\renewcommand{\topfraction}{0.9}\renewcommand{\bottomfraction}{0.8}\renewcommand{\textfraction}{0.08}\renewcommand{\floatpagefraction}{0.85}%
+\setcounter{topnumber}{3}\setcounter{bottomnumber}{2}\setcounter{totalnumber}{5}%
 %%%%
 
 %%%%%=============================================================================%%%%

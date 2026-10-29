@@ -130,7 +130,7 @@ def main():
                           "claim": window(span_of(res, c["model"], c["id"], c["span"]), c["tok"]),
                           "token": c["tok"], "gt": c["gt"], "model": NAMES[c["model"]], "cause": cause, "id": c["id"]})
             break
-    fig, axs = plt.subplots(len(cases), 2, figsize=(7.0, 2.0 * len(cases)), gridspec_kw={"width_ratios": [1.0, 1.0]})
+    fig, axs = plt.subplots(len(cases), 2, figsize=(7.0, 1.55 * len(cases)), gridspec_kw={"width_ratios": [1.0, 1.0]})
     for (a, b), cs in zip(axs, cases):
         a.imshow(cs["img"]); a.set_axis_off()
         b.set_axis_off()

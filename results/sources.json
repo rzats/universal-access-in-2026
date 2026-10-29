@@ -1,0 +1,176 @@
+{
+ "n_images": {
+  "ingredients": 94,
+  "front": 14,
+  "bill": 8,
+  "bank": 7,
+  "form": 14,
+  "leaflet": 10,
+  "medical": 9,
+  "education": 7,
+  "book": 6,
+  "notice": 7
+ },
+ "rates": {
+  "haiku.ingredients": {
+   "k": 271,
+   "n": 4164
+  },
+  "haiku.front": {
+   "k": 36,
+   "n": 227
+  },
+  "haiku.form": {
+   "k": 7,
+   "n": 561
+  },
+  "haiku.medical": {
+   "k": 30,
+   "n": 488
+  },
+  "haiku.leaflet": {
+   "k": 15,
+   "n": 421
+  },
+  "haiku.bill": {
+   "k": 55,
+   "n": 608
+  },
+  "haiku.bank": {
+   "k": 17,
+   "n": 654
+  },
+  "haiku.education": {
+   "k": 3,
+   "n": 364
+  },
+  "haiku.notice": {
+   "k": 16,
+   "n": 482
+  },
+  "haiku.book": {
+   "k": 11,
+   "n": 459
+  },
+  "sonnet.ingredients": {
+   "k": 267,
+   "n": 5226
+  },
+  "sonnet.front": {
+   "k": 44,
+   "n": 275
+  },
+  "sonnet.form": {
+   "k": 10,
+   "n": 723
+  },
+  "sonnet.medical": {
+   "k": 32,
+   "n": 631
+  },
+  "sonnet.leaflet": {
+   "k": 9,
+   "n": 778
+  },
+  "sonnet.bill": {
+   "k": 26,
+   "n": 636
+  },
+  "sonnet.bank": {
+   "k": 15,
+   "n": 737
+  },
+  "sonnet.education": {
+   "k": 1,
+   "n": 399
+  },
+  "sonnet.notice": {
+   "k": 8,
+   "n": 599
+  },
+  "sonnet.book": {
+   "k": 5,
+   "n": 663
+  },
+  "opus.ingredients": {
+   "k": 355,
+   "n": 5968
+  },
+  "opus.front": {
+   "k": 42,
+   "n": 282
+  },
+  "opus.form": {
+   "k": 13,
+   "n": 731
+  },
+  "opus.medical": {
+   "k": 25,
+   "n": 614
+  },
+  "opus.leaflet": {
+   "k": 9,
+   "n": 681
+  },
+  "opus.bill": {
+   "k": 12,
+   "n": 673
+  },
+  "opus.bank": {
+   "k": 17,
+   "n": 734
+  },
+  "opus.education": {
+   "k": 4,
+   "n": 424
+  },
+  "opus.notice": {
+   "k": 5,
+   "n": 576
+  },
+  "opus.book": {
+   "k": 4,
+   "n": 680
+  },
+  "fable.ingredients": {
+   "k": 360,
+   "n": 5477
+  },
+  "fable.front": {
+   "k": 81,
+   "n": 409
+  },
+  "fable.form": {
+   "k": 20,
+   "n": 793
+  },
+  "fable.medical": {
+   "k": 37,
+   "n": 588
+  },
+  "fable.leaflet": {
+   "k": 7,
+   "n": 403
+  },
+  "fable.bill": {
+   "k": 47,
+   "n": 756
+  },
+  "fable.bank": {
+   "k": 14,
+   "n": 619
+  },
+  "fable.education": {
+   "k": 11,
+   "n": 333
+  },
+  "fable.notice": {
+   "k": 6,
+   "n": 554
+  },
+  "fable.book": {
+   "k": 9,
+   "n": 679
+  }
+ }
+}

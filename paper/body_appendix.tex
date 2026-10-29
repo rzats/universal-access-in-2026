@@ -33,9 +33,25 @@ The label definitions inserted into the prompt are as follows. \emph{Correct}: t
 
 \paragraph{Open audit rater.} \texttt{gemma3:12b} (Ollama digest \texttt{f4031aab637d}, Q4\_K\_M quantisation) served by Ollama \OllamaVersion{} on a separate local machine, one request at a time. Decoding used temperature~0, seed~7 and at most 120 output tokens. Its latency is not comparable with the cloud models and is not reported.
 
-\section{Per-genre and per-condition breakdown}\label{secA2}
+\section{Pairwise model tests and per-condition breakdown}\label{secA2}
 
-\begin{table}[h]
+Table~\ref{tab:pairs} lists every pairwise comparison between the four models on shared images, for both studies, with Holm-corrected exact McNemar tests on the image-level outcome and paired cluster-bootstrap intervals for the token-rate difference. Table~\ref{tab:breakdown} gives the token-level hallucination rate of descriptions for every level of every factor, so that no result in the main text is reported only in pooled form.
+
+\begin{table}[!tbp]
+\caption{Pairwise model comparisons on shared images (description prompt). ``Any-hall.'' gives the share of images with at least one hallucinated word for the first / second model; ``Disc.'' the discordant pairs (first only / second only); $p$ is the exact McNemar test, Holm-corrected across the six pairs of each study; the last column is the difference in token-level hallucination rate (first minus second, percentage points) with a paired cluster-bootstrap 95\% interval.}\label{tab:pairs}
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular*}{\textwidth}{@{\extracolsep\fill}lrrrrl}
+\toprule
+Pair & Images & Any-hall.\ \% & Disc. & $p_\mathrm{Holm}$ & $\Delta$ token rate [95\% CI] \\
+\midrule
+%TABLE:pairs%
+\botrule
+\end{tabular*}
+\end{table}
+
+
+\begin{table}[!tbp]
 \caption{Token-level hallucination rate (\%) of descriptions by study, factor and level, with the number of quoted tokens in parentheses. Study~1: synthetic, Study~2: real images. Signage in Study~2 is used in full frame only. The invented and near-word categories exist only in Study~1. ``Name / rare word'' in Study~2 covers every word absent from the frequency list.}\label{tab:breakdown}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
