@@ -330,9 +330,13 @@
 
 \author[2]{\fnm{Roksoliana} \sur{Zatserkovna}}\email{roksoliana.s.zatserkovna@lpnu.ua}
 
+\author[3]{\fnm{Petro} \sur{Kutsyk}}
+
 \affil*[1]{\orgname{Lviv University of Trade and Economics}, \orgaddress{\street{10 Tuhan-Baranovskyi Str.}, \city{Lviv}, \postcode{79008}, \country{Ukraine}}}
 
 \affil[2]{\orgname{Lviv Polytechnic National University}, \orgaddress{\street{12 Stepan Bandera Str.}, \city{Lviv}, \postcode{79013}, \country{Ukraine}}}
+
+\affil[3]{\orgdiv{Department of Accounting}, \orgname{Lviv University of Trade and Economics}, \orgaddress{\street{10 Tuhan-Baranovskyi Str.}, \city{Lviv}, \postcode{79008}, \country{Ukraine}}}
 
 \abstract{Blind people increasingly rely on vision-language models to read signs, product labels and documents aloud, but a model that cannot read a word tends to produce a plausible one instead. We measure how often this happens for Ukrainian (Cyrillic) text with four Claude models of one vendor, and whether it can be detected at run time. Study~1 uses \NImages{} synthetic images in a factorial design that crosses image quality, framing (cropping, finger or glare occlusion) and the type of the distinctive name (real word, invented word, near-word). Study~2 uses \RealNImages{} real images, namely Open Food Facts packaging photographs and official Ukrainian documents, with ground truth independent of the evaluated models. Only \RangeHall\% (Study~1) and \RealRangeHall\% (Study~2) of quoted words were hallucinated. An automated audit confirmed most hallucination labels in Study~1 but only about half in Study~2, where the reference text misses some printed content. The audit-adjusted rates are therefore \SynAdjRange\% and \RealAdjRange\%. Yet \RangeImg\% and \RealRangeImg\% of descriptions contained at least one word labelled as hallucinated, mostly without hedging. In a paired probe on real documents, a printed near-word was reported as the real word it resembles in \RangePrNorm\% of pages. Within the family, the most expensive model was not the most faithful reader. Combining the model's own re-reading, an independent OCR pass and agreement between models detected hallucinated words with an AUROC of \RangeAucComb{} (Study~1) and \RealRangeAucComb{} (Study~2). We report paired tests, run-to-run stability, cost and latency, and an audit of the labeller by two automated raters, and we derive design recommendations for assistive reading applications.}
 
@@ -782,7 +786,7 @@ Not applicable.
 The stimulus generator, model-query, OCR, labelling, analysis and figure scripts are available in the same repository.
 
 \bmhead{Author contribution}
-Rostyslav Zatserkovnyi: conceptualisation, study direction and supervision, review of methods and results, writing (review and editing). Roksoliana Zatserkovna: conceptualisation, accessibility domain expertise, review of results, writing (review and editing). The experiment code, model runs, analyses and the labeller audit were automated with an AI system (see Use of generative AI). Both authors read and approved the final manuscript.
+Rostyslav Zatserkovnyi: conceptualisation, study direction and supervision, review of methods and results, writing (review and editing). Roksoliana Zatserkovna: conceptualisation, accessibility domain expertise, review of results, writing (review and editing). Petro Kutsyk: review of the manuscript. The experiment code, model runs, analyses and the labeller audit were automated with an AI system (see Use of generative AI). All authors read and approved the final manuscript.
 
 \bmhead{Use of generative AI}
 During the preparation of this work the authors used Claude (Anthropic) to proofread the manuscript and check grammar and spelling. In addition, Claude was used under the authors' direction to implement the stimulus generation, model querying, labelling and analysis code, to run the experiments and the automated labeller audit, and to draft the text, which the authors reviewed. The Claude models evaluated as the objects of study are described in Section~\ref{sec:models}.
