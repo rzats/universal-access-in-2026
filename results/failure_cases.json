@@ -28,12 +28,12 @@
  },
  {
   "title": "Digit misread",
-  "printed": "…сть) на 100 г (g) продукту: 1718,6 кДж (kJ) (411,0 ккал (кса!))…",
-  "claim": "…дукту. Енергетична цінність 1716,6 кДж (411,0 ккал)… жири 13,8 …",
-  "token": "17166",
-  "gt": "17186",
-  "model": "Sonnet 5.5",
+  "printed": "…ЦІ, ГЛАЗУРОВАНО-ДЕКОРОВАНЕ, 12,0% ЖИРУ",
+  "claim": "Склад продукту: морозиво, 12,5 % жиру: молоко…",
+  "token": "125",
+  "gt": "120",
+  "model": "Opus 5.5",
   "cause": "small or blurred digits carry no language prior to correct them",
-  "id": "pac-000"
+  "id": "pac-092"
  }
 ]

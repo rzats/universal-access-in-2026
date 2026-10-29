@@ -49,8 +49,9 @@ for ax, fr, title in zip(axs, ["none", "crop", "occlusion"], ["Full frame", "Cro
     ax.set_xticklabels(["clean", "blur", "severe"])
     ax.set_title(title, fontsize=8, color=INK)
     ax.set_ylim(0, 100)
-axs[0].legend(frameon=False, fontsize=7, loc="upper left")
-fig.tight_layout()
+h, l = axs[0].get_legend_handles_labels()
+fig.tight_layout(rect=(0, 0, 1, 0.9))
+fig.legend(h, l, frameon=False, fontsize=7, loc="upper center", ncol=4)
 fig.savefig(os.path.join(OUT, "fig_cells" + SUF + ".pdf"))
 plt.close(fig)
 
@@ -91,25 +92,59 @@ plt.close(fig)
 
 # ---- Fig 1: example stimuli (one row per genre: clean / degraded / framed)
 ST = [json.loads(l) for l in open(os.path.join(DATA, "stimuli.jsonl"), encoding="utf-8")]
-def pick(g, q, fr):
+def pick(g, q, fr, skip=()):
     for x in ST:
-        if x["genre"] == g and x["quality"] == q and x["framing"] == fr:
+        if x["genre"] == g and x["quality"] == q and x["framing"] == fr and x["id"] not in skip \
+                and x.get("framing_info", {}).get("occluder") != "finger" \
+                and x["src"] != "doc:billbank_b09.pdf":  # finger occluder not shown; b09 page too small to read at this size
             return x
-if SUF == "":  # Study 1: one example per genre and condition, as in the first version
-    ex = [x for x in ST if x["id"] in ("sig-cl-no-lu-0", "pac-bl-oc-no-1", "doc-se-cr-wo-2", "pac-cl-cr-no-0", "doc-bl-oc-lu-3", "sig-se-no-no-0")]
-    ex = ex[:6]
-else:
-  ex = [pick("packaging", "clean", "none"), pick("packaging", "blur", "crop"), pick("packaging", "severe", "occlusion"),
-        pick("document", "clean", "none"), pick("document", "blur", "occlusion"), pick("document", "severe", "crop")]
-fig, axs = plt.subplots(2, 3, figsize=(7.0, 3.8)) if SUF == "" else plt.subplots(2, 3, figsize=(7.0, 4.6))
+if SUF == "":  # Study 1: one example per genre and condition
+    ex = [x for x in ST if x["id"] in ("sig-cl-no-lu-0", "pac-bl-oc-no-1", "doc-se-cr-wo-2", "pac-cl-cr-no-0", "doc-bl-oc-lu-3", "sig-se-no-no-0")][:6]
+    fig, axs = plt.subplots(2, 3, figsize=(7.0, 3.8))
+else:  # Study 2: eight real stimuli, two rows (packaging, documents)
+    ex = []
+    for g in ["packaging", "document"]:
+        for q, fr in [("clean", "none"), ("blur", "none"), ("severe", "crop"), ("clean", "occlusion")]:
+            ex.append(pick(g, q, fr, {e["id"] for e in ex if e}))
+    fig, axs = plt.subplots(2, 4, figsize=(7.0, 3.9))
+LAB = {"none": "full frame", "crop": "cropped", "occlusion": "glare"}
 for ax, e in zip(axs.flat, ex):
     ax.set_axis_off()
     if e is None:
         continue
     ax.imshow(Image.open(os.path.join(DATA, "images", e["id"] + ".jpg")))
-    ax.set_title(f"{e['genre']}, {e['quality']}, " + {"none": "full frame", "crop": "cropped", "occlusion": "occluded"}[e["framing"]],
-                 fontsize=7, color=INK)
+    ax.set_title(f"{e['genre']}\n{e['quality']}, {LAB[e['framing']]}", fontsize=6.5, color=INK)
 fig.tight_layout()
 fig.savefig(os.path.join(OUT, "fig_examples" + ("_synth" if SUF == "" else "") + ".pdf"), dpi=170)
 plt.close(fig)
+
+# ---- error taxonomy per model and genre (share of all quoted words, description prompt)
+if SUF == "_real":
+    TAX = [("misread:digit", "digit misread", "#2a78d6"), ("misread:russified", "Ukrainian letter", "#eb6834"),
+           ("misread:lexicalised", "lexicalised", "#1baf7a"), ("misread:other", "other misread", "#eda100"),
+           ("fabricated:none", "fabricated", "#e87ba4"), ("completion:", "completion", "#6250d6")]
+    fig, axs = plt.subplots(1, 2, figsize=(7.0, 2.6), sharey=True)
+    for ax, g in zip(axs, ["packaging", "document"]):
+        x = np.arange(len(models))
+        bottom = np.zeros(len(models))
+        for key, lab, col in TAX:
+            vals = []
+            for m in models:
+                cc = [c for c in C if c["model"] == m and c["prompt"] == "desc" and c["genre"] == g]
+                k = sum(1 for c in cc if (c["label"] + ":" + c.get("sub", "")) .startswith(key) and
+                        (key != "completion:" or c["label"] == "completion"))
+                vals.append(100 * k / max(1, len(cc)))
+            vals = np.array(vals)
+            ax.bar(x, vals, 0.6, bottom=bottom, color=col, label=lab, edgecolor="white", linewidth=0.8, zorder=2)
+            bottom += vals
+        ax.set_xticks(x)
+        ax.set_xticklabels([NAME[m] for m in models], fontsize=7)
+        ax.set_title(g, fontsize=8, color=INK)
+        ax.yaxis.grid(True, color=GRID, lw=0.6, zorder=0)
+        ax.set_axisbelow(True)
+    axs[0].set_ylabel("Unsupported words (% of quoted words)")
+    axs[1].legend(frameon=False, fontsize=6.5, loc="upper left", bbox_to_anchor=(1.0, 1.0))
+    fig.tight_layout()
+    fig.savefig(os.path.join(OUT, "fig_taxonomy_real.pdf"))
+    plt.close(fig)
 print("figures written to", OUT)

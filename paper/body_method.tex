@@ -14,13 +14,8 @@ Every stimulus has one distinctive \emph{name slot}: a brand, shop, company, str
 
 \paragraph{Quality.} The third factor degrades the image after it is scaled to 1024~pixels on the long side. \emph{Clean} adds mild sensor noise and JPEG compression at quality 90. \emph{Blur} applies a Gaussian blur with $\sigma\in[1.6,2.4]$~px, reduces contrast to 80--95\% and compresses at quality 75. \emph{Severe} applies $\sigma\in[2.8,3.8]$~px, reduces contrast to 50--70\% and brightness to 65--90\%, adds stronger noise and compresses at quality 45. Small print becomes illegible under severe degradation while titles remain readable, which reproduces the graded legibility of real photographs taken by blind users.
 
-\paragraph{Design.} The full factorial design crosses genre (3) $\times$ quality (3) $\times$ framing (3) $\times$ name-slot level (3), giving 81 cells with \NImgPerCell{} images per cell, \NImages{} images in total. The images contain \NGTTokens{} ground-truth tokens, of which \NGTNotVisible{} are not fully visible. Figure~\ref{fig:examples_synth} shows examples. The generator is seeded per stimulus, so the image set is reproducible byte for byte from the released code.
+\paragraph{Design.} The full factorial design crosses genre (3) $\times$ quality (3) $\times$ framing (3) $\times$ name-slot level (3), giving 81 cells with \NImgPerCell{} images per cell, \NImages{} images in total. The images contain \NGTTokens{} ground-truth tokens, of which \NGTNotVisible{} are not fully visible. The generator is seeded per stimulus, so the image set is reproducible byte for byte from the released code.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\textwidth]{figures/fig_examples_synth.pdf}
-\caption{Example stimuli from the three genres under different quality and framing conditions. All text is Ukrainian, and the ground truth records every character and whether it is visible in the final frame.}\label{fig:examples_synth}
-\end{figure}
 
 
 \subsection{Study 2: real-image benchmark}\label{sec:stimuli}
@@ -40,7 +35,7 @@ All Study~2 stimuli are photographs or renderings of real Ukrainian objects and 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_examples.pdf}
-\caption{Example Study~2 stimuli: real Ukrainian packaging photographs (Open Food Facts, top row) and official documents (bottom row) under different quality and framing conditions. The ground truth records every character and whether it is visible in the final frame.}\label{fig:examples}
+\caption{Example Study~2 stimuli: real Ukrainian packaging photographs (Open Food Facts, top row) and official documents (bottom row) under different quality and framing conditions. The ground truth records every character and whether it is visible in the final frame. The benchmark also contains finger occlusions (23 of the 176 images), which are not shown here.}\label{fig:examples}
 \end{figure}
 
 \subsection{Near-word probe}\label{sec:probe}

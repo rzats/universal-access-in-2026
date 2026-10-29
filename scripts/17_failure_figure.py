@@ -110,7 +110,8 @@ def main():
          "letters specific to Ukrainian (і, ї, є, ґ) are normalised away"),
         ("Completion of text cut off by the frame edge", lambda c: c["label"] == "completion" and c["framing"] == "crop" and len(c["gt"]) >= 6,
          "the hidden part of the word is predictable, so it is filled in"),
-        ("Digit misread", lambda c: c["label"] == "misread" and c.get("sub") == "digit" and len(c["gt"]) >= 3 and c["quality"] != "severe",
+        ("Digit misread", lambda c: c["label"] == "misread" and c.get("sub") == "digit" and 3 <= len(c["gt"]) == len(c["tok"])
+         and sum(x != y for x, y in zip(c["gt"], c["tok"])) == 1 and c["quality"] != "severe",
          "small or blurred digits carry no language prior to correct them"),
     ]
     for title, f, cause in picks:
@@ -119,6 +120,8 @@ def main():
         for c in cand:
             ln = line_of(st[c["id"]], c["gt"])
             if ln is None or (st[c["id"]]["genre"] != "signage" and "bbox" not in ln):
+                continue
+            if st[c["id"]].get("framing_info", {}).get("occluder") == "finger":  # finger occluder not shown
                 continue
             if title.startswith("Digit") and not same_context(span_of(res, c["model"], c["id"], c["span"]), ln["raw"], c["tok"]):
                 continue
