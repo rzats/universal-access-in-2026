@@ -51,9 +51,14 @@ def mcnemar(a, b):
     return b10, b01, (binomtest(b10, b10 + b01, 0.5).pvalue if b10 + b01 else 1.0)
 
 
+RESP = {}  # (model, prompt) -> ids with a response; filled in main()
+
+
 def per_image(C, m, p="desc"):
-    """image -> [n_hall, n_claims] for one model/prompt."""
+    """image -> [n_hall, n_claims] for one model/prompt; images answered without any quoted text count as 0/0."""
     d = collections.defaultdict(lambda: [0, 0])
+    for i in RESP.get((m, p), ()):
+        d[i]
     for c in C:
         if c["model"] == m and c["prompt"] == p:
             d[c["id"]][0] += c["label"] in HALL
@@ -148,11 +153,11 @@ def conditions(C, R, rng):
     return res
 
 
-def cost_latency(runs):
+def cost_latency(runs, keep=None):
     out = {}
     for m in MODELS:
         for p in ["desc", "trans"]:
-            R = load(os.path.join(ROOT, runs, "vlm", f"{m}.{p}.jsonl"))
+            R = [r for r in load(os.path.join(ROOT, runs, "vlm", f"{m}.{p}.jsonl")) if keep is None or r["id"] in keep]
             if not R:
                 continue
             u = [r["usage"] for r in R]
@@ -242,7 +247,11 @@ def main():
     for ds, (data, runs) in DS.items():
         C = [c for c in load(os.path.join(ROOT, runs, "claims.jsonl")) if c["label"] != "unscored"]
         R = load(os.path.join(ROOT, runs, "responses.jsonl"))
-        out[ds] = {"model_pairs": model_pairs(C, rng), "conditions": conditions(C, R, rng), "cost": cost_latency(runs)}
+        RESP.clear()
+        for r in R:
+            RESP.setdefault((r["model"], r["prompt"]), set()).add(r["id"])
+        ids = {s["id"] for s in load(os.path.join(ROOT, data, "stimuli.jsonl"))}
+        out[ds] = {"model_pairs": model_pairs(C, rng), "conditions": conditions(C, R, rng), "cost": cost_latency(runs, ids)}
     out["probe_cost"] = cost_latency(os.path.join("runs", "probe"))
     out["stability"] = stability(rng)
     out["sets"] = compare_sets()

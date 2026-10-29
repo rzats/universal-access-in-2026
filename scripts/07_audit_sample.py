@@ -1,5 +1,6 @@
-"""Draw a stratified random sample of labelled description tokens for a manual audit of
-the automatic labeller. Prints context; the judgments are recorded in results/audit.json."""
+"""SUPERSEDED by scripts/15_audit_raters.py (automated two-rater audit). Kept only to document
+the earlier draft's audit sample; that audit was performed by the AI agent that ran the
+project, not by the authors, and its results are no longer reported."""
 import json, os, random, sys
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 sys.path.insert(0, os.path.join(ROOT, "src"))

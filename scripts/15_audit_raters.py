@@ -42,9 +42,11 @@ Quoted word being scored (normalised to lower case): «{tok}»
 Label assigned by the scorer: {label}
 Definition of this label: {definition}
 
-Look at the image and the reference. Is the assigned label right for this word?
-Ignore capitalisation, punctuation and spacing differences. Answer with JSON only:
-{{"verdict": "right" or "wrong", "reason": "<at most 15 words>"}}"""
+Look at the image and the reference, then answer two questions.
+1. Is the assigned label right for this word?
+2. Does the quoted word reproduce text that is printed AND fully visible in the image (ignoring capitalisation and punctuation)? Answer "yes" if so; answer "no" if the word is not printed, is printed differently, or is printed but cut off or covered.
+Answer with JSON only:
+{{"verdict": "right" or "wrong", "printed": "yes" or "no", "reason": "<at most 15 words>"}}"""
 
 
 def load(path):
@@ -102,10 +104,11 @@ def parse(text):
     try:
         d = json.loads(m.group(0))
         v = str(d.get("verdict", "")).lower()
-        return ("right" if v.startswith("right") else "wrong" if v.startswith("wrong") else None), d.get("reason", "")
+        pr = str(d.get("printed", "")).lower()
+        return ("right" if v.startswith("right") else "wrong" if v.startswith("wrong") else None), \
+            ("yes" if pr.startswith("y") else "no" if pr.startswith("n") else None), d.get("reason", "")
     except Exception:
-        v = "right" if re.search(r"\bright\b", text.lower()) else ("wrong" if re.search(r"\bwrong\b", text.lower()) else None)
-        return v, text[:100]
+        return None, None, text[:100]
 
 
 def rate(rater):
@@ -148,9 +151,12 @@ def rate(rater):
                     print("retry", r["key"], str(e)[:120], flush=True)
                     time.sleep(15 * (attempt + 1))
             else:
+                if rater == "gemma":
+                    print("server unreachable; stopping (resumable)", flush=True)
+                    return
                 continue
-            v, reason = parse(text)
-            f.write(json.dumps({"key": r["key"], "verdict": v, "reason": reason, "raw": text[:400], "cost": cost,
+            v, printed, reason = parse(text)
+            f.write(json.dumps({"key": r["key"], "verdict": v, "printed": printed, "reason": reason, "raw": text[:400], "cost": cost,
                                 "secs": round(time.time() - t0, 1), **({"meta": meta} if meta else {})}, ensure_ascii=False) + "\n")
             f.flush()
             if (i + 1) % 25 == 0:
@@ -177,30 +183,50 @@ def kappa(a, b):
 
 def analyse():
     S = {r["key"]: r for r in load(os.path.join(OUT, "sample.jsonl"))}
-    R = {name: {r["key"]: r["verdict"] for r in load(os.path.join(OUT, f"rater_{name}.jsonl")) if r["verdict"]}
+    # drop items whose label changed after sampling (look-alike folding fix applied after the draw)
+    from textnorm import _fix_script
+    cur = {}
+    for ds, runs in [("synthetic", "runs"), ("real", os.path.join("runs", "real"))]:
+        for c in load(os.path.join(ROOT, runs, "claims.jsonl")):
+            if c["prompt"] == "desc":
+                cur[f"{ds}:{c['model']}:{c['id']}:{c['span']}:{c['tok']}"] = c["label"]
+    stale = [k for k, r in S.items() if cur.get(":".join(k.split(":")[:4] + [_fix_script(r["tok"])])) != r["label"]]
+    S = {k: r for k, r in S.items() if k not in stale}
+    R = {name: {r["key"]: r for r in load(os.path.join(OUT, f"rater_{name}.jsonl")) if r.get("printed")}
          for name in ["claude", "gemma"]}
-    res = {"raters": {"claude": CLAUDE, "gemma": GEMMA}, "n_sample": len(S),
-           "resolution": "a label counts as right only if every available rater judges it right (conservative)"}
+    res = {"raters": {"claude": CLAUDE, "gemma": GEMMA}, "n_sample": len(S), "n_stale_dropped": len(stale),
+           "primary": "for misread/fabricated labels: the rater judges the quoted word NOT printed-and-visible; "
+                      "for correct labels: judged printed-and-visible; for completions: judged not printed-and-visible",
+           "resolution": "an item is confirmed only if every rater that rated it confirms it (conservative); "
+                         "items rated by neither rater are excluded"}
     gm = load(os.path.join(OUT, "rater_gemma.jsonl"))
     if gm:
         res["gemma_meta"] = gm[0].get("meta")
+
+    def ok(lab, rr):  # does the rater confirm the label's claim about printed text?
+        return (rr["printed"] == "yes") if lab == "correct" else (rr["printed"] == "no")
+
     for ds in ["synthetic", "real"]:
         out = {}
         keys = [k for k, r in S.items() if r["dataset"] == ds]
         for name in ["claude", "gemma"]:
-            out[name] = {lab: wilson(sum(R[name].get(k) == "right" for k in keys if S[k]["label"] == lab and k in R[name]),
-                                     sum(1 for k in keys if S[k]["label"] == lab and k in R[name])) for lab in LABELS}
-            hk = [k for k in keys if S[k]["label"] in ("misread", "fabricated") and k in R[name]]
-            out[name]["hallucination"] = wilson(sum(R[name][k] == "right" for k in hk), len(hk))
+            got = [k for k in keys if k in R[name]]
+            out[name] = {lab: wilson(sum(ok(lab, R[name][k]) for k in got if S[k]["label"] == lab),
+                                     sum(1 for k in got if S[k]["label"] == lab)) for lab in LABELS}
+            hk = [k for k in got if S[k]["label"] in ("misread", "fabricated")]
+            out[name]["hallucination"] = wilson(sum(ok(S[k]["label"], R[name][k]) for k in hk), len(hk))
+            out[name]["exact_label"] = {lab: wilson(sum(R[name][k]["verdict"] == "right" for k in got if S[k]["label"] == lab),
+                                                    sum(1 for k in got if S[k]["label"] == lab)) for lab in LABELS}
         both = [k for k in keys if k in R["claude"] and k in R["gemma"]]
         out["n_both"] = len(both)
-        out["kappa"] = kappa([R["claude"][k] == "right" for k in both], [R["gemma"][k] == "right" for k in both])
-        out["raw_agreement"] = round(sum(R["claude"][k] == R["gemma"][k] for k in both) / max(1, len(both)), 4)
-        res_keys = [k for k in keys if k in R["claude"]]
-        comb = {k: all(R[n].get(k, "right") == "right" for n in ["claude", "gemma"]) for k in res_keys}
-        out["resolved"] = {lab: wilson(sum(comb[k] for k in res_keys if S[k]["label"] == lab),
-                                       sum(1 for k in res_keys if S[k]["label"] == lab)) for lab in LABELS}
-        hk = [k for k in res_keys if S[k]["label"] in ("misread", "fabricated")]
+        out["kappa"] = kappa([R["claude"][k]["printed"] == "yes" for k in both], [R["gemma"][k]["printed"] == "yes" for k in both])
+        out["raw_agreement"] = round(sum(R["claude"][k]["printed"] == R["gemma"][k]["printed"] for k in both) / max(1, len(both)), 4)
+        out["kappa_exact_label"] = kappa([R["claude"][k]["verdict"] == "right" for k in both], [R["gemma"][k]["verdict"] == "right" for k in both])
+        rated = [k for k in keys if k in R["claude"] or k in R["gemma"]]
+        comb = {k: all(ok(S[k]["label"], R[n][k]) for n in ["claude", "gemma"] if k in R[n]) for k in rated}
+        out["resolved"] = {lab: wilson(sum(comb[k] for k in rated if S[k]["label"] == lab),
+                                       sum(1 for k in rated if S[k]["label"] == lab)) for lab in LABELS}
+        hk = [k for k in rated if S[k]["label"] in ("misread", "fabricated")]
         out["resolved"]["hallucination"] = wilson(sum(comb[k] for k in hk), len(hk))
         res[ds] = out
     os.makedirs(os.path.join(ROOT, "results"), exist_ok=True)

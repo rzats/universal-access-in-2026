@@ -1,0 +1,39 @@
+[
+ {
+  "title": "Near-word normalised to the real word (edited document)",
+  "printed": "тяжкям",
+  "claim": "тяжким",
+  "model": "Sonnet 5.5",
+  "cause": "language prior overrides a clearly printed one-letter difference"
+ },
+ {
+  "title": "Ukrainian letter replaced by a Russian-like spelling",
+  "printed": "…ми, бактерицидна активність цефдініру обумовлена",
+  "claim": "…ми, бактерицидна активність цефдиніру обумовлена пригніченням син…",
+  "token": "цефдиніру",
+  "gt": "цефдініру",
+  "model": "Sonnet 5.5",
+  "cause": "letters specific to Ukrainian (і, ї, є, ґ) are normalised away",
+  "id": "doc-033"
+ },
+ {
+  "title": "Completion of text cut off by the frame edge",
+  "printed": "…не молоко, харчові волокна (олігофруктоза),",
+  "claim": "олігофруктоза",
+  "token": "олігофруктоза",
+  "gt": "олігофруктоза",
+  "model": "Fable 5.1",
+  "cause": "the hidden part of the word is predictable, so it is filled in",
+  "id": "pac-062"
+ },
+ {
+  "title": "Digit misread",
+  "printed": "…сть) на 100 г (g) продукту: 1718,6 кДж (kJ) (411,0 ккал (кса!))…",
+  "claim": "…дукту. Енергетична цінність 1716,6 кДж (411,0 ккал)… жири 13,8 …",
+  "token": "17166",
+  "gt": "17186",
+  "model": "Sonnet 5.5",
+  "cause": "small or blurred digits carry no language prior to correct them",
+  "id": "pac-000"
+ }
+]

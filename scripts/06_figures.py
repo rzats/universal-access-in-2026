@@ -15,6 +15,7 @@ from paths import DATA, RUNS, RESULTS  # noqa: E402
 OUT = os.path.join(ROOT, "paper", "figures")
 os.makedirs(OUT, exist_ok=True)
 S = json.load(open(os.path.join(RESULTS, "summary.json"), encoding="utf-8"))
+SUF = "" if os.environ.get("UAIS_SET") == "synthetic" else "_real"  # Study 1 / Study 2 figure names
 COL = {"haiku": "#2a78d6", "sonnet": "#eb6834", "opus": "#1baf7a", "fable": "#eda100"}
 NAME = {"haiku": "Haiku 5.5", "sonnet": "Sonnet 5.5", "opus": "Opus 5.5", "fable": "Fable 5.1"}
 INK, INK2, GRID = "#0b0b0b", "#52514e", "#e4e3df"
@@ -50,7 +51,7 @@ for ax, fr, title in zip(axs, ["none", "crop", "occlusion"], ["Full frame", "Cro
     ax.set_ylim(0, 100)
 axs[0].legend(frameon=False, fontsize=7, loc="upper left")
 fig.tight_layout()
-fig.savefig(os.path.join(OUT, "fig_cells.pdf"))
+fig.savefig(os.path.join(OUT, "fig_cells" + SUF + ".pdf"))
 plt.close(fig)
 
 # ---- Fig 3: token hallucination rate by ground-truth category
@@ -61,7 +62,7 @@ bars(ax, cats, lambda m, c: S["factors"]["gt_cat"][m].get(c), "Hallucinated word
 ax.set_xticklabels(labels)
 ax.legend(frameon=False, fontsize=7, loc="upper left")
 fig.tight_layout()
-fig.savefig(os.path.join(OUT, "fig_categories.pdf"))
+fig.savefig(os.path.join(OUT, "fig_categories" + SUF + ".pdf"))
 plt.close(fig)
 
 # ---- Fig 4: ROC curves of detectors, one panel per main model
@@ -85,7 +86,7 @@ for ax, m in zip(axs, mm):
     ax.legend(frameon=False, fontsize=6, loc="upper center", bbox_to_anchor=(0.5, -0.22), ncol=1, title="AUROC", title_fontsize=6)
 axs[0].set_ylabel("Hallucinated words caught")
 fig.tight_layout()
-fig.savefig(os.path.join(OUT, "fig_roc.pdf"))
+fig.savefig(os.path.join(OUT, "fig_roc" + SUF + ".pdf"))
 plt.close(fig)
 
 # ---- Fig 1: example stimuli (one row per genre: clean / degraded / framed)
@@ -94,10 +95,13 @@ def pick(g, q, fr):
     for x in ST:
         if x["genre"] == g and x["quality"] == q and x["framing"] == fr:
             return x
-ex = [pick("signage", "clean", "none"), pick("signage", "blur", "none"), pick("signage", "severe", "none"),
-      pick("packaging", "clean", "none"), pick("packaging", "blur", "crop"), pick("packaging", "clean", "occlusion"),
-      pick("document", "clean", "none"), pick("document", "blur", "occlusion"), pick("document", "clean", "crop")]
-fig, axs = plt.subplots(3, 3, figsize=(7.0, 6.6))
+if SUF == "":  # Study 1: one example per genre and condition, as in the first version
+    ex = [x for x in ST if x["id"] in ("sig-cl-no-lu-0", "pac-bl-oc-no-1", "doc-se-cr-wo-2", "pac-cl-cr-no-0", "doc-bl-oc-lu-3", "sig-se-no-no-0")]
+    ex = ex[:6]
+else:
+  ex = [pick("packaging", "clean", "none"), pick("packaging", "blur", "crop"), pick("packaging", "severe", "occlusion"),
+        pick("document", "clean", "none"), pick("document", "blur", "occlusion"), pick("document", "severe", "crop")]
+fig, axs = plt.subplots(2, 3, figsize=(7.0, 3.8)) if SUF == "" else plt.subplots(2, 3, figsize=(7.0, 4.6))
 for ax, e in zip(axs.flat, ex):
     ax.set_axis_off()
     if e is None:
@@ -106,6 +110,6 @@ for ax, e in zip(axs.flat, ex):
     ax.set_title(f"{e['genre']}, {e['quality']}, " + {"none": "full frame", "crop": "cropped", "occlusion": "occluded"}[e["framing"]],
                  fontsize=7, color=INK)
 fig.tight_layout()
-fig.savefig(os.path.join(OUT, "fig_examples.pdf"), dpi=170)
+fig.savefig(os.path.join(OUT, "fig_examples" + ("_synth" if SUF == "" else "") + ".pdf"), dpi=170)
 plt.close(fig)
 print("figures written to", OUT)

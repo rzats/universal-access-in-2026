@@ -66,7 +66,8 @@ def macros():
         for fr, nm in [("none", "Full"), ("crop", "Crop"), ("occlusion", "Occ")]:
             m[f"Frame{nm}{T}"] = pc(F["framing"][mod][fr]["p"])
         for g in ["signage", "packaging", "document"]:
-            m[f"Genre{g.capitalize()}{T}"] = pc(F["genre"][mod][g]["p"])
+            if g in F["genre"][mod]:
+                m[f"Genre{g.capitalize()}{T}"] = pc(F["genre"][mod][g]["p"])
         r = S["rates"][f"{mod}.desc"]
         m[f"HedgeHall{T}"] = pc(r["hedged_share_of_hall"]["p"], 0)
         m[f"HedgeCorr{T}"] = pc(r["hedged_share_of_correct"]["p"], 0)
@@ -136,6 +137,8 @@ def macros():
     m["RangeImg"] = rng_([S["rates"][f"{k}.desc"]["img_any_hall"]["p"] for k in allm], 0)
     m["RangeCleanFull"] = rng_([S["rates"][f"{k}.desc"]["img_any_hall_clean_full"]["p"] for k in main3], 0)
     m["RangeNameHall"] = rng_([S["factors"]["gt_cat"][k]["name"]["p"] for k in main3])
+    m["RangeNonceLureHall"] = rng_([S["factors"]["gt_cat"][k][c]["p"] for k in main3 for c in ("nonce", "lure") if c in S["factors"]["gt_cat"][k]], 0) \
+        if "nonce" in S["factors"]["gt_cat"]["haiku"] else "--"
     m["RangeNumHall"] = rng_([S["factors"]["gt_cat"][k]["num"]["p"] for k in main3])
     m["RangeWordHall"] = rng_([S["factors"]["gt_cat"][k]["word"]["p"] for k in main3])
     m["RangeAucComb"] = rng_([S["detection"][k]["combined"]["auroc"] for k in main3], pct=False)
@@ -324,6 +327,31 @@ def rev_macros():
         m[f"{pre}NPairsSig"] = str(sum(r["p_holm"] < 0.05 for r in mp))
         m[f"{pre}NPairs"] = str(len(mp))
         m[f"{pre}NTokSig"] = str(sum(r["tok_diff_ci"][0] > 0 or r["tok_diff_ci"][1] < 0 for r in mp))
+    for pre, S_ in [("Syn", SYN), ("Real", REAL)]:
+        for k, nm in [("misread:lexicalised", "Lex"), ("fabricated:none", "Fab"), ("misread:russified", "Ua"), ("misread:digit", "Digit")]:
+            vals = [d.get(k, 0) / sum(d.values()) for d in S_["subtypes"].values() if sum(d.values())]
+            m[f"{pre}RangeSub{nm}"] = rng2(vals, 0)
+    # every pairwise / condition comparison used in the prose
+    for ds, pre in [("synthetic", "Syn"), ("real", "Real")]:
+        for r in REV[ds]["model_pairs"]:
+            k = f"{pre}Pair{r['a'].capitalize()}{r['b'].capitalize()}"
+            m[k + "P"] = p3(r["p_holm"])
+            m[k + "Img"] = f"{pc(r['img_a'], 0)}\\% vs {pc(r['img_b'], 0)}\\%"
+            m[k + "Tok"] = f"{pc(r['tok_diff'], 1)} [{pc(r['tok_diff_ci'][0], 1)}, {pc(r['tok_diff_ci'][1], 1)}]"
+        for c in REV[ds]["conditions"]:
+            k = f"{pre}C{c['model'].capitalize()}{c['a'].capitalize()}{c['b'].capitalize()}"
+            m[k + "Tok"] = f"[{pc(c['tok_diff_ci'][0], 1)}, {pc(c['tok_diff_ci'][1], 1)}]"
+            m[k + "P"] = p3(c["p_holm"])
+            m[k + "Img"] = f"{pc(c['img_a'], 0)}\\% vs {pc(c['img_b'], 0)}\\%"
+    for ds, pre in [("synthetic", "Syn"), ("real", "Real")]:
+        cost = REV[ds]["cost"]
+        for mod in ["haiku", "sonnet", "opus", "fable"]:
+            for pr in ["desc", "trans"]:
+                v = cost.get(f"{mod}.{pr}")
+                if v:
+                    k = f"{pre}Cost{mod.capitalize()}{pr.capitalize()}"
+                    m[k] = f"{v['usd_per_image']:.4f}"
+                    m[k + "Sec"] = f"{v['sec_median']:.0f}"
     if AUD:
         for ds, pre in [("synthetic", "Syn"), ("real", "Real")]:
             a = AUD.get(ds)
@@ -340,6 +368,11 @@ def rev_macros():
                 for rater, rn in [("claude", "Cl"), ("gemma", "Gm")]:
                     rr = a[rater][k]
                     m[f"{pre}Aud{nm}{rn}"] = pc(rr["p"], 0) if rr["p"] is not None else "--"
+        for ds, pre, S_ in [("synthetic", "Syn", SYN), ("real", "Real", REAL)]:
+            f = AUD[ds]["claude"]["hallucination"]["p"]
+            if f is not None:
+                vals = [S_["rates"][f"{k}.desc"]["hall_token"]["p"] * f for k in ["haiku", "sonnet", "opus", "fable"]]
+                m[f"{pre}AdjRange"] = rng2(vals, 1)
         gm = AUD.get("gemma_meta") or {}
         m["OllamaVersion"] = str(gm.get("ollama_version", "--"))
     return m
@@ -366,7 +399,7 @@ def main():
     mac.update({k: real[k] for k in shared})
     mac.update({"Real" + k: v for k, v in real.items() if k not in shared})
     mac.update(rev_macros())
-    used = set(re.findall(r"\\([A-Z][A-Za-z]+)(?![A-Za-z])", body)) - {"LaTeX", "TeX", "Large", "Huge", "LARGE"}
+    used = set(re.findall(r"\\([A-Z][A-Za-z]+)(?![A-Za-z])", body)) - {"LaTeX", "TeX", "Large", "Huge", "LARGE", "Delta"}
     missing = sorted(u for u in used if u not in mac and u not in ("LaTeX", "TeX"))
     if missing:
         print("WARNING undefined number macros:", missing)

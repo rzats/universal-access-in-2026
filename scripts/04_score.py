@@ -60,6 +60,8 @@ def main():
     out_c = open(os.path.join(RUNS, "claims.jsonl"), "w", encoding="utf-8")
     out_r = open(os.path.join(RUNS, "responses.jsonl"), "w", encoding="utf-8")
     for (m, p, i), text in sorted(resp.items()):
+        if i not in stim:  # e.g. responses for items later excluded from the benchmark
+            continue
         s = stim[i]
         gt = s["tokens"]
         cl = claims_desc(text) if p == "desc" else claims_trans(text)

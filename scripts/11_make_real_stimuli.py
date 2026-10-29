@@ -22,6 +22,7 @@ from realstim import photograph, gt_tokens, lines_from_gcv, lines_from_pdf
 from textnorm import toks
 
 SEED = 20261022
+INCLUDE_SIGNAGE = False
 OUT = os.path.join(ROOT, "data", "real")
 QUAL, FRAME = ["clean", "blur", "severe"], ["none", "crop", "occlusion"]
 
@@ -110,8 +111,11 @@ def sources():
                                           "tesseract_agreement": round(agree, 3)},
                           "pil": img, "lines": lines + ctx, "extra": [], "sheet": True})
     # signage
+    # Signage is excluded from the benchmark: its reference transcriptions were produced with a
+    # Claude model (the agent that ran the project), i.e. a member of the evaluated model family,
+    # so its ground truth is not independent of the systems under test.
     p = os.path.join(ROOT, "data", "real", "sign_transcriptions.jsonl")
-    if os.path.exists(p):
+    if INCLUDE_SIGNAGE and os.path.exists(p):
         man = {json.loads(l)["file"]: json.loads(l) for l in open(os.path.join(ROOT, "data", "raw_signs", "manifest.jsonl"), encoding="utf-8")}
         for t in (json.loads(l) for l in open(p, encoding="utf-8")):
             if not t.get("use", True):

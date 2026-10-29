@@ -1,0 +1,373 @@
+{
+ "raters": {
+  "claude": "claude-sonnet-5-5",
+  "gemma": "gemma3:12b"
+ },
+ "n_sample": 636,
+ "n_stale_dropped": 3,
+ "primary": "for misread/fabricated labels: the rater judges the quoted word NOT printed-and-visible; for correct labels: judged printed-and-visible; for completions: judged not printed-and-visible",
+ "resolution": "an item is confirmed only if every rater that rated it confirms it (conservative); items rated by neither rater are excluded",
+ "gemma_meta": {
+  "ollama_version": "0.40.11",
+  "model": "gemma3:12b",
+  "options": {
+   "temperature": 0,
+   "seed": 7,
+   "num_predict": 120
+  }
+ },
+ "synthetic": {
+  "claude": {
+   "correct": {
+    "k": 98,
+    "n": 100,
+    "p": 0.98,
+    "lo": 0.93,
+    "hi": 0.9945
+   },
+   "completion": {
+    "k": 99,
+    "n": 100,
+    "p": 0.99,
+    "lo": 0.9455,
+    "hi": 0.9982
+   },
+   "misread": {
+    "k": 93,
+    "n": 100,
+    "p": 0.93,
+    "lo": 0.8625,
+    "hi": 0.9657
+   },
+   "fabricated": {
+    "k": 81,
+    "n": 97,
+    "p": 0.8351,
+    "lo": 0.7487,
+    "hi": 0.8958
+   },
+   "hallucination": {
+    "k": 174,
+    "n": 197,
+    "p": 0.8832,
+    "lo": 0.8309,
+    "hi": 0.9209
+   },
+   "exact_label": {
+    "correct": {
+     "k": 97,
+     "n": 100,
+     "p": 0.97,
+     "lo": 0.9155,
+     "hi": 0.9897
+    },
+    "completion": {
+     "k": 98,
+     "n": 100,
+     "p": 0.98,
+     "lo": 0.93,
+     "hi": 0.9945
+    },
+    "misread": {
+     "k": 79,
+     "n": 100,
+     "p": 0.79,
+     "lo": 0.7002,
+     "hi": 0.8583
+    },
+    "fabricated": {
+     "k": 41,
+     "n": 97,
+     "p": 0.4227,
+     "lo": 0.3292,
+     "hi": 0.5221
+    }
+   }
+  },
+  "gemma": {
+   "correct": {
+    "k": 49,
+    "n": 50,
+    "p": 0.98,
+    "lo": 0.895,
+    "hi": 0.9965
+   },
+   "completion": {
+    "k": 10,
+    "n": 50,
+    "p": 0.2,
+    "lo": 0.1124,
+    "hi": 0.3304
+   },
+   "misread": {
+    "k": 5,
+    "n": 38,
+    "p": 0.1316,
+    "lo": 0.0575,
+    "hi": 0.2733
+   },
+   "fabricated": {
+    "k": 21,
+    "n": 24,
+    "p": 0.875,
+    "lo": 0.69,
+    "hi": 0.9566
+   },
+   "hallucination": {
+    "k": 26,
+    "n": 62,
+    "p": 0.4194,
+    "lo": 0.3048,
+    "hi": 0.5433
+   },
+   "exact_label": {
+    "correct": {
+     "k": 41,
+     "n": 50,
+     "p": 0.82,
+     "lo": 0.692,
+     "hi": 0.9023
+    },
+    "completion": {
+     "k": 42,
+     "n": 50,
+     "p": 0.84,
+     "lo": 0.7149,
+     "hi": 0.9166
+    },
+    "misread": {
+     "k": 37,
+     "n": 38,
+     "p": 0.9737,
+     "lo": 0.865,
+     "hi": 0.9953
+    },
+    "fabricated": {
+     "k": 22,
+     "n": 24,
+     "p": 0.9167,
+     "lo": 0.7415,
+     "hi": 0.9768
+    }
+   }
+  },
+  "n_both": 162,
+  "kappa": 0.2221,
+  "raw_agreement": 0.5432,
+  "kappa_exact_label": -0.0045,
+  "resolved": {
+   "correct": {
+    "k": 97,
+    "n": 100,
+    "p": 0.97,
+    "lo": 0.9155,
+    "hi": 0.9897
+   },
+   "completion": {
+    "k": 59,
+    "n": 100,
+    "p": 0.59,
+    "lo": 0.492,
+    "hi": 0.6813
+   },
+   "misread": {
+    "k": 63,
+    "n": 100,
+    "p": 0.63,
+    "lo": 0.5322,
+    "hi": 0.7182
+   },
+   "fabricated": {
+    "k": 80,
+    "n": 97,
+    "p": 0.8247,
+    "lo": 0.7371,
+    "hi": 0.8876
+   },
+   "hallucination": {
+    "k": 143,
+    "n": 197,
+    "p": 0.7259,
+    "lo": 0.6597,
+    "hi": 0.7834
+   }
+  }
+ },
+ "real": {
+  "claude": {
+   "correct": {
+    "k": 58,
+    "n": 60,
+    "p": 0.9667,
+    "lo": 0.8864,
+    "hi": 0.9908
+   },
+   "completion": {
+    "k": 50,
+    "n": 60,
+    "p": 0.8333,
+    "lo": 0.7197,
+    "hi": 0.9069
+   },
+   "misread": {
+    "k": 35,
+    "n": 60,
+    "p": 0.5833,
+    "lo": 0.4573,
+    "hi": 0.6994
+   },
+   "fabricated": {
+    "k": 32,
+    "n": 59,
+    "p": 0.5424,
+    "lo": 0.4166,
+    "hi": 0.663
+   },
+   "hallucination": {
+    "k": 67,
+    "n": 119,
+    "p": 0.563,
+    "lo": 0.4733,
+    "hi": 0.6488
+   },
+   "exact_label": {
+    "correct": {
+     "k": 58,
+     "n": 60,
+     "p": 0.9667,
+     "lo": 0.8864,
+     "hi": 0.9908
+    },
+    "completion": {
+     "k": 50,
+     "n": 60,
+     "p": 0.8333,
+     "lo": 0.7197,
+     "hi": 0.9069
+    },
+    "misread": {
+     "k": 20,
+     "n": 60,
+     "p": 0.3333,
+     "lo": 0.2273,
+     "hi": 0.4594
+    },
+    "fabricated": {
+     "k": 16,
+     "n": 59,
+     "p": 0.2712,
+     "lo": 0.1744,
+     "hi": 0.396
+    }
+   }
+  },
+  "gemma": {
+   "correct": {
+    "k": 0,
+    "n": 0,
+    "p": null,
+    "lo": null,
+    "hi": null
+   },
+   "completion": {
+    "k": 0,
+    "n": 0,
+    "p": null,
+    "lo": null,
+    "hi": null
+   },
+   "misread": {
+    "k": 0,
+    "n": 0,
+    "p": null,
+    "lo": null,
+    "hi": null
+   },
+   "fabricated": {
+    "k": 0,
+    "n": 0,
+    "p": null,
+    "lo": null,
+    "hi": null
+   },
+   "hallucination": {
+    "k": 0,
+    "n": 0,
+    "p": null,
+    "lo": null,
+    "hi": null
+   },
+   "exact_label": {
+    "correct": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "completion": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "misread": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    },
+    "fabricated": {
+     "k": 0,
+     "n": 0,
+     "p": null,
+     "lo": null,
+     "hi": null
+    }
+   }
+  },
+  "n_both": 0,
+  "kappa": null,
+  "raw_agreement": 0.0,
+  "kappa_exact_label": null,
+  "resolved": {
+   "correct": {
+    "k": 58,
+    "n": 60,
+    "p": 0.9667,
+    "lo": 0.8864,
+    "hi": 0.9908
+   },
+   "completion": {
+    "k": 50,
+    "n": 60,
+    "p": 0.8333,
+    "lo": 0.7197,
+    "hi": 0.9069
+   },
+   "misread": {
+    "k": 35,
+    "n": 60,
+    "p": 0.5833,
+    "lo": 0.4573,
+    "hi": 0.6994
+   },
+   "fabricated": {
+    "k": 32,
+    "n": 59,
+    "p": 0.5424,
+    "lo": 0.4166,
+    "hi": 0.663
+   },
+   "hallucination": {
+    "k": 67,
+    "n": 119,
+    "p": 0.563,
+    "lo": 0.4733,
+    "hi": 0.6488
+   }
+  }
+ }
+}
