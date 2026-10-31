@@ -115,7 +115,7 @@ for ax, e in zip(axs.flat, ex):
     ax.imshow(Image.open(os.path.join(DATA, "images", e["id"] + ".jpg")))
     ax.set_title(f"{e['genre']}\n{e['quality']}, {LAB[e['framing']]}", fontsize=6.5, color=INK)
 fig.tight_layout()
-fig.savefig(os.path.join(OUT, "fig_examples" + ("_synth" if SUF == "" else "") + ".pdf"), dpi=170)
+fig.savefig(os.path.join(OUT, "fig_examples" + ("_synth" if SUF == "" else "") + ".pdf"), dpi=400)
 plt.close(fig)
 
 # ---- error taxonomy per model and genre (share of all quoted words, description prompt)

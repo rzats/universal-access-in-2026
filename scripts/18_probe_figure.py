@@ -62,7 +62,7 @@ def main():
     ax.legend(frameon=False, fontsize=6, loc="upper center", bbox_to_anchor=(0.5, -0.17), ncol=2)
     ax.set_title("What the description quoted", fontsize=8, color=INK)
     fig.tight_layout()
-    fig.savefig(os.path.join(ROOT, "paper", "figures", "fig_probe.pdf"), dpi=200)
+    fig.savefig(os.path.join(ROOT, "paper", "figures", "fig_probe.pdf"), dpi=400)
     json.dump({"pairs": pairs, "targets": [st[p]["target"] for p in pairs]}, open(os.path.join(ROOT, "results", "probe_figure.json"), "w"),
               ensure_ascii=False, indent=1)
     print(pairs, [st[p]["target"] for p in pairs])

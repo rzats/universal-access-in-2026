@@ -4,15 +4,21 @@
 
 \author[2]{\fnm{Roksoliana} \sur{Zatserkovna}}\email{roksoliana.s.zatserkovna@lpnu.ua}
 
-\author[3]{\fnm{Petro} \sur{Kutsyk}}
+\author[3]{\fnm{Petro} \sur{Kutsyk}}\email{kutsykpetro@gmail.com}
 
 \affil*[1]{\orgname{Lviv University of Trade and Economics}, \orgaddress{\street{10 Tuhan-Baranovskyi Str.}, \city{Lviv}, \postcode{79008}, \country{Ukraine}}}
 
 \affil[2]{\orgname{Lviv Polytechnic National University}, \orgaddress{\street{12 Stepan Bandera Str.}, \city{Lviv}, \postcode{79013}, \country{Ukraine}}}
 
-\affil[3]{\orgdiv{Department of Accounting}, \orgname{Lviv University of Trade and Economics}, \orgaddress{\street{10 Tuhan-Baranovskyi Str.}, \city{Lviv}, \postcode{79008}, \country{Ukraine}}}
+\affil[3]{\orgdiv{Department of Accounting, Control, Analysis and Taxation}, \orgname{Lviv University of Trade and Economics}, \orgaddress{\street{10 Tuhan-Baranovskyi Str.}, \city{Lviv}, \postcode{79008}, \country{Ukraine}}}
 
-\abstract{Blind people increasingly rely on vision-language models to read signs, product labels and documents aloud, but a model that cannot read a word tends to produce a plausible one instead. We measure how often this happens for Ukrainian (Cyrillic) text with four Claude models of one vendor, and whether it can be detected at run time. Study~1 uses \NImages{} synthetic images in a factorial design that crosses image quality, framing (cropping, finger or glare occlusion) and the type of the distinctive name (real word, invented word, near-word). Study~2 uses \RealNImages{} real images, namely Open Food Facts packaging photographs and official Ukrainian documents, with ground truth independent of the evaluated models. Only \RangeHall\% (Study~1) and \RealRangeHall\% (Study~2) of quoted words were hallucinated. An automated audit confirmed most hallucination labels in Study~1 but only about half in Study~2, where the reference text misses some printed content. The audit-adjusted rates are therefore \SynAdjRange\% and \RealAdjRange\%. Yet \RangeImg\% and \RealRangeImg\% of descriptions contained at least one word labelled as hallucinated, mostly without hedging. In a paired probe on real documents, a printed near-word was reported as the real word it resembles in \RangePrNorm\% of pages. Within the family, the most expensive model was not the most faithful reader. Combining the model's own re-reading, an independent OCR pass and agreement between models detected hallucinated words with an AUROC of \RangeAucComb{} (Study~1) and \RealRangeAucComb{} (Study~2). We report paired tests, run-to-run stability, cost and latency, and an audit of the labeller by two automated raters, and we derive design recommendations for assistive reading applications.}
+\abstract{\textbf{Purpose:} Blind people increasingly rely on vision-language models to read signs, product labels and documents aloud, but a model that cannot read a word tends to produce a plausible one instead. We measure how often this happens for Ukrainian (Cyrillic) text and whether it can be detected at run time.
+
+\textbf{Methods:} Four Claude models of one vendor were evaluated. Study~1 uses \NImages{} synthetic images in a factorial design that crosses image quality, framing (crop, occlusion) and the type of the distinctive name (real word, invented word, near-word). Study~2 uses \RealNImages{} real images, Open Food Facts packaging photographs and official Ukrainian documents, with model-independent ground truth. A paired near-word probe, repeated runs, paired tests and a two-rater automated audit of the labeller complete the design.
+
+\textbf{Results:} Only \RangeHall\% (Study~1) and \RealRangeHall\% (Study~2) of quoted words were hallucinated; after the audit, \SynAdjRange\% and \RealAdjRange\%. Yet \RangeImg\% and \RealRangeImg\% of descriptions contained at least one word labelled as hallucinated, mostly without hedging. On real documents, a printed near-word was reported as the real word it resembles in \RangePrNorm\% of pages. Combining the model's own re-reading, an independent OCR pass and agreement between models detected hallucinated words with an AUROC of \RangeAucComb{} (Study~1) and \RealRangeAucComb{} (Study~2).
+
+\textbf{Conclusion:} Unhedged text-reading hallucinations are rare per word but common per description, and they can be flagged at run time, so assistive reading applications can tell blind users which words to doubt. The findings are scoped to one model family.}
 
 \keywords{blind and visually impaired users, vision-language models, hallucination detection, scene text reading, Cyrillic script, assistive technology}
 

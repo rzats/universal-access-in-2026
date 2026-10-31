@@ -140,7 +140,7 @@ def main():
         b.text(0, 0.5, "\n".join(textwrap.fill(t, 58) for t in txt.split("\n")), fontsize=7.5, va="center", ha="left")
     fig.tight_layout()
     out = os.path.join(ROOT, "paper", "figures", "fig_failures.pdf")
-    fig.savefig(out, dpi=200)
+    fig.savefig(out, dpi=400)
     json.dump([{k: v for k, v in c.items() if k != "img"} for c in cases], open(os.path.join(ROOT, "results", "failure_cases.json"), "w"),
               ensure_ascii=False, indent=1)
     print("cases:", [c["title"] for c in cases])

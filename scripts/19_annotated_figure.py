@@ -126,7 +126,7 @@ def main():
     fig.canvas.draw()
     for at, lines in pending:  # lay out words only after the axes have their final size
         draw_words(at, lines)
-    fig.savefig(os.path.join(ROOT, "paper", "figures", "fig_annotated.pdf"), dpi=200)
+    fig.savefig(os.path.join(ROOT, "paper", "figures", "fig_annotated.pdf"), dpi=400)
     json.dump(summary, open(os.path.join(ROOT, "results", "annotated_cases.json"), "w"), ensure_ascii=False, indent=1)
     for x in summary:
         print(x)

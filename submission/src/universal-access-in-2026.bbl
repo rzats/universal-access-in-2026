@@ -1,0 +1,880 @@
+%% BioMed_Central_Bib_Style_v1.01
+
+\begin{thebibliography}{43}
+% BibTex style file: bmc-mathphys.bst (version 2.1), 2014-07-24
+\ifx \bisbn   \undefined \def \bisbn  #1{ISBN #1}\fi
+\ifx \binits  \undefined \def \binits#1{#1}\fi
+\ifx \bauthor  \undefined \def \bauthor#1{#1}\fi
+\ifx \batitle  \undefined \def \batitle#1{#1}\fi
+\ifx \bjtitle  \undefined \def \bjtitle#1{#1}\fi
+\ifx \bvolume  \undefined \def \bvolume#1{\textbf{#1}}\fi
+\ifx \byear  \undefined \def \byear#1{#1}\fi
+\ifx \bissue  \undefined \def \bissue#1{#1}\fi
+\ifx \bfpage  \undefined \def \bfpage#1{#1}\fi
+\ifx \blpage  \undefined \def \blpage #1{#1}\fi
+\ifx \burl  \undefined \def \burl#1{\textsf{#1}}\fi
+\ifx \doiurl  \undefined \def \doiurl#1{\url{https://doi.org/#1}}\fi
+\ifx \betal  \undefined \def \betal{\textit{et al.}}\fi
+\ifx \binstitute  \undefined \def \binstitute#1{#1}\fi
+\ifx \binstitutionaled  \undefined \def \binstitutionaled#1{#1}\fi
+\ifx \bctitle  \undefined \def \bctitle#1{#1}\fi
+\ifx \beditor  \undefined \def \beditor#1{#1}\fi
+\ifx \bpublisher  \undefined \def \bpublisher#1{#1}\fi
+\ifx \bbtitle  \undefined \def \bbtitle#1{#1}\fi
+\ifx \bedition  \undefined \def \bedition#1{#1}\fi
+\ifx \bseriesno  \undefined \def \bseriesno#1{#1}\fi
+\ifx \blocation  \undefined \def \blocation#1{#1}\fi
+\ifx \bsertitle  \undefined \def \bsertitle#1{#1}\fi
+\ifx \bsnm \undefined \def \bsnm#1{#1}\fi
+\ifx \bsuffix \undefined \def \bsuffix#1{#1}\fi
+\ifx \bparticle \undefined \def \bparticle#1{#1}\fi
+\ifx \barticle \undefined \def \barticle#1{#1}\fi
+\bibcommenthead
+\ifx \bconfdate \undefined \def \bconfdate #1{#1}\fi
+\ifx \botherref \undefined \def \botherref #1{#1}\fi
+\ifx \url \undefined \def \url#1{\textsf{#1}}\fi
+\ifx \bchapter \undefined \def \bchapter#1{#1}\fi
+\ifx \bbook \undefined \def \bbook#1{#1}\fi
+\ifx \bcomment \undefined \def \bcomment#1{#1}\fi
+\ifx \oauthor \undefined \def \oauthor#1{#1}\fi
+\ifx \citeauthoryear \undefined \def \citeauthoryear#1{#1}\fi
+\ifx \endbibitem  \undefined \def \endbibitem {}\fi
+\ifx \bconflocation  \undefined \def \bconflocation#1{#1}\fi
+\ifx \arxivurl  \undefined \def \arxivurl#1{\textsf{#1}}\fi
+\csname PreBibitemsHook\endcsname
+
+%%% 1
+\bibitem[\protect\citeauthoryear{Bigham et~al.}{2010}]{bigham2010vizwiz}
+\begin{bchapter}
+\bauthor{\bsnm{Bigham}, \binits{J.P.}},
+\bauthor{\bsnm{Jayant}, \binits{C.}},
+\bauthor{\bsnm{Ji}, \binits{H.}},
+\bauthor{\bsnm{Little}, \binits{G.}},
+\bauthor{\bsnm{Miller}, \binits{A.}},
+\bauthor{\bsnm{Miller}, \binits{R.C.}},
+\bauthor{\bsnm{Miller}, \binits{R.}},
+\bauthor{\bsnm{Tatarowicz}, \binits{A.}},
+\bauthor{\bsnm{White}, \binits{B.}},
+\bauthor{\bsnm{White}, \binits{S.}},
+\bauthor{\bsnm{Yeh}, \binits{T.}}:
+\bctitle{{VizWiz: Nearly real-time answers to visual questions}}.
+In: \bbtitle{Proceedings of the 23nd Annual ACM Symposium on User Interface
+  Software and Technology},
+pp. \bfpage{333}--\blpage{342}.
+\bpublisher{ACM},
+\blocation{New York, NY, USA}
+(\byear{2010}).
+\doiurl{10.1145/1866029.1866080}
+\end{bchapter}
+\endbibitem
+
+%%% 2
+\bibitem[\protect\citeauthoryear{Brady et~al.}{2013}]{brady2013visual}
+\begin{bchapter}
+\bauthor{\bsnm{Brady}, \binits{E.}},
+\bauthor{\bsnm{Morris}, \binits{M.R.}},
+\bauthor{\bsnm{Zhong}, \binits{Y.}},
+\bauthor{\bsnm{White}, \binits{S.}},
+\bauthor{\bsnm{Bigham}, \binits{J.P.}}:
+\bctitle{{Visual challenges in the everyday lives of blind people}}.
+In: \bbtitle{Proceedings of the SIGCHI Conference on Human Factors in Computing
+  Systems},
+pp. \bfpage{2117}--\blpage{2126}.
+\bpublisher{ACM},
+\blocation{New York, NY, USA}
+(\byear{2013}).
+\doiurl{10.1145/2470654.2481291}
+\end{bchapter}
+\endbibitem
+
+%%% 3
+\bibitem[\protect\citeauthoryear{Gurari et~al.}{2018}]{gurari2018vizwiz}
+\begin{bchapter}
+\bauthor{\bsnm{Gurari}, \binits{D.}},
+\bauthor{\bsnm{Li}, \binits{Q.}},
+\bauthor{\bsnm{Stangl}, \binits{A.J.}},
+\bauthor{\bsnm{Guo}, \binits{A.}},
+\bauthor{\bsnm{Lin}, \binits{C.}},
+\bauthor{\bsnm{Grauman}, \binits{K.}},
+\bauthor{\bsnm{Luo}, \binits{J.}},
+\bauthor{\bsnm{Bigham}, \binits{J.P.}}:
+\bctitle{{VizWiz Grand Challenge: Answering Visual Questions from Blind
+  People}}.
+In: \bbtitle{2018 IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition},
+pp. \bfpage{3608}--\blpage{3617}.
+\bpublisher{IEEE},
+\blocation{Piscataway, NJ, USA}
+(\byear{2018}).
+\doiurl{10.1109/cvpr.2018.00380}
+\end{bchapter}
+\endbibitem
+
+%%% 4
+\bibitem[\protect\citeauthoryear{Granquist
+  et~al.}{2021}]{granquist2021evaluation}
+\begin{barticle}
+\bauthor{\bsnm{Granquist}, \binits{C.}},
+\bauthor{\bsnm{Sun}, \binits{S.Y.}},
+\bauthor{\bsnm{Montezuma}, \binits{S.R.}},
+\bauthor{\bsnm{Tran}, \binits{T.M.}},
+\bauthor{\bsnm{Gage}, \binits{R.}},
+\bauthor{\bsnm{Legge}, \binits{G.E.}}:
+\batitle{{Evaluation and Comparison of Artificial Intelligence Vision Aids:
+  Orcam MyEye 1 and Seeing AI}}.
+\bjtitle{Journal of Visual Impairment \& Blindness}
+\bvolume{115}(\bissue{4}),
+\bfpage{277}--\blpage{285}
+(\byear{2021})
+\doiurl{10.1177/0145482x211027492}
+\end{barticle}
+\endbibitem
+
+%%% 5
+\bibitem[\protect\citeauthoryear{Khan and Khusro}{2021}]{khan2020insight}
+\begin{barticle}
+\bauthor{\bsnm{Khan}, \binits{A.}},
+\bauthor{\bsnm{Khusro}, \binits{S.}}:
+\batitle{{An insight into smartphone-based assistive solutions for visually
+  impaired and blind people: issues, challenges and opportunities}}.
+\bjtitle{Universal Access in the Information Society}
+\bvolume{20}(\bissue{2}),
+\bfpage{265}--\blpage{298}
+(\byear{2021})
+\doiurl{10.1007/s10209-020-00733-8}
+\end{barticle}
+\endbibitem
+
+%%% 6
+\bibitem[\protect\citeauthoryear{{Gonzalez Penuela}
+  et~al.}{2024}]{gonzalezpenuela2024investigating}
+\begin{bchapter}
+\bauthor{\bsnm{{Gonzalez Penuela}}, \binits{R.E.}},
+\bauthor{\bsnm{Collins}, \binits{J.}},
+\bauthor{\bsnm{Bennett}, \binits{C.}},
+\bauthor{\bsnm{Azenkot}, \binits{S.}}:
+\bctitle{{Investigating Use Cases of AI-Powered Scene Description Applications
+  for Blind and Low Vision People}}.
+In: \bbtitle{Proceedings of the CHI Conference on Human Factors in Computing
+  Systems},
+pp. \bfpage{1}--\blpage{21}.
+\bpublisher{ACM},
+\blocation{New York, NY, USA}
+(\byear{2024}).
+\doiurl{10.1145/3613904.3642211}
+\end{bchapter}
+\endbibitem
+
+%%% 7
+\bibitem[\protect\citeauthoryear{Xie et~al.}{2025}]{xie2025beyond}
+\begin{bchapter}
+\bauthor{\bsnm{Xie}, \binits{J.}},
+\bauthor{\bsnm{Yu}, \binits{R.}},
+\bauthor{\bsnm{Zhang}, \binits{H.}},
+\bauthor{\bsnm{Billah}, \binits{S.M.}},
+\bauthor{\bsnm{Lee}, \binits{S.}},
+\bauthor{\bsnm{Carroll}, \binits{J.M.}}:
+\bctitle{{Beyond Visual Perception: Insights from Smartphone Interaction of
+  Visually Impaired Users with Large Multimodal Models}}.
+In: \bbtitle{Proceedings of the 2025 CHI Conference on Human Factors in
+  Computing Systems},
+pp. \bfpage{1}--\blpage{17}.
+\bpublisher{ACM},
+\blocation{New York, NY, USA}
+(\byear{2025}).
+\doiurl{10.1145/3706598.3714210}
+\end{bchapter}
+\endbibitem
+
+%%% 8
+\bibitem[\protect\citeauthoryear{Adnin and Das}{2024}]{adnin2024king}
+\begin{bchapter}
+\bauthor{\bsnm{Adnin}, \binits{R.}},
+\bauthor{\bsnm{Das}, \binits{M.}}:
+\bctitle{{``I look at it as the king of knowledge'': How Blind People Use and
+  Understand Generative AI Tools}}.
+In: \bbtitle{The 26th International ACM SIGACCESS Conference on Computers and
+  Accessibility},
+pp. \bfpage{1}--\blpage{14}.
+\bpublisher{ACM},
+\blocation{New York, NY, USA}
+(\byear{2024}).
+\doiurl{10.1145/3663548.3675631}
+\end{bchapter}
+\endbibitem
+
+%%% 9
+\bibitem[\protect\citeauthoryear{MacLeod
+  et~al.}{2017}]{macleod2017understanding}
+\begin{bchapter}
+\bauthor{\bsnm{MacLeod}, \binits{H.}},
+\bauthor{\bsnm{Bennett}, \binits{C.L.}},
+\bauthor{\bsnm{Morris}, \binits{M.R.}},
+\bauthor{\bsnm{Cutrell}, \binits{E.}}:
+\bctitle{{Understanding Blind People's Experiences with Computer-Generated
+  Captions of Social Media Images}}.
+In: \bbtitle{Proceedings of the 2017 CHI Conference on Human Factors in
+  Computing Systems},
+pp. \bfpage{5988}--\blpage{5999}.
+\bpublisher{ACM},
+\blocation{New York, NY, USA}
+(\byear{2017}).
+\doiurl{10.1145/3025453.3025814}
+\end{bchapter}
+\endbibitem
+
+%%% 10
+\bibitem[\protect\citeauthoryear{Alharbi et~al.}{2024}]{alharbi2024misfitting}
+\begin{bchapter}
+\bauthor{\bsnm{Alharbi}, \binits{R.}},
+\bauthor{\bsnm{Lor}, \binits{P.}},
+\bauthor{\bsnm{Herskovitz}, \binits{J.}},
+\bauthor{\bsnm{Schoenebeck}, \binits{S.}},
+\bauthor{\bsnm{Brewer}, \binits{R.N.}}:
+\bctitle{{Misfitting With AI: How Blind People Verify and Contest AI Errors}}.
+In: \bbtitle{The 26th International ACM SIGACCESS Conference on Computers and
+  Accessibility},
+pp. \bfpage{1}--\blpage{17}.
+\bpublisher{ACM},
+\blocation{New York, NY, USA}
+(\byear{2024}).
+\doiurl{10.1145/3663548.3675659}
+\end{bchapter}
+\endbibitem
+
+%%% 11
+\bibitem[\protect\citeauthoryear{Hong and
+  Kacorri}{2024}]{hong2024understanding}
+\begin{bchapter}
+\bauthor{\bsnm{Hong}, \binits{J.}},
+\bauthor{\bsnm{Kacorri}, \binits{H.}}:
+\bctitle{{Understanding How Blind Users Handle Object Recognition Errors:
+  Strategies and Challenges}}.
+In: \bbtitle{The 26th International ACM SIGACCESS Conference on Computers and
+  Accessibility},
+pp. \bfpage{1}--\blpage{15}.
+\bpublisher{ACM},
+\blocation{New York, NY, USA}
+(\byear{2024}).
+\doiurl{10.1145/3663548.3675635}
+\end{bchapter}
+\endbibitem
+
+%%% 12
+\bibitem[\protect\citeauthoryear{Liu et~al.}{2024}]{liu2024ocrbench}
+\begin{barticle}
+\bauthor{\bsnm{Liu}, \binits{Y.}},
+\bauthor{\bsnm{Li}, \binits{Z.}},
+\bauthor{\bsnm{Huang}, \binits{M.}},
+\bauthor{\bsnm{Yang}, \binits{B.}},
+\bauthor{\bsnm{Yu}, \binits{W.}},
+\bauthor{\bsnm{Li}, \binits{C.}},
+\bauthor{\bsnm{Yin}, \binits{X.-C.}},
+\bauthor{\bsnm{Liu}, \binits{C.-L.}},
+\bauthor{\bsnm{Jin}, \binits{L.}},
+\bauthor{\bsnm{Bai}, \binits{X.}}:
+\batitle{{OCRBench: on the hidden mystery of OCR in large multimodal models}}.
+\bjtitle{Science China Information Sciences}
+\bvolume{67}(\bissue{12}),
+\bfpage{220102}
+(\byear{2024})
+\doiurl{10.1007/s11432-024-4235-6}
+\end{barticle}
+\endbibitem
+
+%%% 13
+\bibitem[\protect\citeauthoryear{Tang et~al.}{2025}]{tang2025mtvqa}
+\begin{bchapter}
+\bauthor{\bsnm{Tang}, \binits{J.}},
+\bauthor{\bsnm{Liu}, \binits{Q.}},
+\bauthor{\bsnm{Ye}, \binits{Y.}},
+\bauthor{\bsnm{Lu}, \binits{J.}},
+\bauthor{\bsnm{Wei}, \binits{S.}},
+\bauthor{\bsnm{Wang}, \binits{A.-L.}},
+\bauthor{\bsnm{Lin}, \binits{C.}},
+\bauthor{\bsnm{Feng}, \binits{H.}},
+\bauthor{\bsnm{Zhao}, \binits{Z.}},
+\bauthor{\bsnm{Wang}, \binits{Y.}},
+\bauthor{\bsnm{Liu}, \binits{Y.}},
+\bauthor{\bsnm{Liu}, \binits{H.}},
+\bauthor{\bsnm{Bai}, \binits{X.}},
+\bauthor{\bsnm{Huang}, \binits{C.}}:
+\bctitle{{MTVQA: Benchmarking Multilingual Text-Centric Visual Question
+  Answering}}.
+In: \bbtitle{Findings of the Association for Computational Linguistics: ACL
+  2025},
+pp. \bfpage{7748}--\blpage{7763}.
+\bpublisher{Association for Computational Linguistics},
+\blocation{Stroudsburg, PA, USA}
+(\byear{2025}).
+\doiurl{10.18653/v1/2025.findings-acl.404}
+\end{bchapter}
+\endbibitem
+
+%%% 14
+\bibitem[\protect\citeauthoryear{Gurari et~al.}{2020}]{gurari2020captioning}
+\begin{bchapter}
+\bauthor{\bsnm{Gurari}, \binits{D.}},
+\bauthor{\bsnm{Zhao}, \binits{Y.}},
+\bauthor{\bsnm{Zhang}, \binits{M.}},
+\bauthor{\bsnm{Bhattacharya}, \binits{N.}}:
+\bctitle{{Captioning Images Taken by People Who Are Blind}}.
+In: \bbtitle{Computer Vision -- ECCV 2020}.
+\bsertitle{Lecture Notes in Computer Science},
+pp. \bfpage{417}--\blpage{434}.
+\bpublisher{Springer},
+\blocation{Cham}
+(\byear{2020}).
+\doiurl{10.1007/978-3-030-58520-4_25}
+\end{bchapter}
+\endbibitem
+
+%%% 15
+\bibitem[\protect\citeauthoryear{Stangl et~al.}{2020}]{stangl2020person}
+\begin{bchapter}
+\bauthor{\bsnm{Stangl}, \binits{A.}},
+\bauthor{\bsnm{Morris}, \binits{M.R.}},
+\bauthor{\bsnm{Gurari}, \binits{D.}}:
+\bctitle{{``Person, Shoes, Tree. Is the Person Naked?'' What People with Vision
+  Impairments Want in Image Descriptions}}.
+In: \bbtitle{Proceedings of the 2020 CHI Conference on Human Factors in
+  Computing Systems},
+pp. \bfpage{1}--\blpage{13}.
+\bpublisher{ACM},
+\blocation{New York, NY, USA}
+(\byear{2020}).
+\doiurl{10.1145/3313831.3376404}
+\end{bchapter}
+\endbibitem
+
+%%% 16
+\bibitem[\protect\citeauthoryear{Zatserkovnyi
+  et~al.}{2021}]{zatserkovnyi2021cv}
+\begin{bchapter}
+\bauthor{\bsnm{Zatserkovnyi}, \binits{R.}},
+\bauthor{\bsnm{Maik}, \binits{V.}},
+\bauthor{\bsnm{Zatserkovna}, \binits{R.}}:
+\bctitle{{Computer vision methods for visually impaired people}}.
+In: \bbtitle{Fifteenth International Conference on Correlation Optics}.
+\bsertitle{Proc. SPIE},
+p. \bfpage{110}
+(\byear{2021}).
+\doiurl{10.1117/12.2617065}
+\end{bchapter}
+\endbibitem
+
+%%% 17
+\bibitem[\protect\citeauthoryear{Rohrbach et~al.}{2018}]{rohrbach2018object}
+\begin{bchapter}
+\bauthor{\bsnm{Rohrbach}, \binits{A.}},
+\bauthor{\bsnm{Hendricks}, \binits{L.A.}},
+\bauthor{\bsnm{Burns}, \binits{K.}},
+\bauthor{\bsnm{Darrell}, \binits{T.}},
+\bauthor{\bsnm{Saenko}, \binits{K.}}:
+\bctitle{{Object Hallucination in Image Captioning}}.
+In: \bbtitle{Proceedings of the 2018 Conference on Empirical Methods in Natural
+  Language Processing},
+pp. \bfpage{4035}--\blpage{4045}.
+\bpublisher{Association for Computational Linguistics},
+\blocation{Stroudsburg, PA, USA}
+(\byear{2018}).
+\doiurl{10.18653/v1/d18-1437}
+\end{bchapter}
+\endbibitem
+
+%%% 18
+\bibitem[\protect\citeauthoryear{Li et~al.}{2023}]{li2023evaluating}
+\begin{bchapter}
+\bauthor{\bsnm{Li}, \binits{Y.}},
+\bauthor{\bsnm{Du}, \binits{Y.}},
+\bauthor{\bsnm{Zhou}, \binits{K.}},
+\bauthor{\bsnm{Wang}, \binits{J.}},
+\bauthor{\bsnm{Zhao}, \binits{X.}},
+\bauthor{\bsnm{Wen}, \binits{J.-R.}}:
+\bctitle{{Evaluating Object Hallucination in Large Vision-Language Models}}.
+In: \bbtitle{Proceedings of the 2023 Conference on Empirical Methods in Natural
+  Language Processing},
+pp. \bfpage{292}--\blpage{305}.
+\bpublisher{Association for Computational Linguistics},
+\blocation{Stroudsburg, PA, USA}
+(\byear{2023}).
+\doiurl{10.18653/v1/2023.emnlp-main.20}
+\end{bchapter}
+\endbibitem
+
+%%% 19
+\bibitem[\protect\citeauthoryear{Guan et~al.}{2024}]{guan2024hallusionbench}
+\begin{bchapter}
+\bauthor{\bsnm{Guan}, \binits{T.}},
+\bauthor{\bsnm{Liu}, \binits{F.}},
+\bauthor{\bsnm{Wu}, \binits{X.}},
+\bauthor{\bsnm{Xian}, \binits{R.}},
+\bauthor{\bsnm{Li}, \binits{Z.}},
+\bauthor{\bsnm{Liu}, \binits{X.}},
+\bauthor{\bsnm{Wang}, \binits{X.}},
+\bauthor{\bsnm{Chen}, \binits{L.}},
+\bauthor{\bsnm{Huang}, \binits{F.}},
+\bauthor{\bsnm{Yacoob}, \binits{Y.}},
+\bauthor{\bsnm{Manocha}, \binits{D.}},
+\bauthor{\bsnm{Zhou}, \binits{T.}}:
+\bctitle{{HallusionBench: An Advanced Diagnostic Suite for Entangled Language
+  Hallucination and Visual Illusion in Large Vision-Language Models}}.
+In: \bbtitle{2024 IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition (CVPR)},
+pp. \bfpage{14375}--\blpage{14385}.
+\bpublisher{IEEE},
+\blocation{Piscataway, NJ, USA}
+(\byear{2024}).
+\doiurl{10.1109/cvpr52733.2024.01363}
+\end{bchapter}
+\endbibitem
+
+%%% 20
+\bibitem[\protect\citeauthoryear{Bai et~al.}{2024}]{bai2024hallucination}
+\begin{botherref}
+\oauthor{\bsnm{Bai}, \binits{Z.}},
+\oauthor{\bsnm{Wang}, \binits{P.}},
+\oauthor{\bsnm{Xiao}, \binits{T.}},
+\oauthor{\bsnm{He}, \binits{T.}},
+\oauthor{\bsnm{Han}, \binits{Z.}},
+\oauthor{\bsnm{Zhang}, \binits{Z.}},
+\oauthor{\bsnm{Shou}, \binits{M.Z.}}:
+{Hallucination of Multimodal Large Language Models: A Survey}.
+arXiv preprint arXiv:2404.18930
+(2024)
+{\href{https://arxiv.org/abs/2404.18930}{{arXiv:2404.18930}}}
+{[cs.CV]}
+\end{botherref}
+\endbibitem
+
+%%% 21
+\bibitem[\protect\citeauthoryear{Liu et~al.}{2024}]{liu2024survey}
+\begin{botherref}
+\oauthor{\bsnm{Liu}, \binits{H.}},
+\oauthor{\bsnm{Xue}, \binits{W.}},
+\oauthor{\bsnm{Chen}, \binits{Y.}},
+\oauthor{\bsnm{Chen}, \binits{D.}},
+\oauthor{\bsnm{Zhao}, \binits{X.}},
+\oauthor{\bsnm{Wang}, \binits{K.}},
+\oauthor{\bsnm{Hou}, \binits{L.}},
+\oauthor{\bsnm{Li}, \binits{R.}},
+\oauthor{\bsnm{Peng}, \binits{W.}}:
+{A Survey on Hallucination in Large Vision-Language Models}.
+arXiv preprint arXiv:2402.00253
+(2024)
+{\href{https://arxiv.org/abs/2402.00253}{{arXiv:2402.00253}}}
+{[cs.CV]}
+\end{botherref}
+\endbibitem
+
+%%% 22
+\bibitem[\protect\citeauthoryear{Zatserkovnyi
+  et~al.}{2025}]{zatserkovnyi2025llm}
+\begin{bchapter}
+\bauthor{\bsnm{Zatserkovnyi}, \binits{R.}},
+\bauthor{\bsnm{Novosad}, \binits{Z.}},
+\bauthor{\bsnm{Zatserkovna}, \binits{R.}}:
+\bctitle{{Large Language Models for Inclusive Image Captioning}}.
+In: \bbtitle{2025 29th International Conference on Information Technology
+  (IT)},
+pp. \bfpage{1}--\blpage{5}.
+\bpublisher{IEEE},
+\blocation{Piscataway, NJ, USA}
+(\byear{2025}).
+\doiurl{10.1109/IT64745.2025.10930278}
+\end{bchapter}
+\endbibitem
+
+%%% 23
+\bibitem[\protect\citeauthoryear{Singh et~al.}{2019}]{singh2019towards}
+\begin{bchapter}
+\bauthor{\bsnm{Singh}, \binits{A.}},
+\bauthor{\bsnm{Natarajan}, \binits{V.}},
+\bauthor{\bsnm{Shah}, \binits{M.}},
+\bauthor{\bsnm{Jiang}, \binits{Y.}},
+\bauthor{\bsnm{Chen}, \binits{X.}},
+\bauthor{\bsnm{Batra}, \binits{D.}},
+\bauthor{\bsnm{Parikh}, \binits{D.}},
+\bauthor{\bsnm{Rohrbach}, \binits{M.}}:
+\bctitle{{Towards VQA Models That Can Read}}.
+In: \bbtitle{2019 IEEE/CVF Conference on Computer Vision and Pattern
+  Recognition (CVPR)},
+pp. \bfpage{8309}--\blpage{8318}.
+\bpublisher{IEEE},
+\blocation{Piscataway, NJ, USA}
+(\byear{2019}).
+\doiurl{10.1109/cvpr.2019.00851}
+\end{bchapter}
+\endbibitem
+
+%%% 24
+\bibitem[\protect\citeauthoryear{Biten et~al.}{2019}]{biten2019scene}
+\begin{bchapter}
+\bauthor{\bsnm{Biten}, \binits{A.F.}},
+\bauthor{\bsnm{Tito}, \binits{R.}},
+\bauthor{\bsnm{Mafla}, \binits{A.}},
+\bauthor{\bsnm{Gomez}, \binits{L.}},
+\bauthor{\bsnm{Rusinol}, \binits{M.}},
+\bauthor{\bsnm{Jawahar}, \binits{C.V.}},
+\bauthor{\bsnm{Valveny}, \binits{E.}},
+\bauthor{\bsnm{Karatzas}, \binits{D.}}:
+\bctitle{{Scene Text Visual Question Answering}}.
+In: \bbtitle{2019 IEEE/CVF International Conference on Computer Vision (ICCV)},
+pp. \bfpage{4290}--\blpage{4300}.
+\bpublisher{IEEE},
+\blocation{Piscataway, NJ, USA}
+(\byear{2019}).
+\doiurl{10.1109/iccv.2019.00439}
+\end{bchapter}
+\endbibitem
+
+%%% 25
+\bibitem[\protect\citeauthoryear{Sidorov et~al.}{2020}]{sidorov2020textcaps}
+\begin{bchapter}
+\bauthor{\bsnm{Sidorov}, \binits{O.}},
+\bauthor{\bsnm{Hu}, \binits{R.}},
+\bauthor{\bsnm{Rohrbach}, \binits{M.}},
+\bauthor{\bsnm{Singh}, \binits{A.}}:
+\bctitle{{TextCaps: A Dataset for Image Captioning with Reading
+  Comprehension}}.
+In: \bbtitle{Computer Vision -- ECCV 2020}.
+\bsertitle{Lecture Notes in Computer Science},
+pp. \bfpage{742}--\blpage{758}.
+\bpublisher{Springer},
+\blocation{Cham}
+(\byear{2020}).
+\doiurl{10.1007/978-3-030-58536-5_44}
+\end{bchapter}
+\endbibitem
+
+%%% 26
+\bibitem[\protect\citeauthoryear{Zatserkovna
+  et~al.}{2026}]{zatserkovna2026packaging}
+\begin{barticle}
+\bauthor{\bsnm{Zatserkovna}, \binits{R.}},
+\bauthor{\bsnm{Zatserkovnyi}, \binits{R.}},
+\bauthor{\bsnm{Havenko}, \binits{S.}}:
+\batitle{{Identifying the impact of visual models on the quality of optical
+  reading of information from food product packaging}}.
+\bjtitle{Eastern-European Journal of Enterprise Technologies}
+\bvolume{4}(\bissue{2(142)}),
+\bfpage{39}--\blpage{47}
+(\byear{2026})
+\doiurl{10.15587/1729-4061.2026.367550}
+\end{barticle}
+\endbibitem
+
+%%% 27
+\bibitem[\protect\citeauthoryear{Cheng et~al.}{2025}]{cheng2024unveiling}
+\begin{bchapter}
+\bauthor{\bsnm{Cheng}, \binits{H.}},
+\bauthor{\bsnm{Xiao}, \binits{E.}},
+\bauthor{\bsnm{Gu}, \binits{J.}},
+\bauthor{\bsnm{Yang}, \binits{L.}},
+\bauthor{\bsnm{Duan}, \binits{J.}},
+\bauthor{\bsnm{Zhang}, \binits{J.}},
+\bauthor{\bsnm{Cao}, \binits{J.}},
+\bauthor{\bsnm{Xu}, \binits{K.}},
+\bauthor{\bsnm{Xu}, \binits{R.}}:
+\bctitle{{Unveiling Typographic Deceptions: Insights of the Typographic
+  Vulnerability in Large Vision-Language Models}}.
+In: \bbtitle{Computer Vision -- ECCV 2024}.
+\bsertitle{Lecture Notes in Computer Science},
+pp. \bfpage{179}--\blpage{196}.
+\bpublisher{Springer},
+\blocation{Cham}
+(\byear{2025}).
+\doiurl{10.1007/978-3-031-73202-7_11}
+\end{bchapter}
+\endbibitem
+
+%%% 28
+\bibitem[\protect\citeauthoryear{He et~al.}{2025}]{he2025seeing}
+\begin{bchapter}
+\bauthor{\bsnm{He}, \binits{Z.}},
+\bauthor{\bsnm{Zhang}, \binits{C.}},
+\bauthor{\bsnm{Wu}, \binits{Z.}},
+\bauthor{\bsnm{Chen}, \binits{Z.}},
+\bauthor{\bsnm{Zhan}, \binits{Y.}},
+\bauthor{\bsnm{Li}, \binits{Y.}},
+\bauthor{\bsnm{Zhang}, \binits{Z.}},
+\bauthor{\bsnm{Wang}, \binits{X.}},
+\bauthor{\bsnm{Qiu}, \binits{M.}}:
+\bctitle{{Seeing is Believing? Mitigating OCR Hallucinations in Multimodal
+  Large Language Models}}.
+In: \bbtitle{Advances in Neural Information Processing Systems 38 (NeurIPS
+  2025)},
+pp. \bfpage{82480}--\blpage{82498}
+(\byear{2025}).
+\doiurl{10.52202/085713-2487}
+\end{bchapter}
+\endbibitem
+
+%%% 29
+\bibitem[\protect\citeauthoryear{Gardella et~al.}{2026}]{gardella2026low}
+\begin{botherref}
+\oauthor{\bsnm{Gardella}, \binits{M.}},
+\oauthor{\bsnm{Mari{\~n}o}, \binits{C.}},
+\oauthor{\bsnm{Belzarena}, \binits{D.}},
+\oauthor{\bsnm{Ram{\'\i}rez}, \binits{I.}},
+\oauthor{\bsnm{Randall}, \binits{G.}},
+\oauthor{\bsnm{Morel}, \binits{J.-M.}}:
+{When Low CER is Not Enough: An Analysis of Hallucinations in Vision-Language
+  OCR Systems on Historical Uruguayan Documents}.
+arXiv preprint arXiv:2607.24077
+(2026)
+{\href{https://arxiv.org/abs/2607.24077}{{arXiv:2607.24077}}}
+{[cs.CV]}
+\end{botherref}
+\endbibitem
+
+%%% 30
+\bibitem[\protect\citeauthoryear{Jaderberg et~al.}{2016}]{jaderberg2016reading}
+\begin{barticle}
+\bauthor{\bsnm{Jaderberg}, \binits{M.}},
+\bauthor{\bsnm{Simonyan}, \binits{K.}},
+\bauthor{\bsnm{Vedaldi}, \binits{A.}},
+\bauthor{\bsnm{Zisserman}, \binits{A.}}:
+\batitle{{Reading Text in the Wild with Convolutional Neural Networks}}.
+\bjtitle{International Journal of Computer Vision}
+\bvolume{116}(\bissue{1}),
+\bfpage{1}--\blpage{20}
+(\byear{2016})
+\doiurl{10.1007/s11263-015-0823-z}
+\end{barticle}
+\endbibitem
+
+%%% 31
+\bibitem[\protect\citeauthoryear{Gupta et~al.}{2016}]{gupta2016synthetic}
+\begin{bchapter}
+\bauthor{\bsnm{Gupta}, \binits{A.}},
+\bauthor{\bsnm{Vedaldi}, \binits{A.}},
+\bauthor{\bsnm{Zisserman}, \binits{A.}}:
+\bctitle{{Synthetic Data for Text Localisation in Natural Images}}.
+In: \bbtitle{2016 IEEE Conference on Computer Vision and Pattern Recognition
+  (CVPR)},
+pp. \bfpage{2315}--\blpage{2324}.
+\bpublisher{IEEE},
+\blocation{Piscataway, NJ, USA}
+(\byear{2016}).
+\doiurl{10.1109/cvpr.2016.254}
+\end{bchapter}
+\endbibitem
+
+%%% 32
+\bibitem[\protect\citeauthoryear{Manakul
+  et~al.}{2023}]{manakul2023selfcheckgpt}
+\begin{bchapter}
+\bauthor{\bsnm{Manakul}, \binits{P.}},
+\bauthor{\bsnm{Liusie}, \binits{A.}},
+\bauthor{\bsnm{Gales}, \binits{M.}}:
+\bctitle{{SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for
+  Generative Large Language Models}}.
+In: \bbtitle{Proceedings of the 2023 Conference on Empirical Methods in Natural
+  Language Processing},
+pp. \bfpage{9004}--\blpage{9017}.
+\bpublisher{Association for Computational Linguistics},
+\blocation{Stroudsburg, PA, USA}
+(\byear{2023}).
+\doiurl{10.18653/v1/2023.emnlp-main.557}
+\end{bchapter}
+\endbibitem
+
+%%% 33
+\bibitem[\protect\citeauthoryear{Kuhn et~al.}{2023}]{kuhn2023semantic}
+\begin{bchapter}
+\bauthor{\bsnm{Kuhn}, \binits{L.}},
+\bauthor{\bsnm{Gal}, \binits{Y.}},
+\bauthor{\bsnm{Farquhar}, \binits{S.}}:
+\bctitle{{Semantic Uncertainty: Linguistic Invariances for Uncertainty
+  Estimation in Natural Language Generation}}.
+In: \bbtitle{The Eleventh International Conference on Learning Representations
+  (ICLR 2023)}
+(\byear{2023})
+\end{bchapter}
+\endbibitem
+
+%%% 34
+\bibitem[\protect\citeauthoryear{Farquhar et~al.}{2024}]{farquhar2024detecting}
+\begin{barticle}
+\bauthor{\bsnm{Farquhar}, \binits{S.}},
+\bauthor{\bsnm{Kossen}, \binits{J.}},
+\bauthor{\bsnm{Kuhn}, \binits{L.}},
+\bauthor{\bsnm{Gal}, \binits{Y.}}:
+\batitle{{Detecting hallucinations in large language models using semantic
+  entropy}}.
+\bjtitle{Nature}
+\bvolume{630}(\bissue{8017}),
+\bfpage{625}--\blpage{630}
+(\byear{2024})
+\doiurl{10.1038/s41586-024-07421-0}
+\end{barticle}
+\endbibitem
+
+%%% 35
+\bibitem[\protect\citeauthoryear{Lin et~al.}{2022}]{lin2022teaching}
+\begin{botherref}
+\oauthor{\bsnm{Lin}, \binits{S.}},
+\oauthor{\bsnm{Hilton}, \binits{J.}},
+\oauthor{\bsnm{Evans}, \binits{O.}}:
+{Teaching Models to Express Their Uncertainty in Words}.
+Transactions on Machine Learning Research
+(2022)
+{\href{https://arxiv.org/abs/2205.14334}{{arXiv:2205.14334}}}
+\end{botherref}
+\endbibitem
+
+%%% 36
+\bibitem[\protect\citeauthoryear{Kadavath et~al.}{2022}]{kadavath2022language}
+\begin{botherref}
+\oauthor{\bsnm{Kadavath}, \binits{S.}},
+\oauthor{\bsnm{Conerly}, \binits{T.}},
+\oauthor{\bsnm{Askell}, \binits{A.}},
+\oauthor{\bsnm{Henighan}, \binits{T.}},
+\oauthor{\bsnm{Drain}, \binits{D.}},
+\oauthor{\bsnm{Perez}, \binits{E.}},
+\oauthor{\bsnm{Schiefer}, \binits{N.}},
+\oauthor{\bsnm{Hatfield-Dodds}, \binits{Z.}},
+\oauthor{\bsnm{DasSarma}, \binits{N.}},
+\oauthor{\bsnm{Tran-Johnson}, \binits{E.}},
+\oauthor{\bsnm{Johnston}, \binits{S.}},
+\oauthor{\bsnm{El-Showk}, \binits{S.}},
+\oauthor{\bsnm{Jones}, \binits{A.}},
+\oauthor{\bsnm{Elhage}, \binits{N.}},
+\oauthor{\bsnm{Hume}, \binits{T.}},
+\oauthor{\bsnm{Chen}, \binits{A.}},
+\oauthor{\bsnm{Bai}, \binits{Y.}},
+\oauthor{\bsnm{Bowman}, \binits{S.}},
+\oauthor{\bsnm{Fort}, \binits{S.}},
+\oauthor{\bsnm{Ganguli}, \binits{D.}},
+\oauthor{\bsnm{Hernandez}, \binits{D.}},
+\oauthor{\bsnm{Jacobson}, \binits{J.}},
+\oauthor{\bsnm{Kernion}, \binits{J.}},
+\oauthor{\bsnm{Kravec}, \binits{S.}},
+\oauthor{\bsnm{Lovitt}, \binits{L.}},
+\oauthor{\bsnm{Ndousse}, \binits{K.}},
+\oauthor{\bsnm{Olsson}, \binits{C.}},
+\oauthor{\bsnm{Ringer}, \binits{S.}},
+\oauthor{\bsnm{Amodei}, \binits{D.}},
+\oauthor{\bsnm{Brown}, \binits{T.}},
+\oauthor{\bsnm{Clark}, \binits{J.}},
+\oauthor{\bsnm{Joseph}, \binits{N.}},
+\oauthor{\bsnm{Mann}, \binits{B.}},
+\oauthor{\bsnm{McCandlish}, \binits{S.}},
+\oauthor{\bsnm{Olah}, \binits{C.}},
+\oauthor{\bsnm{Kaplan}, \binits{J.}}:
+{Language Models (Mostly) Know What They Know}.
+arXiv preprint arXiv:2207.05221
+(2022)
+{\href{https://arxiv.org/abs/2207.05221}{{arXiv:2207.05221}}}
+{[cs.CL]}
+\end{botherref}
+\endbibitem
+
+%%% 37
+\bibitem[\protect\citeauthoryear{Xiong et~al.}{2024}]{xiong2023can}
+\begin{bchapter}
+\bauthor{\bsnm{Xiong}, \binits{M.}},
+\bauthor{\bsnm{Hu}, \binits{Z.}},
+\bauthor{\bsnm{Lu}, \binits{X.}},
+\bauthor{\bsnm{Li}, \binits{Y.}},
+\bauthor{\bsnm{Fu}, \binits{J.}},
+\bauthor{\bsnm{He}, \binits{J.}},
+\bauthor{\bsnm{Hooi}, \binits{B.}}:
+\bctitle{{Can LLMs Express Their Uncertainty? An Empirical Evaluation of
+  Confidence Elicitation in LLMs}}.
+In: \bbtitle{The Twelfth International Conference on Learning Representations
+  (ICLR 2024)}
+(\byear{2024})
+\end{bchapter}
+\endbibitem
+
+%%% 38
+\bibitem[\protect\citeauthoryear{Yona et~al.}{2024}]{yona2024can}
+\begin{bchapter}
+\bauthor{\bsnm{Yona}, \binits{G.}},
+\bauthor{\bsnm{Aharoni}, \binits{R.}},
+\bauthor{\bsnm{Geva}, \binits{M.}}:
+\bctitle{{Can Large Language Models Faithfully Express Their Intrinsic
+  Uncertainty in Words?}}
+In: \bbtitle{Proceedings of the 2024 Conference on Empirical Methods in Natural
+  Language Processing},
+pp. \bfpage{7752}--\blpage{7764}.
+\bpublisher{Association for Computational Linguistics},
+\blocation{Stroudsburg, PA, USA}
+(\byear{2024}).
+\doiurl{10.18653/v1/2024.emnlp-main.443}
+\end{bchapter}
+\endbibitem
+
+%%% 39
+\bibitem[\protect\citeauthoryear{Smith}{2007}]{smith2007overview}
+\begin{bchapter}
+\bauthor{\bsnm{Smith}, \binits{R.}}:
+\bctitle{{An Overview of the Tesseract OCR Engine}}.
+In: \bbtitle{Ninth International Conference on Document Analysis and
+  Recognition (ICDAR 2007) Vol 2},
+pp. \bfpage{629}--\blpage{633}.
+\bpublisher{IEEE},
+\blocation{Piscataway, NJ, USA}
+(\byear{2007}).
+\doiurl{10.1109/icdar.2007.4376991}
+\end{bchapter}
+\endbibitem
+
+%%% 40
+\bibitem[\protect\citeauthoryear{Cohen}{1960}]{cohen1960coefficient}
+\begin{barticle}
+\bauthor{\bsnm{Cohen}, \binits{J.}}:
+\batitle{{A Coefficient of Agreement for Nominal Scales}}.
+\bjtitle{Educational and Psychological Measurement}
+\bvolume{20}(\bissue{1}),
+\bfpage{37}--\blpage{46}
+(\byear{1960})
+\doiurl{10.1177/001316446002000104}
+\end{barticle}
+\endbibitem
+
+%%% 41
+\bibitem[\protect\citeauthoryear{Hanley and McNeil}{1982}]{hanley1982meaning}
+\begin{barticle}
+\bauthor{\bsnm{Hanley}, \binits{J.A.}},
+\bauthor{\bsnm{McNeil}, \binits{B.J.}}:
+\batitle{{The meaning and use of the area under a receiver operating
+  characteristic (ROC) curve}}.
+\bjtitle{Radiology}
+\bvolume{143}(\bissue{1}),
+\bfpage{29}--\blpage{36}
+(\byear{1982})
+\doiurl{10.1148/radiology.143.1.7063747}
+\end{barticle}
+\endbibitem
+
+%%% 42
+\bibitem[\protect\citeauthoryear{Wilson}{1927}]{wilson1927probable}
+\begin{barticle}
+\bauthor{\bsnm{Wilson}, \binits{E.B.}}:
+\batitle{{Probable Inference, the Law of Succession, and Statistical
+  Inference}}.
+\bjtitle{Journal of the American Statistical Association}
+\bvolume{22}(\bissue{158}),
+\bfpage{209}--\blpage{212}
+(\byear{1927})
+\doiurl{10.1080/01621459.1927.10502953}
+\end{barticle}
+\endbibitem
+
+%%% 43
+\bibitem[\protect\citeauthoryear{Efron}{1979}]{efron1979bootstrap}
+\begin{barticle}
+\bauthor{\bsnm{Efron}, \binits{B.}}:
+\batitle{{Bootstrap Methods: Another Look at the Jackknife}}.
+\bjtitle{The Annals of Statistics}
+\bvolume{7}(\bissue{1}),
+\bfpage{1}--\blpage{26}
+(\byear{1979})
+\doiurl{10.1214/aos/1176344552}
+\end{barticle}
+\endbibitem
+
+\end{thebibliography}
