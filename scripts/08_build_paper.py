@@ -286,9 +286,22 @@ def table_breakdown():
     return "\n".join(rows[:-1])
 
 
+def table_audit():
+    rows = []
+    for ds, nm in [("synthetic", "1"), ("real", "2")]:
+        a = AUD[ds]
+        for k, lab in [("correct", "correct"), ("completion", "completion"), ("misread", "misread"), ("fabricated", "fabricated"), ("hallucination", "misread + fabricated")]:
+            cell = lambda r: f"{pc(r['p'], 0)}\\% ({r['n']})" if r["p"] is not None else "--"
+            rows.append(f"{nm} & {lab} & {cell(a['claude'][k])} & {cell(a['gemma'][k])} & {cell(a['resolved'][k])} \\\\")
+        rows.append(f"{nm} & $\\kappa$ (items) & \\multicolumn{{3}}{{c}}{{{a['kappa']:.2f} ({a['n_both']})}} \\\\")
+        if ds == "synthetic":
+            rows.append("\\midrule")
+    return "\n".join(rows)
+
+
 TABLES = {"rates": lambda: table_rates(SYN), "realrates": lambda: table_rates(REAL), "detect": lambda: table_detect(SYN),
           "realdetect": lambda: table_detect(REAL), "pairs": table_pairs, "cost": table_cost, "stab": table_stab,
-          "breakdown": table_breakdown}
+          "breakdown": table_breakdown, "audit": table_audit}
 
 
 def p3(p):

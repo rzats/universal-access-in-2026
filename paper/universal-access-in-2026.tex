@@ -206,11 +206,18 @@
 \newcommand{\RealAucCombCIOpus}{0.867 [0.837, 0.905]}
 \newcommand{\RealAucCombCISonnet}{0.863 [0.825, 0.899]}
 \newcommand{\RealAudComplCl}{83}
+\newcommand{\RealAudComplGm}{4}
 \newcommand{\RealAudCorrCl}{97}
+\newcommand{\RealAudCorrGm}{95}
 \newcommand{\RealAudFabCl}{54}
+\newcommand{\RealAudFabGm}{77}
+\newcommand{\RealAudHall}{40}
 \newcommand{\RealAudHallCl}{56}
+\newcommand{\RealAudKappa}{0.12}
 \newcommand{\RealAudMisCl}{58}
+\newcommand{\RealAudMisGm}{29}
 \newcommand{\RealAudN}{239}
+\newcommand{\RealAudNBoth}{199}
 \newcommand{\RealCHaikuSevereCleanTok}{[3.7, 20.0]}
 \newcommand{\RealCOpusPackagingDocumentP}{0.044}
 \newcommand{\RealCOpusPackagingDocumentTok}{[3.2, 6.1]}
@@ -284,19 +291,19 @@
 \newcommand{\SubUaOpus}{17}
 \newcommand{\SubUaSonnet}{16}
 \newcommand{\SynAdjRange}{2.5--3.6}
-\newcommand{\SynAudAgree}{54}
 \newcommand{\SynAudComplCl}{99}
+\newcommand{\SynAudComplGm}{15}
 \newcommand{\SynAudCorrCl}{98}
-\newcommand{\SynAudCorrGm}{98}
+\newcommand{\SynAudCorrGm}{94}
 \newcommand{\SynAudFabCl}{84}
-\newcommand{\SynAudHall}{73}
-\newcommand{\SynAudHallCI}{66--78}
+\newcommand{\SynAudFabGm}{91}
+\newcommand{\SynAudHall}{45}
 \newcommand{\SynAudHallCl}{88}
-\newcommand{\SynAudKappa}{0.22}
+\newcommand{\SynAudKappa}{0.17}
 \newcommand{\SynAudMisCl}{93}
 \newcommand{\SynAudMisGm}{13}
 \newcommand{\SynAudN}{397}
-\newcommand{\SynAudNBoth}{162}
+\newcommand{\SynAudNBoth}{397}
 \newcommand{\SynCFableOcclusionNoneP}{0.350}
 \newcommand{\SynCFableSevereCleanImg}{71\% vs 32\%}
 \newcommand{\SynCHaikuBlurCleanTok}{[-1.3, 0.1]}
@@ -438,7 +445,7 @@ All Study~2 stimuli are photographs or renderings of real Ukrainian objects and 
 
 \paragraph{Ground-truth categories.} Every ground-truth token is categorised as \emph{digits}, a \emph{common word} (present in a 290-thousand-word Ukrainian frequency list derived from OpenSubtitles\footnote{\url{https://github.com/hermitdave/FrequencyWords} (2018 release, CC BY-SA 4.0).}), or a \emph{name or rare word} (absent from it: brands, surnames, place names, technical terms). The benchmark contains \RealNImages{} images with \RealNGTTokens{} ground-truth tokens, of which \RealNGTNotVisible{} are not fully visible. Figure~\ref{fig:examples} shows examples.
 
-\begin{figure}[!htbp]
+\begin{figure}[!tbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_examples.pdf}
 \caption{Example Study~2 stimuli: real Ukrainian packaging photographs (Open Food Facts, top row) and official documents (bottom row) under different quality and framing conditions. The ground truth records every character and whether it is visible in the final frame. The benchmark also contains finger occlusions (23 of the 176 images), which are not shown here.}\label{fig:examples}
@@ -495,7 +502,7 @@ All statements below concern four models of one vendor. Model-versus-model and c
 
 Table~\ref{tab:rates} summarises the outcomes over all \NImages{} synthetic images. Measured per quoted word, hallucination is rare: \HallPHaikuDesc\% of the words Haiku quotes in its descriptions are misread or fabricated, \HallPSonnetDesc\% for Sonnet, \HallPOpusDesc\% for Opus and \HallPFableDesc\% for Fable. Measured per response, which is what a blind user experiences, it is common. A description contains at least one hallucinated word in \ImgPHaikuDesc\% (Haiku), \ImgPSonnetDesc\% (Sonnet), \ImgPOpusDesc\% (Opus) and \ImgPFableDesc\% (Fable) of the images. Within this model family, the most expensive model is not the most faithful reader. Fable produces a hallucinated word in more descriptions than Sonnet (Holm-corrected McNemar $p=\SynPairSonnetFableP$) and Opus ($p=\SynPairOpusFableP$), and Haiku in more than Sonnet ($p=\SynPairHaikuSonnetP$). The other pairs do not differ reliably (Table~\ref{tab:pairs}). In \RangeImgUnh\% of the images, at least one hallucinated word is stated without any hedging in its sentence, so the listener has no cue to doubt it. Hallucination is not confined to degraded images: even for clean, fully framed images, \ImgCleanFullHaiku\% (Haiku), \ImgCleanFullSonnet\% (Sonnet) and \ImgCleanFullOpus\% (Opus) of the descriptions contain a hallucinated word. At least one wrong digit group, which can affect dates, doses, prices, phone or account numbers, appears in \ImgDigitHaiku\%, \ImgDigitSonnet\% and \ImgDigitOpus\% of the descriptions. Reading coverage is high: the models quote \RangeCov\% of the visible ground-truth words.
 
-\begin{table}[!htbp]
+\begin{table}[!tbp]
 \caption{Study~1 (synthetic, \NImages{} images): text-reading outcomes per model and prompt. Token rates are percentages of all quoted (description) or transcribed (transcription) tokens; brackets give Wilson 95\% intervals. ``Responses'' is the percentage of images whose response contains at least one hallucinated (misread or fabricated) token. Coverage is the percentage of visible ground-truth tokens that the response reads correctly.}\label{tab:rates}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -528,7 +535,7 @@ Table~\ref{tab:detect} reports how well each run-time signal separates hallucina
 
 The signals are complementary. The cross-validated combination reaches AUROC \AucCombCIHaiku{} for Haiku, \AucCombCISonnet{} for Sonnet and \AucCombCIOpus{} for Opus, against base rates of \BaseHaiku\%, \BaseSonnet\% and \BaseOpus\%. At a false-flag rate of 10\% on correct words, it catches \RecTenHaiku\%, \RecTenSonnet\% and \RecTenOpus\% of hallucinated words. A training-free rule flags a quoted word when the model's own re-reading lacks it, or when neither OCR nor a majority of the other models confirms it. It catches \RuleRecHaiku\%, \RuleRecSonnet\% and \RuleRecOpus\% of hallucinated words while flagging \RuleFfHaiku\%, \RuleFfSonnet\% and \RuleFfOpus\% of correct ones. The re-reading comparison alone catches \RangeRereadRec\%.
 
-\begin{table}[!htbp]
+\begin{table}[!tbp]
 \caption{Study~1: detection of hallucinated words in descriptions. AUROC with cluster-bootstrap 95\% intervals (resampling images). The combined model is a class-balanced logistic regression over all signals plus token length and digit status, scored by five-fold cross-validation grouped by image. The rule row gives recall / false-flag rate.}\label{tab:detect}
 \footnotesize
 \begin{tabular*}{\textwidth}{@{\extracolsep\fill}lccc}
@@ -557,31 +564,31 @@ Tokens (hallucinated) & 10{,}823 (408) & 11{,}458 (323) & 12{,}146 (386) \\
 
 Table~\ref{tab:realrates} gives the outcomes on the \RealNImages{} real images. Per quoted word, the descriptions are hallucinated at \RealHallPHaikuDesc\% (Haiku), \RealHallPSonnetDesc\% (Sonnet), \RealHallPOpusDesc\% (Opus) and \RealHallPFableDesc\% (Fable). This is higher than in Study~1, and the response-level rates are much higher (\RealImgPHaikuDesc\%, \RealImgPSonnetDesc\%, \RealImgPOpusDesc\% and \RealImgPFableDesc\%), because a real ingredient panel or form page carries about six times as many words as a synthetic stimulus (Section~\ref{sec:setcompare}). Coverage is lower (\RealRangeCov\%): descriptions of dense documents summarise rather than read everything. The model ordering is consistent with Study~1. Fable has a hallucinated word in more descriptions than Haiku (Holm $p=\RealPairHaikuFableP$), Sonnet ($p=\RealPairSonnetFableP$) and Opus ($p=\RealPairOpusFableP$), and per quoted word Haiku is above Sonnet (difference \RealPairHaikuSonnetTok{} percentage points). Packaging photographs are harder than documents for every model (token-rate difference for Opus \RealCOpusPackagingDocumentTok{} percentage points, Holm $p=\RealCOpusPackagingDocumentP$ on the image level). Severe degradation raises the per-word rate (Haiku \RealCHaikuSevereCleanTok, Sonnet \RealCSonnetSevereCleanTok, Opus \RealCOpusSevereCleanTok{} percentage points). The response-level rate, however, does not rise (all Holm $p\ge 0.7$), because the models quote far less text from severely degraded images. Words absent from the frequency list (names, brands and technical terms) are hallucinated at \RealRangeNameHall\%, against \RealRangeWordHall\% for common words and \RealRangeNumHall\% for digits (Figure~\ref{fig:categories_real}). Figure~\ref{fig:cells_real} shows the response-level rates per quality and framing cell, and Figure~\ref{fig:taxonomy_real} the error taxonomy per model and genre. Figure~\ref{fig:sources} breaks the real material down by source. Front-of-pack photographs, dominated by brand names in decorative type, have by far the highest labelled rate. Part of this is a reference effect, because the OCR reference itself struggles with decorative type (Section~\ref{sec:audit_res}). Among documents, bills and medical forms, with their dense numbers and abbreviations, are harder than plain notices, education documents and book annotations. On packaging, misreadings other than digits and Ukrainian letters and outright fabrications dominate. Completions are most frequent for Fable.
 
-\begin{figure}[!htbp]
+\begin{figure}[!tbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_sources.pdf}
 \caption{Study~2: token-level hallucination rate of descriptions by source category, per model, with Wilson 95\% intervals; $n$ is the number of images per category. Rates are before the audit adjustment.}\label{fig:sources}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[!tbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_cells_real.pdf}
 \caption{Study~2 (real images): share of description responses containing at least one hallucinated word, by image quality (x-axis) and framing (panels). Error bars are Wilson 95\% intervals; each bar is based on 19 or 20 images, so the intervals are wide and no cell contrast survives Holm correction (Section~\ref{sec:real}).}\label{fig:cells_real}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[!tbp]
 \centering
 \includegraphics[width=0.72\textwidth]{figures/fig_categories_real.pdf}
 \caption{Study~2: share of quoted words that are hallucinated, by the category of the ground-truth word they correspond to (description prompt). Error bars are Wilson 95\% intervals.}\label{fig:categories_real}
 \end{figure}
 
-\begin{figure}[!htbp]
+\begin{figure}[!tbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_taxonomy_real.pdf}
 \caption{Study~2: error taxonomy per model and genre, as a share of all quoted words in descriptions. ``Ukrainian letter'' marks substitutions of \foreignlanguage{ukrainian}{і, ї, є, ґ} by spellings shared with Russian; ``lexicalised'' marks a rare printed word reported as a common one. Rates are before the audit adjustment of Section~\ref{sec:audit_res}.}\label{fig:taxonomy_real}
 \end{figure}
 
-\begin{table}[!htbp]
+\begin{table}[!tbp]
 \caption{Study~2 (real packaging and documents, \RealNImages{} images): text-reading outcomes per model and prompt; columns as in Table~\ref{tab:rates}.}\label{tab:realrates}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -602,19 +609,19 @@ Fable 5.1 & description & 10{,}611 & 5.58 [5.16{,} 6.03] & 3.68 & 1.90 & 2.23 & 
 
 Detection transfers to real images with lower but still useful performance (Table~\ref{tab:realdetect}). The combined detector reaches AUROC \RealAucCombCIHaiku{} (Haiku), \RealAucCombCISonnet{} (Sonnet) and \RealAucCombCIOpus{} (Opus). At a 10\% false-flag rate it catches \RealRecTenHaiku\%, \RealRecTenSonnet\% and \RealRecTenOpus\% of hallucinated words. Cross-model agreement and OCR similarity remain the strongest single signals (Figure~\ref{fig:roc_real}).
 
-\begin{figure}[!htbp]
+\begin{figure}[!tbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_roc_real.pdf}
 \caption{Study~2: ROC curves of the individual run-time signals for words quoted in descriptions of real images, per model. The legend gives each signal's AUROC.}\label{fig:roc_real}
 \end{figure} Figure~\ref{fig:annotated} shows whole descriptions of two real images with every quoted word marked by its label. It illustrates both the errors the benchmark is designed to catch and the main weakness of the Study~2 reference. On the yoghurt label, a surname split across a line break is quoted as one corrected word and counted as a misreading. The other ``hallucinations'' are a barcode digit run, a stamp code and a superscript exponent, which are printed but missing from the OCR reference. On the employment-centre form, the abbreviation \foreignlanguage{ukrainian}{«МП»} (seal place) is quoted as the expanded phrase \foreignlanguage{ukrainian}{«місце печатки»}, which is not printed. The run-time rule flags these words but also some correct ones. Figure~\ref{fig:failures} shows four further characteristic failures from the real-image runs.
 
-\begin{figure}[!htbp]
+\begin{figure}[!tbp]
 \centering
 \includegraphics[width=0.95\textwidth]{figures/fig_annotated.pdf}
 \caption{Two real stimuli with the quoted text of one model's description. Every quoted word is coloured by the deterministic label. Words labelled as hallucinated were additionally checked by the Claude audit rater: red where the rater confirms that the word is not printed, amber where it judges the word to be printed (a reference gap, e.g. a barcode or a stamp code missing from the OCR reference). A dagger marks words flagged by the training-free run-time rule. The two cases were selected for illustration; the rater verdicts are listed in the repository.}\label{fig:annotated}
 \end{figure}
 
-\begin{table}[!htbp]
+\begin{table}[!tbp]
 \caption{Study~2: detection of hallucinated words in descriptions of real images; layout as in Table~\ref{tab:detect}.}\label{tab:realdetect}
 \footnotesize
 \begin{tabular*}{\textwidth}{@{\extracolsep\fill}lccc}
@@ -639,7 +646,7 @@ Tokens (hallucinated) & 8{,}428 (461) & 10{,}667 (417) & 11{,}363 (486) \\
 \end{tabular*}
 \end{table}
 
-\begin{figure}[!htbp]
+\begin{figure}[!tbp]
 \centering
 \includegraphics[width=0.92\textwidth]{figures/fig_failures.pdf}
 \caption{Failure cases from the real-image runs: crop of the stimulus around the token, printed text and quoted text. Top to bottom: a near-word on an edited medicine leaflet (probe, clean) reported as the real word; the Ukrainian spelling of a drug name (\foreignlanguage{ukrainian}{цефдініру}, leaflet of 3-Dinir, blur with glare) quoted in its Russian-like form; a word cut off by the frame edge (packaging, severe, crop) quoted in full; a fat content of ``12,0\% on an ice-cream label quoted as ``12,5\% (packaging, blur with glare). Cases were drawn with a fixed seed among Sonnet, Opus and Fable descriptions.}\label{fig:failures}
@@ -649,7 +656,7 @@ Tokens (hallucinated) & 8{,}428 (461) & 10{,}667 (417) & 11{,}363 (486) \\
 
 On the \NProbePairs{} probe pairs, the four models quote the unedited real word correctly on \RangePrOrig\% of the original pages. On the edited pages they quote the printed near-word on only \RangePrNear\%, and on \RangePrNorm\% they quote the real word instead (Haiku \PrNormHaiku\%, Sonnet \PrNormSonnet\%, Opus \PrNormOpus\%, Fable \PrNormFable\%). For every model, the drop from reading the original correctly to reading the near-word correctly is significant (exact McNemar on the pairs: Haiku $p\PrPHaiku$, Sonnet $p\PrPSonnet$, Opus $p\PrPOpus$, Fable $p\PrPFable$). The edit is clearly visible at the probe's resolution (the target letters are at least 11~px high). Prior-driven normalisation is therefore not an artefact of synthetic rendering: on real official documents, the models report the word they expect (Figure~\ref{fig:probe}).
 
-\begin{figure}[!htbp]
+\begin{figure}[!tbp]
 \centering
 \includegraphics[width=\textwidth]{figures/fig_probe.pdf}
 \caption{Near-word probe on real documents. Left: two of the \NProbePairs{} pairs (crop around the target on the original and the edited page, clean condition), drawn with a fixed seed among pages where at least three models reported the real word. Right: what each model's description quoted for the target on the edited pages, and how often it read the target correctly on the unedited original (diamonds).}\label{fig:probe}
@@ -663,7 +670,7 @@ The two sets differ in ways that matter for interpretation. Real stimuli carry \
 
 The description prompt was run three times on \StabN{} Study~1 images, one per design cell (Table~\ref{tab:stab}). The image-level outcome (any hallucinated word) changes between runs for \StabFlipRange\% of the images. The token-level rate varies by at most \StabSpreadMax{} percentage points between runs. Point estimates of individual responses are therefore noisy, while the aggregate rates are stable. Disagreement between a model's own samples is a usable detector in its own right (AUROC \StabDisAucRange{} on this subset). This is comparable to, and for some models slightly above, the model's re-reading under the transcription prompt on the full set.
 
-\begin{table}[!htbp]
+\begin{table}[!tbp]
 \caption{Run-to-run stability of the description prompt on \StabN{} Study~1 images (one per design cell), three runs per model. ``Flip'' is the share of images whose image-level outcome (any hallucinated word) is not the same in all three runs, with a Wilson 95\% interval. ``Disagr.'' is the AUROC of sample disagreement as a detector of hallucinated words in run~1.}\label{tab:stab}
 \footnotesize
 \begin{tabular*}{\textwidth}{@{\extracolsep\fill}lrlllrr}
@@ -680,13 +687,37 @@ Fable 5.1 & 81 & 38 / 40 / 48 & 25 [17, 35] & 3.25 / 3.52 / 4.53 & 1.28 & 0.77 \
 
 \subsection{Automated audit of the labeller}\label{sec:audit_res}
 
-On the Study~1 sample, the Claude rater confirms \SynAudCorrCl\% of correct labels, \SynAudMisCl\% of misreadings, \SynAudFabCl\% of fabrications and \SynAudComplCl\% of completions. On the Study~2 sample the corresponding figures are \RealAudCorrCl\%, \RealAudMisCl\%, \RealAudFabCl\% and \RealAudComplCl\%. Gemma~3 12B rated \SynAudNBoth{} of the Study~1 items before its server became unavailable. It confirms correct labels at a similar rate (\SynAudCorrGm\%) but judges most misread words to be printed as they were quoted (\SynAudMisGm\% confirmed). Inspection of its reasons shows that it does not resolve single-letter differences in Ukrainian words. Agreement between the raters on the printed-and-visible question is accordingly low (Cohen's $\kappa=\SynAudKappa$ on \SynAudNBoth{} items, raw agreement \SynAudAgree\%). Under the conservative resolution rule, \SynAudHall\% (\SynAudHallCI\%) of the Study~1 hallucination labels are confirmed. The Claude rater alone confirms \SynAudHallCl\%. For Study~2 the Claude rater confirms \RealAudHallCl\% of hallucination labels. The difference reflects reference gaps on real material, e.g., logos and stamps that are drawn as images rather than text and words that the reference OCR missed. Reported hallucination rates should therefore be read as upper bounds. Scaling the token-level rates of the descriptions by the Claude rater's confirmation rate gives audit-adjusted rates of \SynAdjRange\% for Study~1 and \RealAdjRange\% for Study~2. The large correction on real material is the main caveat on the Study~2 numbers. Gemma~3 was not available for the Study~2 sample, so these items have a single rater. One rater is a member of the evaluated family, and the other rater's own reading of Ukrainian is the bottleneck, so neither replaces a human validation.
+Table~\ref{tab:audit} gives each rater's confirmation rate per label. The Claude rater confirms \SynAudCorrCl\% of correct labels, \SynAudMisCl\% of misreadings, \SynAudFabCl\% of fabrications and \SynAudComplCl\% of completions on the Study~1 sample, and \RealAudCorrCl\%, \RealAudMisCl\%, \RealAudFabCl\% and \RealAudComplCl\% on the Study~2 sample. Gemma~3 12B agrees on correct labels (\SynAudCorrGm\% and \RealAudCorrGm\%) and on fabrications (\SynAudFabGm\% and \RealAudFabGm\%). It rejects most misreadings (\SynAudMisGm\% and \RealAudMisGm\% confirmed) and most completions (\SynAudComplGm\% and \RealAudComplGm\%). Its stated reasons show why: it does not resolve single-letter differences in Ukrainian words, and it treats a word as visible when only part of it is. Agreement between the raters on the printed-and-visible question is therefore low (Cohen's $\kappa=\SynAudKappa$ on \SynAudNBoth{} Study~1 items and $\kappa=\RealAudKappa$ on \RealAudNBoth{} Study~2 items). Under the conservative rule, which requires both raters to confirm, \SynAudHall\% of the Study~1 and \RealAudHall\% of the Study~2 hallucination labels are confirmed. This is a lower bound, dominated by the open rater's blindness to single-letter changes. The Claude rater alone confirms \SynAudHallCl\% and \RealAudHallCl\%. On real material the unconfirmed labels mostly reflect reference gaps, such as logos and stamps drawn as images rather than text and words that the reference OCR missed. Reported hallucination rates should therefore be read as upper bounds. Scaling the token-level rates of the descriptions by the Claude rater's confirmation rate gives audit-adjusted rates of \SynAdjRange\% for Study~1 and \RealAdjRange\% for Study~2. The large correction on real material is the main caveat on the Study~2 numbers. One rater is a member of the evaluated family, and the other rater's own reading of Ukrainian is the bottleneck, so neither replaces a human validation.
+
+\begin{table}[!tbp]
+\caption{Automated audit of the labeller: share of sampled description tokens whose label each rater confirms (printed-and-visible judgement), per study and label, with the number of rated items. ``Both'' applies the conservative rule (confirmed only if every rater that rated the item confirms it). $\kappa$ is Cohen's kappa between the raters on items rated by both.}\label{tab:audit}
+\footnotesize
+\begin{tabular*}{\textwidth}{@{\extracolsep\fill}llrrr}
+\toprule
+Study & Label & Claude Sonnet 5.5 & Gemma 3 12B & Both \\
+\midrule
+1 & correct & 98\% (100) & 94\% (100) & 92\% (100) \\
+1 & completion & 99\% (100) & 15\% (100) & 15\% (100) \\
+1 & misread & 93\% (100) & 13\% (100) & 12\% (100) \\
+1 & fabricated & 84\% (97) & 91\% (97) & 79\% (97) \\
+1 & misread + fabricated & 88\% (197) & 51\% (197) & 45\% (197) \\
+1 & $\kappa$ (items) & \multicolumn{3}{c}{0.17 (397)} \\
+\midrule
+2 & correct & 97\% (60) & 95\% (60) & 93\% (60) \\
+2 & completion & 83\% (60) & 4\% (50) & 18\% (60) \\
+2 & misread & 58\% (60) & 29\% (45) & 32\% (60) \\
+2 & fabricated & 54\% (59) & 77\% (44) & 47\% (59) \\
+2 & misread + fabricated & 56\% (119) & 53\% (89) & 40\% (119) \\
+2 & $\kappa$ (items) & \multicolumn{3}{c}{0.12 (199)} \\
+\botrule
+\end{tabular*}
+\end{table}
 
 \subsection{Cost and latency}\label{sec:cost}
 
 Table~\ref{tab:cost} reports tokens, list-price cost and wall-clock time per image. All values were measured through the same command-line client, from the same machine and on the same days, so they are comparable across the four models but include client overhead and network time. On real images, a Haiku description costs \RealCostHaikuDesc{}~USD and takes about \RealCostHaikuDescSec{}~s. The re-reading call that the strongest single-model detector needs (a transcription by the same model) adds \RealCostHaikuTrans{}~USD and \RealCostHaikuTransSec{}~s for Haiku, and \RealCostOpusTrans{}~USD and \RealCostOpusTransSec{}~s for Opus. The cross-model signal requires two further descriptions, i.e., at least two to three times the cost and latency of a single description.
 
-\begin{table}[!htbp]
+\begin{table}[!tbp]
 \caption{Cost and latency per image and call, by study, model and prompt: mean input tokens (including cached system-prompt tokens), mean output tokens, mean list-price cost in USD, and median (90th percentile) wall-clock seconds. All calls used the same command-line client path.}\label{tab:cost}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -896,6 +927,7 @@ Study & Factor & Level & Haiku 5.5 & Sonnet 5.5 & Opus 5.5 & Fable 5.1 \\
 \end{tabular*}
 \end{table}
 
+\FloatBarrier
 \end{appendices}
 
 \bibliography{refs}
