@@ -61,6 +61,8 @@
 \usepackage[ukrainian,english]{babel}%
 \usepackage{url}%
 \usepackage{placeins}%
+% ORCID iD link without the EPS logo shipped with sn-jnl (not available under XeTeX)
+\definecolor{orcidgreen}{HTML}{A6CE39}\gdef\orcidlogo{\textsuperscript{\textcolor{orcidgreen}{\sffamily\bfseries iD}}}%
 \usepackage{needspace}%
 % float placement: allow several floats per text page and avoid sparse float-only pages
 \renewcommand{\topfraction}{0.9}\renewcommand{\bottomfraction}{0.8}\renewcommand{\textfraction}{0.08}\renewcommand{\floatpagefraction}{0.85}%
@@ -330,11 +332,11 @@
 \begin{document}
 \title[Detecting text-reading hallucinations for blind users]{Detecting Text-Reading Hallucinations in Vision-Language Descriptions of Cyrillic Signage, Packaging and Documents for Blind Users}
 
-\author*[1]{\fnm{Rostyslav} \sur{Zatserkovnyi}}\email{zatserkovnyi.rostyslav@gmail.com}
+\author*[1]{\fnm{Rostyslav} \sur{Zatserkovnyi}\,\orcid{https://orcid.org/0000-0001-6991-2866}}\email{zatserkovnyi.rostyslav@gmail.com}
 
-\author[2]{\fnm{Roksoliana} \sur{Zatserkovna}}\email{roksoliana.s.zatserkovna@lpnu.ua}
+\author[2]{\fnm{Roksoliana} \sur{Zatserkovna}\,\orcid{https://orcid.org/0000-0003-1011-053X}}\email{roksoliana.s.zatserkovna@lpnu.ua}
 
-\author[3]{\fnm{Petro} \sur{Kutsyk}}\email{kutsykpetro@gmail.com}
+\author[3]{\fnm{Petro} \sur{Kutsyk}\,\orcid{https://orcid.org/0000-0001-5795-9704}}\email{kutsykpetro@gmail.com}
 
 \affil*[1]{\orgname{Lviv University of Trade and Economics}, \orgaddress{\street{10 Tuhan-Baranovskyi Str.}, \city{Lviv}, \postcode{79008}, \country{Ukraine}}}
 
@@ -780,6 +782,9 @@ Not applicable.
 
 \bmhead{Code availability}
 The stimulus generator, model-query, OCR, labelling, analysis and figure scripts are available in the same repository.
+
+\bmhead{ORCID iDs}
+Rostyslav Zatserkovnyi: \url{https://orcid.org/0000-0001-6991-2866}. Roksoliana Zatserkovna: \url{https://orcid.org/0000-0003-1011-053X}. Petro Kutsyk: \url{https://orcid.org/0000-0001-5795-9704}.
 
 \bmhead{Author contribution}
 Rostyslav Zatserkovnyi: conceptualisation, study direction and supervision, review of methods and results, writing (review and editing). Roksoliana Zatserkovna: conceptualisation, accessibility domain expertise, review of results, writing (review and editing). Petro Kutsyk: review of the manuscript. The experiment code, model runs, analyses and the labeller audit were automated with an AI system (see Use of generative AI). All authors read and approved the final manuscript.
