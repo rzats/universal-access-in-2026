@@ -105,6 +105,9 @@ else:  # Study 2: eight real stimuli, two rows (packaging, documents)
     ex = []
     for g in ["packaging", "document"]:
         for q, fr in [("clean", "none"), ("blur", "none"), ("severe", "crop"), ("clean", "occlusion")]:
+            if (g, q, fr) == ("packaging", "blur", "none"):  # a close-up label (text fills ~90% of the frame)
+                ex.append(next(x for x in ST if x["id"] == "pac-009"))
+                continue
             ex.append(pick(g, q, fr, {e["id"] for e in ex if e}))
     fig, axs = plt.subplots(2, 4, figsize=(7.0, 3.9))
 LAB = {"none": "full frame", "crop": "cropped", "occlusion": "glare"}

@@ -22,7 +22,7 @@ from textnorm import toks
 spec = importlib.util.spec_from_file_location("aud", os.path.join(ROOT, "scripts", "15_audit_raters.py"))
 aud = importlib.util.module_from_spec(spec); spec.loader.exec_module(aud)
 
-CASES = [("pac-067", "sonnet"), ("doc-022", "opus")]  # chosen for illustration (full frame, blur)
+CASES = [("pac-075", "haiku"), ("doc-039", "haiku")]  # full frame; coherent descriptions with a few genuine substitutions
 NAME = {"haiku": "Haiku 5.5", "sonnet": "Sonnet 5.5", "opus": "Opus 5.5", "fable": "Fable 5.1"}
 COL = {"correct": "#52514e", "completion": "#6250d6", "confirmed": "#e34948", "gap": "#eda100"}
 CACHE = os.path.join(ROOT, "runs", "audit", "annotated.jsonl")
@@ -90,11 +90,17 @@ def main():
                 row = {"key": f"ann:{m}:{sid}:{c['span']}:{c['tok']}", "id": sid, "image": os.path.join("data", "real", "images", sid + ".jpg"),
                        "tok": c["tok"], "label": c["label"], "line": line, "span": spans[c["span"]][0] if c["span"] < len(spans) else ""}
                 v = rate(row)
-                st = "confirmed" if v["printed"] == "no" else "gap"
-                summary.append({"id": sid, "model": m, "tok": c["tok"], "label": c["label"], "gt": c["gt"], "rater_printed": v["printed"], "reason": v["reason"]})
+                st = "confirmed" if v["printed"] == "no" else "gap"  # primary audit question (Section 3.5)
+                summary.append({"id": sid, "model": m, "tok": c["tok"], "label": c["label"], "gt": c["gt"], "rater_printed": v["printed"], "rater_verdict": v["verdict"], "shown_as": st, "reason": v["reason"]})
             flag = (c["reread"] is False) or (c["ocr"] is False and (c["xmodel"] or 0) < 0.5)
             lab[(c["span"], c["tok"])] = (st, flag)
-        ai.imshow(Image.open(os.path.join(ROOT, "data", "real", "images", sid + ".jpg"))); ai.set_axis_off()
+        im = Image.open(os.path.join(ROOT, "data", "real", "images", sid + ".jpg"))
+        bbs = [l["bbox"] for l in s["lines"] if "bbox" in l]
+        if bbs:  # crop to the text region so the printed text is legible
+            x0 = min(b[0] for b in bbs); y0 = min(b[1] for b in bbs); x1 = max(b[2] for b in bbs); y1 = max(b[3] for b in bbs)
+            pad = 25
+            im = im.crop((max(0, x0 - pad), max(0, y0 - pad), min(im.size[0], x1 + pad), min(im.size[1], y1 + pad)))
+        ai.imshow(im); ai.set_axis_off()
         ai.set_title(f"{s['genre']} ({s['kind']}), {s['quality']}", fontsize=7)
         at.set_axis_off()
         lines, seen = [], set()
@@ -107,7 +113,10 @@ def main():
             for w in sp.split():
                 tt = toks(w)
                 st, fl = "correct", False
-                for t in tt:
+                hits = [t for t in tt if (k, t) in lab]
+                if not hits and tt and all(t.isdigit() for t in tt):  # digit groups merged into one token (e.g. barcodes)
+                    hits = [t2 for (k2, t2) in lab if k2 == k and t2.isdigit() and all(t in t2 for t in tt)]
+                for t in hits:
                     if (k, t) in lab:
                         st2, fl2 = lab[(k, t)]
                         if st2 != "correct":

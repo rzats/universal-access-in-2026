@@ -1,56 +1,112 @@
 [
  {
-  "id": "pac-067",
-  "model": "sonnet",
-  "tok": "⁷",
-  "label": "fabricated",
-  "gt": "1679",
-  "rater_printed": "yes",
-  "reason": "The superscript 7 in '1 · 10⁷ КУО/г' is printed and visible, so it isn't fabricated."
- },
- {
-  "id": "pac-067",
-  "model": "sonnet",
-  "tok": "богаєвського",
+  "id": "pac-075",
+  "model": "haiku",
+  "tok": "заквасна",
   "label": "misread",
-  "gt": "євського",
+  "gt": "закваска",
   "rater_printed": "no",
-  "reason": "Print shows split 'Бога євського'; the joined 'Богаєвського' is a corrected spelling, not printed."
+  "rater_verdict": "right",
+  "shown_as": "confirmed",
+  "reason": "The label prints «закваска»; «заквасна» is a wrong reading of that word."
  },
  {
-  "id": "pac-067",
-  "model": "sonnet",
-  "tok": "а",
+  "id": "pac-075",
+  "model": "haiku",
+  "tok": "молокозгортальний",
   "label": "misread",
-  "gt": "на",
-  "rater_printed": "yes",
-  "reason": "The 'a' is the start of the legible stamp 'a-UA-16-11-45-IX-PP', not a misread reference word."
- },
- {
-  "id": "pac-067",
-  "model": "sonnet",
-  "tok": "820226",
-  "label": "fabricated",
-  "gt": "20",
-  "rater_printed": "yes",
-  "reason": "Barcode number on the left edge reads 4 820226…; the token is printed and visible, not invented."
- },
- {
-  "id": "doc-022",
-  "model": "opus",
-  "tok": "місце",
-  "label": "fabricated",
-  "gt": "власне",
+  "gt": "молокозідальний",
   "rater_printed": "no",
-  "reason": "The form prints only the abbreviation «МП (за наявності)»; the word «місце» appears nowhere."
+  "rater_verdict": "right",
+  "shown_as": "confirmed",
+  "reason": "Printed word is молокозсідальний (reference молокозідальний); молокозгортальний is a different word, so misread fits."
  },
  {
-  "id": "doc-022",
-  "model": "opus",
-  "tok": "печатки",
-  "label": "fabricated",
-  "gt": "подається",
+  "id": "pac-075",
+  "model": "haiku",
+  "tok": "971",
+  "label": "misread",
+  "gt": "921",
   "rater_printed": "no",
-  "reason": "The word 'печатки' is not printed; the form only has the abbreviation 'МП (за наявності)'."
+  "rater_verdict": "right",
+  "shown_as": "confirmed",
+  "reason": "The label prints 921 кДж, not 971, so 971 is a misread digit."
+ },
+ {
+  "id": "pac-075",
+  "model": "haiku",
+  "tok": "6",
+  "label": "fabricated",
+  "gt": "164",
+  "rater_printed": "no",
+  "rater_verdict": "right",
+  "shown_as": "confirmed",
+  "reason": "Label prints storage temperature as (4±2) °С; no standalone '6' appears, so the model invented it."
+ },
+ {
+  "id": "pac-075",
+  "model": "haiku",
+  "tok": "4820272180714",
+  "label": "fabricated",
+  "gt": "820272",
+  "rater_printed": "yes",
+  "rater_verdict": "wrong",
+  "shown_as": "gap",
+  "reason": "Barcode digits 4 820272 180714 are visible; the merged token matches the printed number, so it isn't fabricated."
+ },
+ {
+  "id": "doc-039",
+  "model": "haiku",
+  "tok": "затверджено",
+  "label": "fabricated",
+  "gt": "захворювання",
+  "rater_printed": "yes",
+  "rater_verdict": "wrong",
+  "shown_as": "gap",
+  "reason": "«ЗАТВЕРДЖЕНО» is printed in full twice (top right and in the form header); the scorer matched it to the wrong reference line."
+ },
+ {
+  "id": "doc-039",
+  "model": "haiku",
+  "tok": "знаходиться",
+  "label": "misread",
+  "gt": "заповнюється",
+  "rater_printed": "no",
+  "rater_verdict": "wrong",
+  "shown_as": "confirmed",
+  "reason": "Printed word is «заповнюється»; «знаходиться» is a different word, so it is a substitution, not a misreading."
+ },
+ {
+  "id": "doc-039",
+  "model": "haiku",
+  "tok": "медична",
+  "label": "misread",
+  "gt": "медичної",
+  "rater_printed": "yes",
+  "rater_verdict": "wrong",
+  "shown_as": "gap",
+  "reason": "\"МЕДИЧНА ДОКУМЕНТАЦІЯ\" is printed in the header, fully visible, and read correctly; it was matched to the wrong line."
+ },
+ {
+  "id": "doc-039",
+  "model": "haiku",
+  "tok": "документація",
+  "label": "misread",
+  "gt": "документації",
+  "rater_printed": "yes",
+  "rater_verdict": "wrong",
+  "shown_as": "gap",
+  "reason": "«МЕДИЧНА ДОКУМЕНТАЦІЯ» is printed in the header and fully visible; scorer matched the wrong reference line."
+ },
+ {
+  "id": "doc-039",
+  "model": "haiku",
+  "tok": "зразок",
+  "label": "misread",
+  "gt": "район",
+  "rater_printed": "yes",
+  "rater_verdict": "wrong",
+  "shown_as": "gap",
+  "reason": "ЗРАЗОК is the red watermark, fully visible; it isn't a misreading of the matched line."
  }
 ]
