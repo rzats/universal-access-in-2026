@@ -397,6 +397,23 @@ def rng2(vals, nd=1, pct=True):
     return f"{f(lo)}--{f(hi)}" if f(lo) != f(hi) else f(lo)
 
 
+CYR = re.compile(r"[\u0400-\u04ff](?:[\u0400-\u04ff'’ʼ\- ]*[\u0400-\u04ff])?")
+
+
+def wrap_cyrillic(body):
+    """Put Cyrillic runs of the English text into \\foreignlanguage{ukrainian}{...} (T2A font
+    encoding and Ukrainian hyphenation under pdfLaTeX); existing switches and comments are kept."""
+    out = []
+    for line in body.split("\n"):
+        i = re.search(r"(?<!\\)%", line)
+        code, sep, com = (line[:i.start()], "%", line[i.end():]) if i else (line, "", "")
+        parts = re.split(r"(\\foreignlanguage\{ukrainian\}\{[^{}]*\})", code)
+        code = "".join(x if x.startswith("\\foreignlanguage") else CYR.sub(lambda m: f"\\foreignlanguage{{ukrainian}}{{{m.group()}}}", x)
+                       for x in parts)
+        out.append(code + sep + com)
+    return "\n".join(out)
+
+
 def main():
     tpl = open(os.path.join(P, "template_main.tex"), encoding="utf-8").read()
     body = "\n\n".join(open(os.path.join(P, b + ".tex"), encoding="utf-8").read()
@@ -420,6 +437,7 @@ def main():
         f"\\newcommand{{\\{k}}}{{{v}}}\n" for k, v in sorted(mac.items()) if k in used)
     for tag, fn in TABLES.items():
         body = body.replace(f"%TABLE:{tag}%", fn())
+    body = wrap_cyrillic(body)
     out = tpl.replace("%BODY%", body).replace("\\begin{document}", defs + "\n\\begin{document}", 1)
     out = out.replace("\\bibliography{sn-bibliography}", "\\bibliography{refs}")
     if "---" in re.sub(r"%.*", "", out):

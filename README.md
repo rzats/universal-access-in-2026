@@ -53,6 +53,9 @@ scripts/16_revision_stats.py   paired tests (McNemar, cluster bootstrap, Holm), 
 scripts/06_figures.py, 17_failure_figure.py   figures
 scripts/08_build_paper.py      assembles paper/universal-access-in-2026.tex from the template and
                                paper/body_*.tex; every number is a macro computed from results/*.json
+scripts/21_submission_zip.py   LaTeX submission package paper/universal-access-in-2026-latex.zip
+                               (one .tex, class, .bst, .bib, .bbl, figures); compiles with pdfLaTeX
+                               or XeLaTeX, test-compiled with pdflatex + bibtex when available
 ```
 
 Select the dataset with `UAIS_SET=synthetic|real|probe`.
@@ -71,6 +74,7 @@ UAIS_SET=probe python3 scripts/04_score.py; python3 scripts/14_probe_analysis.py
 python3 scripts/15_audit_raters.py sample synthetic; python3 scripts/15_audit_raters.py sample real
 python3 scripts/15_audit_raters.py claude; python3 scripts/15_audit_raters.py gemma; python3 scripts/15_audit_raters.py analyse
 python3 scripts/16_revision_stats.py; python3 scripts/17_failure_figure.py; python3 scripts/08_build_paper.py
+python3 scripts/21_submission_zip.py
 ```
 
 Fonts are OFL/UFL (google/fonts); the word list is CC BY-SA 4.0 (hermitdave/FrequencyWords,

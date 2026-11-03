@@ -55,9 +55,15 @@
 \usepackage{algorithmicx}%
 \usepackage{algpseudocode}%
 \usepackage{listings}%
-\usepackage{fontspec}% XeTeX (tectonic): Unicode Computer Modern covers Cyrillic
+\usepackage{iftex}%
+\ifXeTeX% XeLaTeX: Unicode Computer Modern covers Cyrillic
+\usepackage{fontspec}%
 \setmainfont{cmunrm.otf}[BoldFont=cmunbx.otf,ItalicFont=cmunti.otf,BoldItalicFont=cmunbi.otf]%
 \setsansfont{cmunss.otf}[BoldFont=cmunsx.otf,ItalicFont=cmunsi.otf]\setmonofont{cmuntt.otf}%
+\else% pdfLaTeX: Cyrillic through the T2A encoding (cm-super / LH fonts)
+\usepackage[T2A,T1]{fontenc}%
+\usepackage[utf8]{inputenc}%
+\fi
 \usepackage[ukrainian,english]{babel}%
 \usepackage{url}%
 \usepackage{placeins}%
