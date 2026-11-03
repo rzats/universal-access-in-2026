@@ -212,18 +212,18 @@
 \newcommand{\RealAucCombCIOpus}{0.867 [0.837, 0.905]}
 \newcommand{\RealAucCombCISonnet}{0.863 [0.825, 0.899]}
 \newcommand{\RealAudComplCl}{83}
-\newcommand{\RealAudComplGm}{4}
+\newcommand{\RealAudComplGm}{5}
 \newcommand{\RealAudCorrCl}{97}
 \newcommand{\RealAudCorrGm}{95}
 \newcommand{\RealAudFabCl}{54}
-\newcommand{\RealAudFabGm}{77}
-\newcommand{\RealAudHall}{40}
+\newcommand{\RealAudFabGm}{78}
+\newcommand{\RealAudHall}{30}
 \newcommand{\RealAudHallCl}{56}
-\newcommand{\RealAudKappa}{0.12}
+\newcommand{\RealAudKappa}{0.09}
 \newcommand{\RealAudMisCl}{58}
-\newcommand{\RealAudMisGm}{29}
+\newcommand{\RealAudMisGm}{25}
 \newcommand{\RealAudN}{239}
-\newcommand{\RealAudNBoth}{199}
+\newcommand{\RealAudNBoth}{239}
 \newcommand{\RealCHaikuSevereCleanTok}{[3.7, 20.0]}
 \newcommand{\RealCOpusPackagingDocumentP}{0.044}
 \newcommand{\RealCOpusPackagingDocumentTok}{[3.2, 6.1]}
@@ -480,7 +480,7 @@ Each claimed token $o$ receives one label from the ground truth of its image, in
 \end{itemize}
 A \emph{hallucinated} token is a misreading or a fabrication; \emph{unsupported} tokens additionally include completions. Misreadings are sub-typed as \emph{digit} errors, \emph{Ukrainian-letter} substitutions (the claimed and printed words differ only in \foreignlanguage{ukrainian}{і/и, ї/і, є/е, ґ/г} or contain letters that exist only in Russian), \emph{lexicalisations} (the claimed form is a real word or a known name but the printed one is not), and other substitutions. We also record whether the sentence containing a quotation carries a hedging cue (e.g., \foreignlanguage{ukrainian}{«ймовірно»}, \foreignlanguage{ukrainian}{«схоже»}, \foreignlanguage{ukrainian}{«нечітко»}, ``probably'', ``looks like'', ``blurry''). Matching against the image's token set rather than a forced alignment is deliberately conservative: a wrong number that happens to occur elsewhere on the same page counts as correct. Conversely, text that is printed but absent from the reference (e.g., a word the reference OCR missed) is counted as a fabrication, so the audit below is essential.
 
-\paragraph{Automated audit with two raters.} The labeller was audited by two independent automated raters, not by people. A stratified random sample of description tokens was drawn: \SynAudN{} from Study~1 (25 per model and label) and \RealAudN{} from Study~2 (15 per model and label, where available). Each rater received the stimulus image, the reference line the token was matched to, the quoted span, the token and the assigned label with its definition. It was asked (i) whether the label is right and (ii) whether the quoted word reproduces text that is printed and fully visible in the image. The second question is the one that matters for the main metric. A misreading or fabrication is confirmed if the word is judged \emph{not} printed-and-visible, a correct token if it is judged printed-and-visible, and a completion if it is judged not visible. The raters were Claude Sonnet~5.5 (through the same client as the evaluated runs) and the open model Gemma~3 12B (\texttt{gemma3:12b}, served locally by Ollama, temperature~0). Disagreements were resolved by a fixed conservative rule: an item counts as confirmed only if every rater that rated it confirms it. We report per-rater and resolved precision with Wilson intervals and Cohen's kappa~\cite{cohen1960coefficient} between the raters. This is agreement between automated raters, not human validation. One rater belongs to the evaluated model family, which may bias it towards the evaluated models' readings. The rater prompt is in Appendix~\ref{secA1}.
+\paragraph{Automated audit with two raters.} The labeller was audited by two independent automated raters, not by people. A stratified random sample of description tokens was drawn: \SynAudN{} from Study~1 (25 per model and label) and \RealAudN{} from Study~2 (15 per model and label, where available). Each rater received the stimulus image, the reference line the token was matched to, the quoted span, the token and the assigned label with its definition. It was asked (i) whether the label is right and (ii) whether the quoted word reproduces text that is printed and fully visible in the image. The second question is the one that matters for the main metric. A misreading or fabrication is confirmed if the word is judged \emph{not} printed-and-visible, a correct token if it is judged printed-and-visible, and a completion if it is judged not visible. The raters were Claude Sonnet~5.5 (through the same client as the evaluated runs) and the open model Gemma~3 12B (\texttt{gemma3:12b}, served locally by Ollama, temperature~0). Disagreements were resolved by a fixed conservative rule: an item counts as confirmed only if both raters confirm it. Both raters rated every sampled item. We report per-rater and resolved precision with Wilson intervals and Cohen's kappa~\cite{cohen1960coefficient} between the raters. This is agreement between automated raters, not human validation. One rater belongs to the evaluated model family, which may bias it towards the evaluated models' readings. The rater prompt is in Appendix~\ref{secA1}.
 
 \subsection{Detectors}\label{sec:detectors}
 
@@ -696,7 +696,7 @@ Fable 5.1 & 81 & 38 / 40 / 48 & 25 [17, 35] & 3.25 / 3.52 / 4.53 & 1.28 & 0.77 \
 Table~\ref{tab:audit} gives each rater's confirmation rate per label. The Claude rater confirms \SynAudCorrCl\% of correct labels, \SynAudMisCl\% of misreadings, \SynAudFabCl\% of fabrications and \SynAudComplCl\% of completions on the Study~1 sample, and \RealAudCorrCl\%, \RealAudMisCl\%, \RealAudFabCl\% and \RealAudComplCl\% on the Study~2 sample. Gemma~3 12B agrees on correct labels (\SynAudCorrGm\% and \RealAudCorrGm\%) and on fabrications (\SynAudFabGm\% and \RealAudFabGm\%). It rejects most misreadings (\SynAudMisGm\% and \RealAudMisGm\% confirmed) and most completions (\SynAudComplGm\% and \RealAudComplGm\%). Its stated reasons show why: it does not resolve single-letter differences in Ukrainian words, and it treats a word as visible when only part of it is. Agreement between the raters on the printed-and-visible question is therefore low (Cohen's $\kappa=\SynAudKappa$ on \SynAudNBoth{} Study~1 items and $\kappa=\RealAudKappa$ on \RealAudNBoth{} Study~2 items). Under the conservative rule, which requires both raters to confirm, \SynAudHall\% of the Study~1 and \RealAudHall\% of the Study~2 hallucination labels are confirmed. This is a lower bound, dominated by the open rater's blindness to single-letter changes. The Claude rater alone confirms \SynAudHallCl\% and \RealAudHallCl\%. On real material the unconfirmed labels mostly reflect reference gaps, such as logos and stamps drawn as images rather than text and words that the reference OCR missed. Reported hallucination rates should therefore be read as upper bounds. Scaling the token-level rates of the descriptions by the Claude rater's confirmation rate gives audit-adjusted rates of \SynAdjRange\% for Study~1 and \RealAdjRange\% for Study~2. The large correction on real material is the main caveat on the Study~2 numbers. One rater is a member of the evaluated family, and the other rater's own reading of Ukrainian is the bottleneck, so neither replaces a human validation.
 
 \begin{table}[!tbp]
-\caption{Automated audit of the labeller: share of sampled description tokens whose label each rater confirms (printed-and-visible judgement), per study and label, with the number of rated items. ``Both'' applies the conservative rule (confirmed only if every rater that rated the item confirms it). $\kappa$ is Cohen's kappa between the raters on items rated by both.}\label{tab:audit}
+\caption{Automated audit of the labeller: share of sampled description tokens whose label each rater confirms (printed-and-visible judgement), per study and label, with the number of rated items. ``Both'' applies the conservative rule (confirmed only if both raters confirm the item). $\kappa$ is Cohen's kappa between the raters.}\label{tab:audit}
 \footnotesize
 \begin{tabular*}{\textwidth}{@{\extracolsep\fill}llrrr}
 \toprule
@@ -710,11 +710,11 @@ Study & Label & Claude Sonnet 5.5 & Gemma 3 12B & Both \\
 1 & $\kappa$ (items) & \multicolumn{3}{c}{0.17 (397)} \\
 \midrule
 2 & correct & 97\% (60) & 95\% (60) & 93\% (60) \\
-2 & completion & 83\% (60) & 4\% (50) & 18\% (60) \\
-2 & misread & 58\% (60) & 29\% (45) & 32\% (60) \\
-2 & fabricated & 54\% (59) & 77\% (44) & 47\% (59) \\
-2 & misread + fabricated & 56\% (119) & 53\% (89) & 40\% (119) \\
-2 & $\kappa$ (items) & \multicolumn{3}{c}{0.12 (199)} \\
+2 & completion & 83\% (60) & 5\% (60) & 3\% (60) \\
+2 & misread & 58\% (60) & 25\% (60) & 17\% (60) \\
+2 & fabricated & 54\% (59) & 78\% (59) & 44\% (59) \\
+2 & misread + fabricated & 56\% (119) & 51\% (119) & 30\% (119) \\
+2 & $\kappa$ (items) & \multicolumn{3}{c}{0.09 (239)} \\
 \botrule
 \end{tabular*}
 \end{table}
@@ -833,7 +833,7 @@ During the preparation of this work the authors used Claude (Anthropic) to proof
 
 \section{Prompts, models and run settings}\label{secA1}
 
-\paragraph{Evaluated models and client.} \texttt{claude-haiku-5-5}, \texttt{claude-sonnet-5-5}, \texttt{claude-opus-5-5} and \texttt{claude-fable-5-1} (Anthropic). Every call went through the Claude Code command-line client, version 2.1.304, in non-interactive mode (\texttt{claude -p \ldots{} --output-format json --system-prompt \ldots{} --tools "" --setting-sources "" --no-session-persistence}). The image was attached by an \texttt{@}-reference to a file with an opaque hashed name. The client does not expose temperature or top-$p$, so the provider's default sampling settings apply. Each call was a fresh session without shared context. Study~1 and the Study~2 signage and document runs were made on 21--22 October 2026. The Study~2 packaging runs, the remaining Opus and Fable calls, the near-word probe, the repeated runs and the audit were made on 28--29 October 2026. Token counts, list-price cost and wall-clock time of every call were recorded from the client's JSON output (Table~\ref{tab:cost}).
+\paragraph{Evaluated models and client.} \texttt{claude-haiku-5-5}, \texttt{claude-sonnet-5-5}, \texttt{claude-opus-5-5} and \texttt{claude-fable-5-1} (Anthropic). Every call went through the Claude Code command-line client, version 2.1.304, in non-interactive mode (\texttt{claude -p \ldots{} --output-format json --system-prompt \ldots{} --tools "" --setting-sources "" --no-session-persistence}). The image was attached by an \texttt{@}-reference to a file with an opaque hashed name. The client does not expose temperature or top-$p$, so the provider's default sampling settings apply. Each call was a fresh session without shared context. Study~1 and the Study~2 signage and document runs were made on 21--22 October 2026. The Study~2 packaging runs, the remaining Opus and Fable calls, the near-word probe, the repeated runs and the audit were made on 28--29 October 2026, except the last 40 Gemma ratings, made on 3 November 2026 after the local Ollama server had become unreachable during the first pass. Token counts, list-price cost and wall-clock time of every call were recorded from the client's JSON output (Table~\ref{tab:cost}).
 
 \paragraph{System prompt (all evaluated calls).}
 \begin{quote}\small
